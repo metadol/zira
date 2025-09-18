@@ -39,4 +39,5 @@ export const DottedSeparator = ({
   );
 };
 
-// aria-hidden prevent screen readers from announcing the separator.
+// aria-hidden prevent screen readers from announcing the separator 
+// as this is used for visual purposes only
