@@ -13,10 +13,10 @@ export const SignInCard = () => {
   return (
     <Card className="w-full h-full md:w-[486px] border-none shadow-none">
       <CardHeader className="flex items-center justify-center p-7 text-center">
-        <CardTitle className="text-lg">Welcome Back</CardTitle>
+        <CardTitle className="text-2xl">Welcome Back</CardTitle>
       </CardHeader>
 
-      <div className="px-7">
+      <div className="px-7"> 
         <DottedSeparator />
       </div>
 
@@ -24,7 +24,7 @@ export const SignInCard = () => {
         <form className="space-y-4">
           <Input type="email" placeholder="Email" />
           <Input type="password" placeholder="Password" />
-          <Button className="w-full">Login</Button>            
+          <Button  size="lg" className="w-full">Login</Button>            
         </form>
       </CardContent>
     </Card>
