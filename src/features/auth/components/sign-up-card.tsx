@@ -1,5 +1,9 @@
+import * as z from "zod";
+import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 import { DottedSeparator } from "@/components/dotted-seperator";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,8 +16,35 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
+import { Form } from "@/components/ui/form";
+import { FormInput } from "@/components/form-input";
+
+const formSchema = z.object({
+  name: z.string().min(1, { message: "Name is required" }),
+  email: z
+    .string()
+    .min(1, { message: "Email is required" })
+    .email({ message: "Invalid email address" }),
+  password: z
+    .string()
+    .min(8, { message: "Password must be at least 8 characters" })
+    .max(256, { message: "Password must be less than 256 characters" }),
+});
 
 export const SignUpCard = () => {
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+    },
+  });
+
+  const onSubmit = (data: z.infer<typeof formSchema>) => {
+    console.log(data);
+  };
+
   return (
     <Card className="w-full h-full md:w-[486px] border-none shadow-none">
       <CardHeader className="flex items-center justify-center p-7 text-center">
@@ -35,37 +66,35 @@ export const SignUpCard = () => {
       </div>
 
       <CardContent className="p-7">
-        <form className="space-y-4">
-          <Input
-            required
-            type="text"
-            value={""}
-            onChange={(e) => {}}
-            placeholder="Enter your name"
-            disabled={false}
-          />
-          <Input
-            required
-            type="email"
-            value={""}
-            onChange={(e) => {}}
-            placeholder="Enter email address"
-            disabled={false}
-          />
-          <Input
-            required
-            type="password"
-            value={""}
-            onChange={(e) => {}}
-            placeholder="Enter password"
-            disabled={false}
-            min={8}
-            max={256}
-          />
-          <Button disabled={false} size={"lg"} className="w-full">
-            Login
-          </Button>
-        </form>
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-4"
+            noValidate
+          >
+            <FormInput
+              control={form.control}
+              name="name"
+              type="text"
+              placeholder="Enter your name"
+            />
+            <FormInput
+              control={form.control}
+              name="email"
+              type="email"
+              placeholder="Enter email address"
+            />
+            <FormInput
+              control={form.control}
+              name="password"
+              type="password"
+              placeholder="Enter password"
+            />
+            <Button disabled={false} size={"lg"} className="w-full">
+              Login
+            </Button>
+          </form>
+        </Form>
       </CardContent>
 
       <div className="px-7">
