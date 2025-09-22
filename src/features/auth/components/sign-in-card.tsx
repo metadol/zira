@@ -22,6 +22,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { FormInput } from "@/components/form-input";
+import Link from "next/link";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
@@ -92,7 +93,7 @@ export const SignInCard = () => {
           <FcGoogle className="mr-2 size-6" />
           Login with google
         </Button>
-        <Button
+        {/* <Button
           disabled={false}
           variant={"secondary"}
           size={"lg"}
@@ -100,7 +101,20 @@ export const SignInCard = () => {
         >
           <FaGithub className="mr-2 size-6" />
           Login with github
-        </Button>
+        </Button> */}
+      </CardContent>
+
+      <div className="px-7">
+        <DottedSeparator />
+      </div>
+
+      <CardContent className="p-7 flex justify-center items-center">
+        <p className="text-sm text-center">
+          Don&apos;t have an account?{" "}
+          <Link href="/sign-up" className="text-blue-600">
+            Sign Up
+          </Link>
+        </p>
       </CardContent>
     </Card>
   );

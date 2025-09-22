@@ -111,7 +111,7 @@ export const SignUpCard = () => {
           <FcGoogle className="mr-2 size-6" />
           Login with google
         </Button>
-        <Button
+        {/* <Button
           disabled={false}
           variant={"secondary"}
           size={"lg"}
@@ -119,7 +119,20 @@ export const SignUpCard = () => {
         >
           <FaGithub className="mr-2 size-6" />
           Login with github
-        </Button>
+        </Button> */}
+      </CardContent>
+
+      <div className="px-7">
+        <DottedSeparator />
+      </div>
+
+      <CardContent className="p-7 flex justify-center items-center">
+        <p className="text-sm text-center">
+          Already have an account?{" "}
+          <Link href="/sign-in" className="text-blue-600 ">
+            Sign In
+          </Link>
+        </p>
       </CardContent>
     </Card>
   );
