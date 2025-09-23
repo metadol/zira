@@ -9,5 +9,11 @@ app.get('/hello', (c) => {
   })
 })
 
+app.get('/test/:id', (c) => {
+  return c.json({
+    message: 'This is a test endpoint! ID: ' + c.req.param('id'),
+  })
+})
+
 export const GET = handle(app)
 export const POST = handle(app)

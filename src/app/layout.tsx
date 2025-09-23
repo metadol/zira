@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google"
+import { Inter } from "next/font/google";
 
 import { cn } from "@/lib/utils";
 
 import "./globals.css";
+import { QueryProvider } from "@/providers/query-provider";
 
 const InterFont = Inter({ subsets: ["latin"] });
 
@@ -19,10 +20,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={cn(InterFont.className, "antialiased min-h-screen")}
-      >
-        {children}
+      <body className={cn(InterFont.className, "antialiased min-h-screen")}>
+        <QueryProvider>{children}</QueryProvider>
       </body>
     </html>
   );
