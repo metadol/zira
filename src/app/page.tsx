@@ -10,7 +10,7 @@ export default function Home() {
       <Button variant={"destructive"} size={"xs"}>Destrctive</Button>
       <Button variant={"ghost"}>Ghost</Button>
       <Button variant={"muted"}>Muted</Button>
-      <Button variant={"teritary"}>Teritary</Button>
+      {/* <Button variant={"teritary"}>Teritary</Button> */}
     </div>
   );
 }
