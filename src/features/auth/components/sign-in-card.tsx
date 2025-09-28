@@ -24,7 +24,7 @@ import {
 import { FormInput } from "@/components/form-input";
 import Link from "next/link";
 import { loginSchema } from "../schemas";
-import { useLogin } from "../api/use-login";
+import { useLogin } from "../api/client/use-login";
 
 export const SignInCard = () => {
   const { mutate } = useLogin();

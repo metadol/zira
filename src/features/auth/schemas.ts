@@ -1,6 +1,5 @@
 import { z } from "zod";
 
-// Option 1: Using the new v4 standalone z.email() (if using Zod v4)
 export const loginSchema = z.object({
     email: z.email("Invalid email address"),
     password: z.string().min(1, "Password is required"),

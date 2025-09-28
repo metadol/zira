@@ -1,7 +1,7 @@
 import { Hono } from 'hono'
 import { handle } from 'hono/vercel'
 
-import auth from '@/features/auth/server/route'
+import auth from '@/features/auth/api/server/route'
 
 const app = new Hono().basePath('/api')
 

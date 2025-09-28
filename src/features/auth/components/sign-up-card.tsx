@@ -19,7 +19,7 @@ import Link from "next/link";
 import { Form } from "@/components/ui/form";
 import { FormInput } from "@/components/form-input";
 import { registerSchema } from "../schemas";
-import { useRegister } from "../api/use-register";
+import { useRegister } from "../api/client/use-register";
 
 export const SignUpCard = () => {
   const { mutate } = useRegister();

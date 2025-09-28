@@ -100,3 +100,21 @@ export const client = hc<AppType>(process.env.NEXT_PUBLIC_APP_URL!);
 // Normal way → manual fetch, strings everywhere, more bugs.
 
 // RPC way → feels like calling a local function, type-safe, less boilerplate.
+
+
+
+
+
+
+//HONO JS FLOW
+// So when you call useLogin.mutate({ json: { email, password } }) in your frontend:
+
+// 1.The hook (useLogin.ts) calls the RPC client.
+
+// 2.RPC client (rpc.ts) sends a request to /api/auth/login.
+
+// 3.Next.js routes that to your main API entry (route.ts).
+
+// 4.route.ts forwards it to the auth subroutes (auth/server/route.ts).
+
+// 5.Zod validates, and you return a JSON response.
