@@ -60,6 +60,7 @@ export const client = hc<AppType>(process.env.NEXT_PUBLIC_APP_URL!);
 // You must always write fetch + res.json() boilerplate.
 
 // ✅ Using Hono RPC
+
 // Server (same as before, but export type)
 // import { Hono } from 'hono'
 

@@ -24,8 +24,11 @@ import {
 import { FormInput } from "@/components/form-input";
 import Link from "next/link";
 import { loginSchema } from "../schemas";
+import { useLogin } from "../api/use-login";
 
 export const SignInCard = () => {
+  const { mutate } = useLogin();
+
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -35,7 +38,7 @@ export const SignInCard = () => {
   });
 
   const onSubmit = (data: z.infer<typeof loginSchema>) => {
-    console.log(data);
+    mutate({ json: data });
   };
 
   return (
