@@ -3,7 +3,7 @@ import { InferRequestType, InferResponseType } from 'hono';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 
-import { client } from '@/lib/rpc';
+import { client } from '@/lib/hono';
 
 type ResponseType = InferResponseType<(typeof client.api.auth.login)['$post']>;
 type RequestType = InferRequestType<(typeof client.api.auth.login)['$post']>;
