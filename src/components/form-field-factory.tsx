@@ -46,6 +46,7 @@ export const FormFieldFactory = ({
       render={({ field }) => (
         <FormItem>
           <FormControl>
+
             {type === "input" && (
               <Input {...field} type={inputType} placeholder={placeholder} />
             )}
@@ -68,6 +69,7 @@ export const FormFieldFactory = ({
                 </SelectContent>
               </Select>
             )}
+            
           </FormControl>
           <FormMessage />
         </FormItem>
