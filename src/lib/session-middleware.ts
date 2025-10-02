@@ -18,6 +18,7 @@ import {
     type Users as UsersType,
 } from 'node-appwrite';
 
+//to ensure type-safety
 type AdditionalContext = {
     Variables: {
         account: AccountType;
@@ -93,3 +94,17 @@ export const sessionMiddleware = createMiddleware<AdditionalContext>(async (c, n
 // 👉 With middleware:
 // One guard at the entrance checks you once ✅.
 // Then you can enjoy the rides freely. 🎉
+
+
+//USAGE EXAMPLE
+
+// // Apply middleware only to this route
+// app.get('/profile', sessionMiddleware, (c) => {
+//   const user = c.get('user')
+//   return c.json({ message: `Welcome ${user.name}` })
+// })
+
+// // Another route without middleware
+// app.get('/public', (c) => {
+//   return c.json({ message: 'Anyone can see this 🚀' })
+// })

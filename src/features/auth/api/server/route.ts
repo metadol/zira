@@ -7,8 +7,13 @@ import { loginSchema, registerSchema } from '../../schemas'
 import { createAdminClient } from '@/lib/appwrite'
 import { AUTH_COOKIE } from '@/lib/constants';
 import { setAuthCookie } from '@/lib/auth';
+import { sessionMiddleware } from '@/lib/session-middleware';
 
 const app = new Hono()
+  .get('/current', sessionMiddleware, async (c) => {
+    const user = c.get('user')
+    return c.json({ data: user })
+  })
   .post('/login', zValidator('json', loginSchema), async (c) => {
     const { email, password } = c.req.valid('json')
 
@@ -28,7 +33,11 @@ const app = new Hono()
 
     return c.json({ success: true })
   })
-  .post('/logout', async (c) => {
+  .post('/logout', sessionMiddleware, async (c) => {
+
+    const account = c.get('account');
+    await account.deleteSession('current');
+
     deleteCookie(c, AUTH_COOKIE)
     return c.json({ success: true })
   })
