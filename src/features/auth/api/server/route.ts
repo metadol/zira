@@ -1,13 +1,16 @@
-import { success, z } from 'zod'
+// 1️⃣ External dependencies
+import { Hono } from 'hono';
+import { zValidator } from '@hono/zod-validator';
+import { deleteCookie } from 'hono/cookie';
 import { ID } from 'node-appwrite';
-import { Hono } from 'hono'
-import { zValidator } from '@hono/zod-validator'
-import { deleteCookie, setCookie } from 'hono/cookie';
-import { loginSchema, registerSchema } from '../../schemas'
-import { createAdminClient } from '@/lib/appwrite'
+
+// 2️⃣ Internal schemas & utilities
+import { loginSchema, registerSchema } from '../../schemas';
+import { createAdminClient } from '@/lib/appwrite';
 import { AUTH_COOKIE } from '@/lib/constants';
 import { setAuthCookie } from '@/lib/auth';
 import { sessionMiddleware } from '@/lib/session-middleware';
+
 
 const app = new Hono()
   .get('/current', sessionMiddleware, async (c) => {
