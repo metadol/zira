@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { useCurrent } from "@/features/auth/api/client/use-current";
 import { useLogout } from "@/features/auth/api/client/use-logout";
+import { UserButton } from "@/features/auth/components/user-button";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
@@ -17,9 +18,9 @@ export default function Home() {
     }
   }, [data, isLoading]);
 
-  return <div>Only Autenticated users can see this
-    <Button onClick={() => mutate()}>Logout</Button>
-     </div>;
+  return (
+    <UserButton />
+  )
 }
 
 // asdf@r.com
