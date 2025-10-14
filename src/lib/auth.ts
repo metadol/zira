@@ -1,5 +1,7 @@
 import { setCookie } from 'hono/cookie'
 import { AUTH_COOKIE } from '@/lib/constants'
+import { createSessionClient } from '@/lib/appwrite';
+
 
 export const setAuthCookie = (c: any, secret: string) => {
     setCookie(c, AUTH_COOKIE, secret, {
@@ -10,6 +12,15 @@ export const setAuthCookie = (c: any, secret: string) => {
         maxAge: 60 * 60 * 24 * 30, // 30 days
     })
 }
+
+export const getCurrentUser = async () => {
+    try {
+        const { account } = await createSessionClient();
+        return await account.get();
+    } catch {
+        return null;
+    }
+};
 
 // 1.Login/Register → User sends request → Hono → calls Appwrite → Appwrite creates session → Hono sets session secret in cookie.
 
