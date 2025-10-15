@@ -29,6 +29,8 @@ type AdditionalContext = {
     };
 };
 
+//THIS IS FOR API ROUTE PROTECTION 
+
 // Middleware in Node.js refers to a concept where functions can be used 
 // to process incoming requests before they reach their final destination.
 export const sessionMiddleware = createMiddleware<AdditionalContext>(async (c, next) => {

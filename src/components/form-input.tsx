@@ -6,15 +6,20 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Control } from "react-hook-form";
+import { InputHTMLAttributes } from "react";
 
-interface FormInputProps {
+interface FormInputProps extends InputHTMLAttributes<HTMLInputElement> {
   control: Control<any>;
   name: string;
-  type?: string;
-  placeholder?: string;
 }
 
-export const FormInput = ({ control, name, type = "text", placeholder }: FormInputProps) => {
+export const FormInput = ({
+  control,
+  name,
+  type = "text",
+  placeholder,
+  ...rest // extra props captured here
+}: FormInputProps) => {
   return (
     <FormField
       name={name}
@@ -22,7 +27,7 @@ export const FormInput = ({ control, name, type = "text", placeholder }: FormInp
       render={({ field }) => (
         <FormItem>
           <FormControl>
-            <Input {...field} type={type} placeholder={placeholder} />
+            <Input {...field} type={type} placeholder={placeholder} {...rest} />
           </FormControl>
           <FormMessage />
         </FormItem>
