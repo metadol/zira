@@ -18,7 +18,7 @@ export const FormInput = ({
   name,
   type = "text",
   placeholder,
-  ...rest // extra props captured here
+  ...rest 
 }: FormInputProps) => {
   return (
     <FormField

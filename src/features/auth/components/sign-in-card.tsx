@@ -91,7 +91,7 @@ export const SignInCard = () => {
           className="w-full"
         >
           <FcGoogle className="mr-2 size-6" />
-          Login with google
+          {/* Login with google */}
         </Button>
       </CardContent>
 

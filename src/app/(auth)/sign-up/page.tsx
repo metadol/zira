@@ -1,10 +1,10 @@
 import { SignUpCard } from "@/features/auth/components/sign-up-card";
 import { getCurrentUser } from "@/lib/auth";
+import { authGuard } from "@/lib/auth-guard";
 import { redirect } from "next/navigation";
 
 const SignUpPage = async () => {
-  const user = await getCurrentUser();
-  if (user) redirect("/");
+  await authGuard("public");
 
   return <SignUpCard />;
 };
