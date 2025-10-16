@@ -7,7 +7,7 @@ export default async function Home() {
   await authGuard("protected");
   return (
     <div>
-      <UserButton />{" "}
+      This is the dashboard home page
     </div>
   );
 }
