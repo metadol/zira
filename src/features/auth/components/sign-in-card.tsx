@@ -27,10 +27,12 @@ import Link from "next/link";
 import { loginSchema } from "../schemas";
 import { useLogin } from "../api/client/use-login";
 
+type LoginFormValues = z.infer<typeof loginSchema>;
+
 export const SignInCard = () => {
   const { mutate, isPending } = useLogin();
 
-  const form = useForm<z.infer<typeof loginSchema>>({
+  const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
       email: "",
@@ -38,7 +40,7 @@ export const SignInCard = () => {
     },
   });
 
-  const onSubmit = (data: z.infer<typeof loginSchema>) => {
+  const onSubmit = (data: LoginFormValues) => {
     mutate({ json: data });
   };
 

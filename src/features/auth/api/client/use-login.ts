@@ -36,3 +36,22 @@ export const useLogin = () => {
 };
 
 //asdf@r.com : Password@1
+
+// Flow when a user signs in:
+
+// User opens /sign-in.
+
+// SignInPage calls authGuard("public") → checks if already logged in.
+// SignInCard renders the signin form → user submits email & password. frontend zod validation using react hook form →
+// Hook form onSubmit calls -> mutate from useLogin.
+// useLogin().mutate({ json: { email, password } }) is called.
+// mutationFn inside useLogin executes the RPC client & sends POST to /api/auth/login.
+// Next.js routes it to app/api/[[...routes]]/route.ts.
+// route.ts forwards it to auth/server/route.ts.
+
+// Hono middleware:
+// Validates request with Zod.
+// Calls Appwrite account.createEmailPasswordSession.
+// Sets auth cookie.
+// Returns JSON response.
+// Frontend useMutation gets the response → you can redirect to /.

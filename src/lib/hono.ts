@@ -113,7 +113,7 @@ export const client = hc<AppType>(process.env.NEXT_PUBLIC_APP_URL!);
 
 // 2.RPC client (rpc.ts) sends a request to /api/auth/login.
 
-// 3.Next.js routes that to your main API entry (route.ts).
+// 3.Next.js routes that to your main API entry (app/api/route.ts)  .
 
 // 4.route.ts forwards it to the auth subroutes (auth/server/route.ts).
 

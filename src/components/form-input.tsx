@@ -4,13 +4,15 @@ import {
   FormItem,
   FormControl,
   FormMessage,
+  FormLabel,
 } from "@/components/ui/form";
-import { Control } from "react-hook-form";
+import { Control, Form } from "react-hook-form";
 import { InputHTMLAttributes } from "react";
 
 interface FormInputProps extends InputHTMLAttributes<HTMLInputElement> {
   control: Control<any>;
   name: string;
+  label?: string;
 }
 
 export const FormInput = ({
@@ -18,7 +20,8 @@ export const FormInput = ({
   name,
   type = "text",
   placeholder,
-  ...rest 
+  label,
+  ...rest
 }: FormInputProps) => {
   return (
     <FormField
@@ -26,6 +29,7 @@ export const FormInput = ({
       control={control}
       render={({ field }) => (
         <FormItem>
+          {label && <FormLabel>{label}</FormLabel>}
           <FormControl>
             <Input {...field} type={type} placeholder={placeholder} {...rest} />
           </FormControl>
@@ -35,3 +39,14 @@ export const FormInput = ({
     />
   );
 };
+
+//name attribute should match with the form schema fields
+
+//HOW TO USE:
+{/* <FormInput
+  control={form.control}
+  label="Workspace Name"
+  name="name"
+  type="text"
+  placeholder="Enter workspace name"
+/>; */}

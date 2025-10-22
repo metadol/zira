@@ -22,10 +22,12 @@ import { FormInput } from "@/components/form-input";
 import { registerSchema } from "../schemas";
 import { useRegister } from "../api/client/use-register";
 
+type RegisterFormValues = z.infer<typeof registerSchema>;
+
 export const SignUpCard = () => {
   const { mutate, isPending } = useRegister();
 
-  const form = useForm<z.infer<typeof registerSchema>>({
+  const form = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
       name: "",
@@ -34,7 +36,7 @@ export const SignUpCard = () => {
     },
   });
 
-  const onSubmit = (data: z.infer<typeof registerSchema>) => {
+  const onSubmit = (data: RegisterFormValues) => {
     console.log(data);
     mutate({ json: data });
   };

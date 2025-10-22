@@ -12,7 +12,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
           <Sidebar />
         </div>
 
-        <div className="lg:pl-[264px] bg-blue-500 w-full">
+        <div className="lg:pl-[264px] bg-blue-500 w-full h-full">
           <div className="mx-auto max-w-screen-2xl h-full bg-yellow-500 p-2">
             <Navbar />
             <main className="flex flex-col h-full py-8 px-6 bg-amber-800 ">
