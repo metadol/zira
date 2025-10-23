@@ -37,6 +37,7 @@ export const WorkspaceSwitcher = () => {
                 <WorkspaceAvatar
                   name={workspace.name}
                   image={workspace.image}
+                  className="flex-shrink-0"
                 />
                 <span className="truncate">{workspace.name}</span>
               </div>
