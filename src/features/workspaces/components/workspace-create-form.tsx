@@ -1,26 +1,28 @@
 "use client";
+
+// React
 import { useForm } from "react-hook-form";
-import { createWorkspaceSchema } from "../schemas";
+
+// Validation
+import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import z from "zod";
+import { createWorkspaceSchema } from "../schemas";
+
+// UI Components
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { Form, FormField } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { DottedSeparator } from "@/components/dotted-seperator";
 import { FormInput } from "@/components/form-input";
+import { ImageUpload } from "@/components/image-upload";
+
+// API Hooks
 import { useCreateWorkspace } from "../api/client/use-workspace-create";
 
 interface CreateWorkspaceFormProps {
   onCancel?: () => void;
 }
+
 type CreateWorkspaceFormValues = z.infer<typeof createWorkspaceSchema>;
 
 export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
@@ -34,13 +36,24 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
   });
 
   const onSubmit = (data: CreateWorkspaceFormValues) => {
-    console.log(data);
-    mutate({ json: data });
+    const finalValues = {
+      ...data,
+      image: data.image instanceof File ? data.image : "",
+    };
+
+    mutate(
+      { form: finalValues },
+      {
+        onSuccess: () => {
+          form.reset();
+        },
+      }
+    );
   };
 
   return (
     <Card className="w-full h-full border-none shadow-none">
-      <CardHeader className="flex p-7 ">
+      <CardHeader className="flex p-7">
         <CardTitle className="text-xl font-bold">Create Workspace</CardTitle>
       </CardHeader>
 
@@ -62,6 +75,20 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
                 name="name"
                 type="text"
                 placeholder="Enter workspace name"
+                disabled={isPending}
+              />
+
+              <FormField
+                disabled={isPending}
+                control={form.control}
+                name="image"
+                render={({ field }) => (
+                  <ImageUpload
+                    value={field.value}
+                    onChange={field.onChange}
+                    disabled={isPending}
+                  />
+                )}
               />
             </div>
 
@@ -71,13 +98,13 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
               <Button
                 variant="secondary"
                 onClick={onCancel}
-                size={"lg"}
+                size="lg"
                 type="button"
                 disabled={isPending}
               >
                 Cancel
               </Button>
-              <Button type="submit" size={"lg"} disabled={isPending}>
+              <Button type="submit" size="lg" disabled={isPending}>
                 Create Workspace
               </Button>
             </div>
