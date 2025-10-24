@@ -23,7 +23,11 @@ export const useLogout = () => {
       router.refresh();
 
       queryClient.invalidateQueries({
-        queryKey: ['current'], //refetches the current endpoint to check if it fails after logout so that user automatically gets logged out!
+        queryKey: ['current'], //refetches current user data after logout
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['workspaces'], //refetches workspaces to clear any cached data after logout
+
       });
     },
     onError: () => {
@@ -34,7 +38,7 @@ export const useLogout = () => {
   return mutation;
 };
 
-//USAGE 
+//USAGE
 // const { mutate } = useLogout();
 
 // useLogout() returns the mutation object.
