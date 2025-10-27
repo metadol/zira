@@ -11,11 +11,17 @@ import {
   SelectValue,
 } from "./ui/select";
 import { WorkspaceAvatar } from "./workspace-avatar";
+import { useRouter } from "next/navigation";
+import { useWorkspaceId } from "@/hooks/use-workspace-id";
 
 export const WorkspaceSwitcher = () => {
+  const workspaceId = useWorkspaceId();
+  const router = useRouter();
   const { data: workspaces } = useGetWorkspaces();
 
-  console.log("workspaces", workspaces);
+  const onSelect = (Id: string) => {
+    router.push(`/workspaces/${Id}`);
+  };
   return (
     <div className="flex flex-col gap-y-2">
       <div className="flex items-center justify-between">
@@ -23,11 +29,9 @@ export const WorkspaceSwitcher = () => {
         <RiAddFill className="size-5 text-neutral-500 cursor-pointer" />
       </div>
 
-      <Select>
+      <Select onValueChange={onSelect} value={workspaceId}>
         <SelectTrigger className="w-full bg-neutral-200 font-medium p-1 data-[placeholder]:text-muted-foreground">
-          <SelectValue
-            placeholder="Select a workspace"
-          />
+          <SelectValue placeholder="Select a workspace" />
         </SelectTrigger>
 
         <SelectContent>

@@ -46,7 +46,9 @@ const app = new Hono()
                 name,
                 userid: user.$id,
                 image: uploadedImageId,
-                invitecode: generateInviteCode(6),
+                invitecode: generateInviteCode(6), 
+                // Generate a random invite code for the workspace 
+                // which can be used to invite other users
             }
         );
 
@@ -125,8 +127,6 @@ const app = new Hono()
             },
         });
     });
-
-
 
 
 
