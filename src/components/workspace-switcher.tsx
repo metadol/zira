@@ -15,8 +15,8 @@ import { useRouter } from "next/navigation";
 import { useWorkspaceId } from "@/hooks/use-workspace-id";
 
 export const WorkspaceSwitcher = () => {
-  const workspaceId = useWorkspaceId();
   const router = useRouter();
+  const workspaceId = useWorkspaceId();
   const { data: workspaces } = useGetWorkspaces();
 
   const onSelect = (Id: string) => {

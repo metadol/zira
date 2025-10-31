@@ -20,7 +20,7 @@ export const setAuthCookie = (c: any, secret: string) => {
 
 // this getCurrentUser allows us to check if the user is logged in
 // on the server side so that 
-// we can avoid suing usecurrent hook 
+// we can avoid suing usecurrent hook in the compoennt  
 // which would require the component to be a client component
 // OTHERWISE, we would have to make the component a client component and redirect using useeffect
 export const getCurrentUser = async () => {
