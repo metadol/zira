@@ -7,11 +7,6 @@ body {
   scroll-behavior: smooth;
 }
 
-/* Hide scrollbar for Chrome, Safari, and Opera */
-::-webkit-scrollbar {
-  display: none;
-}
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -81,4 +76,11 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/*CUSTOM STYLES*/
+
+/* Hide scrollbar for Chrome, Safari, and Opera */
+::-webkit-scrollbar {
+  display: none;
 }
