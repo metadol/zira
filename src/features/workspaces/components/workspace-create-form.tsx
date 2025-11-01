@@ -2,6 +2,7 @@
 
 // React
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 
 // Validation
 import { z } from "zod";
@@ -26,6 +27,7 @@ interface CreateWorkspaceFormProps {
 type CreateWorkspaceFormValues = z.infer<typeof createWorkspaceSchema>;
 
 export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
+  const router = useRouter();
   const { mutate, isPending } = useCreateWorkspace();
 
   const form = useForm<CreateWorkspaceFormValues>({
@@ -44,8 +46,9 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
     mutate(
       { form: finalValues },
       {
-        onSuccess: () => {
+        onSuccess: ({ data }) => {
           form.reset();
+          router.push(`/workspaces/${data.$id}`);
         },
       }
     );
