@@ -19,6 +19,7 @@ import { ImageUpload } from "@/components/image-upload";
 
 // API Hooks
 import { useCreateWorkspace } from "../api/client/use-workspace-create";
+import { cn } from "@/lib/utils";
 
 interface CreateWorkspaceFormProps {
   onCancel?: () => void;
@@ -104,6 +105,7 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
                 size="lg"
                 type="button"
                 disabled={isPending}
+                className={cn(!onCancel && "invisible")}
               >
                 Cancel
               </Button>

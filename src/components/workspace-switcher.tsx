@@ -17,9 +17,10 @@ import { useCreateWorkSpaceModal } from "@/hooks/use-workspace-modal";
 
 export const WorkspaceSwitcher = () => {
   const router = useRouter();
+
   const workspaceId = useWorkspaceId();
-  const { data: workspaces } = useGetWorkspaces();
   const { open } = useCreateWorkSpaceModal();
+  const { data: workspaces } = useGetWorkspaces();
 
   const onSelect = (Id: string) => {
     router.push(`/workspaces/${Id}`);

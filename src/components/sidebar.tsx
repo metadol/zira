@@ -3,15 +3,12 @@ import Link from "next/link";
 import { DottedSeparator } from "./dotted-seperator";
 import { Navigation } from "./navigation";
 import { WorkspaceSwitcher } from "./workspace-switcher";
+import { Logo } from "./zira-logo";
 
 export const Sidebar = () => {
   return (
     <aside className="w-full h-full bg-neutral-100 p-4">
-      <Link href="/" className="flex items-center gap-2 ">
-        <Eclipse />
-        <p>Zira</p>
-      </Link>
-
+      <Logo />
       <DottedSeparator className="my-4" />
       <WorkspaceSwitcher />
       <DottedSeparator className="my-4" />
