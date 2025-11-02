@@ -98,18 +98,23 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
 
             <DottedSeparator className="py-7" />
 
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col-reverse xs:flex-row gap-y-2 items-center justify-between ">
               <Button
                 variant="secondary"
                 onClick={onCancel}
                 size="lg"
                 type="button"
                 disabled={isPending}
-                className={cn(!onCancel && "invisible")}
+                className={cn(!onCancel && "invisible", "w-full xs:w-auto")}
               >
                 Cancel
               </Button>
-              <Button type="submit" size="lg" disabled={isPending}>
+              <Button
+                type="submit"
+                size="lg"
+                disabled={isPending}
+                className="w-full xs:w-auto"
+              >
                 Create Workspace
               </Button>
             </div>
