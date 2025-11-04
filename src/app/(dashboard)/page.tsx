@@ -2,7 +2,7 @@ import { authGuard } from "@/lib/auth-guard";
 import { getWorkspaces } from "@/lib/workspace";
 import { redirect } from "next/navigation";
 
-export default async function Home() {
+const HomePage = async () => {
   await authGuard("protected");
 
   const workspaces = await getWorkspaces();
@@ -12,5 +12,7 @@ export default async function Home() {
     redirect(`/workspaces/${workspaces.documents[0].$id}`);
   }
 }
+
+export default HomePage
 
 // asdf@r.com
