@@ -5,9 +5,16 @@ import { sessionMiddleware } from '@/lib/session-middleware';
 import { DATABASE_ID, IMAGES_BUCKET_ID, MEMBERS_ID, WORKSPACES_ID } from '@/config';
 import { ID, type Models, Query } from 'node-appwrite';
 import { generateInviteCode } from '@/lib/utils';
+import { getMember } from '@/features/members/utils';
+
+
+enum MemberRole {
+    ADMIN = 'ADMIN',
+    MEMBER = 'MEMBER',
+}
 
 const app = new Hono()
-    .post('/', zValidator('form', createWorkspaceSchema), sessionMiddleware, async (c) => {
+    .post('/', sessionMiddleware, zValidator('form', createWorkspaceSchema), async (c) => {
         const databases = c.get('databases');
         const storage = c.get('storage');
         const user = c.get('user');
@@ -126,7 +133,58 @@ const app = new Hono()
                 total: workspaces.total,
             },
         });
-    });
+    })
+
+    .patch('/:workspaceId', sessionMiddleware, zValidator('form', updateWorkspaceSchema), async (c) => {
+        const databases = c.get('databases');
+        const storage = c.get('storage');
+        const user = c.get('user');
+
+        const { workspaceId } = c.req.param();
+        const { name, image } = c.req.valid('form');
+
+        const existingWorkspace = await databases.getDocument(DATABASE_ID, WORKSPACES_ID, workspaceId);
+
+        const member = await getMember({
+            databases,
+            workspaceId,
+            userId: user.$id,
+        });
+
+        if (!member || member.role !== MemberRole.ADMIN) {
+            return c.json(
+                {
+                    error: 'Unauthorized.',
+                },
+                401,
+            );
+        }
+
+        let uploadedImageId: string | undefined = undefined;
+
+        if (image instanceof File) {
+            const fileExt = image.name.split('.').at(-1) ?? 'png';
+            const fileName = `${ID.unique()}.${fileExt}`;
+
+            const renamedImage = new File([image], fileName, {
+                type: image.type,
+            });
+
+            const file = await storage.createFile(IMAGES_BUCKET_ID, ID.unique(), renamedImage);
+
+            // delete old project image
+            if (existingWorkspace.imageId) await storage.deleteFile(IMAGES_BUCKET_ID, existingWorkspace.imageId);
+
+            uploadedImageId = file.$id;
+        }
+
+        const workspace = await databases.updateDocument(DATABASE_ID, WORKSPACES_ID, workspaceId, {
+            name,
+            imageid: uploadedImageId,
+        });
+
+        return c.json({ data: workspace });
+    })
 
 
 
