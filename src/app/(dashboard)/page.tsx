@@ -1,5 +1,5 @@
-import { authGuard } from "@/lib/auth-guard";
-import { getWorkspaces } from "@/lib/workspace";
+import { authGuard } from "@/features/auth/utils";
+import { getWorkspaces } from "@/features/workspaces/utils";
 import { redirect } from "next/navigation";
 
 const HomePage = async () => {

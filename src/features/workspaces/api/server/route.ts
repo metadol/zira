@@ -1,6 +1,6 @@
 import { zValidator } from '@hono/zod-validator';
 import { Hono } from 'hono';
-import { createWorkspaceSchema } from '../../schemas';
+import { createWorkspaceSchema, updateWorkspaceSchema } from '../../schemas';
 import { sessionMiddleware } from '@/lib/session-middleware';
 import { DATABASE_ID, IMAGES_BUCKET_ID, MEMBERS_ID, WORKSPACES_ID } from '@/config';
 import { ID, type Models, Query } from 'node-appwrite';
@@ -46,7 +46,7 @@ const app = new Hono()
                 name,
                 userid: user.$id,
                 image: uploadedImageId,
-                invitecode: generateInviteCode(6), 
+                invitecode: generateInviteCode(6),
                 // Generate a random invite code for the workspace 
                 // which can be used to invite other users
             }
@@ -127,7 +127,6 @@ const app = new Hono()
             },
         });
     });
-
 
 
 

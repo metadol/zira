@@ -1,5 +1,5 @@
+import { authGuard } from "@/features/auth/utils";
 import { CreateWorkspaceForm } from "@/features/workspaces/components/workspace-create-form";
-import { authGuard } from "@/lib/auth-guard";
 
 const createWorkSpacePage = async () => {
   await authGuard("protected");

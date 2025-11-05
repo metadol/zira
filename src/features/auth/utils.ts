@@ -1,7 +1,7 @@
 import { setCookie } from 'hono/cookie'
 import { AUTH_COOKIE } from '@/lib/constants'
 import { createSessionClient } from '@/lib/appwrite';
-
+import { redirect } from "next/navigation";
 
 export const setAuthCookie = (c: any, secret: string) => {
     setCookie(c, AUTH_COOKIE, secret, {
@@ -13,16 +13,6 @@ export const setAuthCookie = (c: any, secret: string) => {
     })
 }
 
-/**
- * Returns the current user if the session is valid, otherwise returns null.
- * @returns {Promise<User | null>} The current user if the session is valid, otherwise null.
- */
-
-// this getCurrentUser allows us to check if the user is logged in
-// on the server side so that 
-// we can avoid suing usecurrent hook in the compoennt  
-// which would require the component to be a client component
-// OTHERWISE, we would have to make the component a client component and redirect using useeffect
 export const getCurrentUser = async () => {
     try {
         const { account } = await createSessionClient();
@@ -32,6 +22,28 @@ export const getCurrentUser = async () => {
     }
 };
 
+export const authGuard = async (type: "public" | "protected") => {
+    const user = await getCurrentUser();
+
+    if (type === "public" && user) redirect("/");
+    if (type === "protected" && !user) redirect("/sign-in");
+
+    return user;
+}
+
+
+
+/**
+ * Returns the current user if the session is valid, otherwise returns null.
+ * @returns {Promise<User | null>} The current user if the session is valid, otherwise null.
+ */
+
+// this getCurrentUser allows us to check if the user is logged in
+// on the server side so that
+// we can avoid suing usecurrent hook in the compoennt
+// which would require the component to be a client component
+// OTHERWISE, we would have to make the component a client component and redirect using useeffect
+
 // 1.Login/Register → User sends request → Hono → calls Appwrite → Appwrite creates session → Hono sets session secret in cookie.
 
 // 2.Requests → Browser auto-sends cookie → Hono middleware reads cookie → asks Appwrite if session is valid → if yes, allow; if not, reject.
@@ -40,3 +52,6 @@ export const getCurrentUser = async () => {
 
 // 👉 Appwrite = auth + sessions
 // 👉 Hono = API layer + cookie manager
+
+
+

@@ -1,6 +1,4 @@
-"use client";
-
-import { authGuard } from "@/lib/auth-guard";
+import { authGuard } from "@/features/auth/utils";
 
 const WorkspacePage = async() => {
   await authGuard("protected");

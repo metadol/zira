@@ -8,7 +8,7 @@ import { ID } from 'node-appwrite';
 import { loginSchema, registerSchema } from '../../schemas';
 import { createAdminClient } from '@/lib/appwrite';
 import { AUTH_COOKIE } from '@/lib/constants';
-import { setAuthCookie } from '@/lib/auth';
+import { setAuthCookie } from '../../utils';
 import { sessionMiddleware } from '@/lib/session-middleware';
 
 

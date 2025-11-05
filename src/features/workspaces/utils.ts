@@ -1,9 +1,10 @@
 'use server';
 
 import { type Models, Query } from 'node-appwrite';
-import { DATABASE_ID, IMAGES_BUCKET_ID, MEMBERS_ID, WORKSPACES_ID } from '../config';
-import { createSessionClient } from './appwrite';
+import { DATABASE_ID, IMAGES_BUCKET_ID, MEMBERS_ID, WORKSPACES_ID } from '../../config';
+import { createSessionClient } from '@/lib/appwrite';
 
+// to use in server components
 export const getWorkspaces = async () => {
     try {
         const { account, databases, storage } = await createSessionClient();
