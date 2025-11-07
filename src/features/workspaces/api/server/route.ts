@@ -6,6 +6,7 @@ import { DATABASE_ID, IMAGES_BUCKET_ID, MEMBERS_ID, WORKSPACES_ID } from '@/conf
 import { ID, type Models, Query } from 'node-appwrite';
 import { generateInviteCode } from '@/lib/utils';
 import { getMember } from '@/features/members/utils';
+import { Workspace } from '../../components/workspace-update-form';
 
 
 enum MemberRole {
@@ -133,6 +134,30 @@ const app = new Hono()
                 total: workspaces.total,
             },
         });
+    })
+
+    .get("/:workspaceId", sessionMiddleware, async (c) => {
+        const user = c.get("user");
+        const databases = c.get("databases");
+        const { workspaceId } = c.req.param();
+
+        const member = await getMember({
+            databases,
+            workspaceId,
+            userId: user.$id,
+        });
+
+        if (!member) {
+            return c.json({ error: "Unauthorized" }, 401);
+        }
+
+        const workspace = await databases.getDocument<Workspace>(
+            DATABASE_ID,
+            WORKSPACES_ID,
+            workspaceId
+        );
+
+        return c.json({ data: workspace });
     })
 
     .patch('/:workspaceId', sessionMiddleware, zValidator('form', updateWorkspaceSchema), async (c) => {

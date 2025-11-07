@@ -23,19 +23,21 @@ import { cn } from "@/lib/utils";
 
 //Appwrite SDK
 import { type Models } from "node-appwrite";
+import { useEffect } from "react";
+import { ArrowLeftIcon } from "lucide-react";
 
 type UpdateWorkspaceFormValues = z.infer<typeof updateWorkspaceSchema>;
-type Workspace = Models.Document & {
+export type Workspace = Models.Document & {
   name: string;
   imageid?: string;
   image?: string;
-  userId: string;
+  userid: string;
   inviteCode: string;
 };
 
 interface UpdateWorkspaceFormProps {
   onCancel?: () => void;
-  initialValues?: Workspace;
+  initialValues: Workspace;
 }
 
 export const UpdateWorkspaceForm = ({
@@ -74,7 +76,19 @@ export const UpdateWorkspaceForm = ({
 
   return (
     <Card className="w-full h-full border-none shadow-none">
-      <CardHeader className="flex p-7">
+      <CardHeader className="flex flex-row items-center gap-x-4 p-7 space-y-0">
+        <Button
+          size={"sm"}
+          variant={"secondary"}
+          onClick={
+            onCancel
+              ? onCancel
+              : () => router.push(`/workspaces/${initialValues.$id}`)
+          }
+        >
+          <ArrowLeftIcon className="size-4 mr-1" />
+          Back
+        </Button>
         <CardTitle className="text-xl font-bold">
           {initialValues?.name}
         </CardTitle>
@@ -124,7 +138,10 @@ export const UpdateWorkspaceForm = ({
                 size="lg"
                 type="button"
                 disabled={isPending}
-                className={cn(!onCancel && "invisible", "w-full xs:w-auto")}
+                className={cn(
+                  !onCancel && "hidden xs:invisible xs:block",
+                  "w-full xs:w-auto "
+                )}
               >
                 Cancel
               </Button>
@@ -134,7 +151,7 @@ export const UpdateWorkspaceForm = ({
                 disabled={isPending}
                 className="w-full xs:w-auto"
               >
-                Create Workspace
+                Save Changes
               </Button>
             </div>
           </form>

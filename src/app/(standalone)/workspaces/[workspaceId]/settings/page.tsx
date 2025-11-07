@@ -1,21 +1,10 @@
+import { WorkspaceIdSettingsClient } from "@/components/workspace-settings";
 import { authGuard } from "@/features/auth/utils";
 
-interface WorkSpaceIdSettingsPageProps {
-  params: {
-    workspaceId: string;
-  };
-}
-
-const WorkSpaceIdSettingsPage = async ({
-  params,
-}: WorkSpaceIdSettingsPageProps) => {
+const WorkSpaceIdSettingsPage = async () => {
   await authGuard("protected");
 
-  return (
-    <div>
-      <div>WorkSpaceID SETTINGS {params.workspaceId}</div>
-    </div>
-  );
+  return <WorkspaceIdSettingsClient />;
 };
 
 export default WorkSpaceIdSettingsPage;

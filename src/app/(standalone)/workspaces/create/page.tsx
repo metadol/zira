@@ -5,7 +5,7 @@ const createWorkSpacePage = async () => {
   await authGuard("protected");
 
   return (
-    <div className="w-full lg:max-w-xl py-8">
+    <div className="w-full lg:max-w-xl">
       <CreateWorkspaceForm />
     </div>
   );
