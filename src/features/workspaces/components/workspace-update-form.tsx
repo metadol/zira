@@ -3,6 +3,8 @@
 // React
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import { ArrowLeftIcon } from "lucide-react";
+
 
 // Validation
 import { z } from "zod";
@@ -23,13 +25,10 @@ import { cn } from "@/lib/utils";
 
 //Appwrite SDK
 import { type Models } from "node-appwrite";
-import { useEffect } from "react";
-import { ArrowLeftIcon } from "lucide-react";
 
 type UpdateWorkspaceFormValues = z.infer<typeof updateWorkspaceSchema>;
 export type Workspace = Models.Document & {
   name: string;
-  imageid?: string;
   image?: string;
   userid: string;
   inviteCode: string;

@@ -138,7 +138,9 @@ const app = new Hono()
 
     .get("/:workspaceId", sessionMiddleware, async (c) => {
         const user = c.get("user");
+        const storage = c.get('storage');
         const databases = c.get("databases");
+
         const { workspaceId } = c.req.param();
 
         const member = await getMember({
@@ -157,7 +159,27 @@ const app = new Hono()
             workspaceId
         );
 
-        return c.json({ data: workspace });
+        // Attach base64 image if available
+        let image: string | undefined = undefined;
+
+        if (workspace.image) {
+            try {
+                const arrayBuffer = await storage.getFileView(IMAGES_BUCKET_ID, workspace.image);
+                image = `data:image/png;base64,${Buffer.from(arrayBuffer).toString("base64")}`;
+            } catch (error) {
+                console.error(`Error fetching image for workspace ${workspace.$id}:`, error);
+            }
+        }
+
+        // return c.json({ data: workspace });
+
+        // Return workspace with embedded image
+        return c.json({
+            data: {
+                ...workspace,
+                image,
+            },
+        });
     })
 
     .patch('/:workspaceId', sessionMiddleware, zValidator('form', updateWorkspaceSchema), async (c) => {
@@ -198,14 +220,14 @@ const app = new Hono()
             const file = await storage.createFile(IMAGES_BUCKET_ID, ID.unique(), renamedImage);
 
             // delete old project image
-            if (existingWorkspace.imageId) await storage.deleteFile(IMAGES_BUCKET_ID, existingWorkspace.imageId);
+            if (existingWorkspace.image) await storage.deleteFile(IMAGES_BUCKET_ID, existingWorkspace.image);
 
             uploadedImageId = file.$id;
         }
 
         const workspace = await databases.updateDocument(DATABASE_ID, WORKSPACES_ID, workspaceId, {
             name,
-            imageid: uploadedImageId,
+            image: uploadedImageId,
         });
 
         return c.json({ data: workspace });
