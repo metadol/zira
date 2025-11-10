@@ -1,0 +1,83 @@
+import { useState } from "react";
+
+import { Button, type ButtonProps } from "@/components/ui/button";
+import { ResponsiveModal } from "@/components/responsive-modal";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardDescription,
+  CardTitle,
+} from "@/components/ui/card";
+
+export type UseConfirmProps = {
+  title: string;
+  message: string;
+  variant?: ButtonProps["variant"];
+};
+
+export const useConfirm = ({
+  title,
+  message,
+  variant = "primary",
+}: UseConfirmProps) => {
+  const [promise, setPromise] = useState<{
+    resolve: (value: boolean) => void;
+  } | null>(null);
+
+  const confirm = () => {
+    return new Promise((resolve, reject) => {
+      setPromise({ resolve });
+    });
+  };
+
+  const handleClose = () => {
+    setPromise(null);
+  };
+
+  const handleConfirm = () => {
+    promise?.resolve(true);
+    setPromise(null);
+  };
+
+  const handleCancel = () => {
+    promise?.resolve(false);
+    setPromise(null);
+  };
+
+  const ConfirmationDialog = ({ isPending }: { isPending?: boolean }) => (
+    <ResponsiveModal open={promise !== null} onOpenChange={handleClose}>
+      <Card className="size-full border-none shadow-none">
+        <CardContent className="pt-8">
+          <CardHeader className="p-0">
+            <CardTitle>{title}</CardTitle>
+
+            <CardDescription>{message}</CardDescription>
+          </CardHeader>
+
+          <div className="flex w-full flex-col items-center justify-end gap-x-2 gap-y-2 pt-4 lg:flex-row">
+            <Button
+              onClick={handleCancel}
+              variant="outline"
+              className="w-full lg:w-auto"
+              disabled={isPending}
+            >
+              Cancel
+            </Button>
+
+            <Button
+              onClick={handleConfirm}
+              variant={variant}
+              className="w-full lg:w-auto"
+              disabled={isPending}
+            >
+              Confirm
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+    </ResponsiveModal>
+  );
+
+  return { confirm, ConfirmationDialog };
+};
