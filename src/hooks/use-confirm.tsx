@@ -20,7 +20,7 @@ export const useConfirm = ({
   title,
   message,
   variant = "primary",
-}: UseConfirmProps) => {
+}: UseConfirmProps): [() => JSX.Element, () => Promise<unknown>] => {
   const [promise, setPromise] = useState<{
     resolve: (value: boolean) => void;
   } | null>(null);
@@ -45,7 +45,7 @@ export const useConfirm = ({
     setPromise(null);
   };
 
-  const ConfirmationDialog = ({ isPending }: { isPending?: boolean }) => (
+  const ConfirmationDialog = () => (
     <ResponsiveModal open={promise !== null} onOpenChange={handleClose}>
       <Card className="size-full border-none shadow-none">
         <CardContent className="pt-8">
@@ -60,7 +60,6 @@ export const useConfirm = ({
               onClick={handleCancel}
               variant="outline"
               className="w-full lg:w-auto"
-              disabled={isPending}
             >
               Cancel
             </Button>
@@ -69,7 +68,6 @@ export const useConfirm = ({
               onClick={handleConfirm}
               variant={variant}
               className="w-full lg:w-auto"
-              disabled={isPending}
             >
               Confirm
             </Button>
@@ -79,5 +77,5 @@ export const useConfirm = ({
     </ResponsiveModal>
   );
 
-  return { confirm, ConfirmationDialog };
+  return [ConfirmationDialog, confirm];
 };

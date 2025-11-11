@@ -1,35 +1,19 @@
 "use client";
 
-// import { PageError } from "@/components/page-error";
-// import { PageLoader } from "@/components/page-loader";
+import { WorkspaceUpdateForm } from "@/features/workspaces/components/workspace-update-form";
+import { WorkspaceInviteSection } from "@/features/workspaces/components/workspace-invite-form";
+import { WorkspaceDangerZone } from "@/features/workspaces/components/workspace-delete-form";
+import { type Workspace } from "@/types";
+interface WorkspaceSettingsProps {
+  workspace: Workspace;
+}
 
-import { useGetWorkspaceById } from "@/features/workspaces/api/client/use-workspace-get-id";
-import {
-  UpdateWorkspaceForm,
-  Workspace,
-} from "@/features/workspaces/components/workspace-update-form";
-import { useWorkspaceId } from "@/hooks/use-workspace-id";
-
-export const WorkspaceIdSettingsClient = () => {
-  const workspaceId = useWorkspaceId();
-  const { data: initialValues, isLoading } = useGetWorkspaceById({
-    workspaceId,
-  });
-
-    if (isLoading) {
-      // return <PageLoader />;
-      return "loading"
-    }
-
-  //   if (!initialValues) {
-  //     return <PageError message="Workspace not found." />;
-  //   }
-
+export function WorkspaceSettings({ workspace }: WorkspaceSettingsProps) {
   return (
-    <div className="w-full lg:max-w-xl">
-      <UpdateWorkspaceForm
-        initialValues={initialValues as Workspace}
-      />
+    <div className="flex flex-col gap-y-6">
+      <WorkspaceUpdateForm initialValues={workspace} />
+      <WorkspaceInviteSection workspace={workspace} />
+      <WorkspaceDangerZone workspace={workspace} />
     </div>
   );
-};
+}
