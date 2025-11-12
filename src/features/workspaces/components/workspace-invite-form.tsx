@@ -23,7 +23,7 @@ export function WorkspaceInviteSection({
     variant: "destructive",
   });
 
-  const fullInviteLink = `${window.location.origin}/workspaces/${workspace.$id}/join/${workspace.inviteCode}`;
+  const fullInviteLink = `${window.location.origin}/workspaces/${workspace.$id}/join/${workspace.invitecode}`;
 
   const handleCopyInviteLink = () => {
     navigator.clipboard.writeText(fullInviteLink).then(() => {

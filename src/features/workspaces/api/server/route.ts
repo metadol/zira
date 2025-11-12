@@ -6,7 +6,8 @@ import { DATABASE_ID, IMAGES_BUCKET_ID, MEMBERS_ID, WORKSPACES_ID } from '@/conf
 import { ID, type Models, Query } from 'node-appwrite';
 import { generateInviteCode } from '@/lib/utils';
 import { getMember } from '@/features/members/utils';
-import { Workspace } from '../../components/workspace-update-form';
+import { Workspace } from '@/types';
+import z from 'zod';
 
 
 enum MemberRole {
@@ -294,7 +295,55 @@ const app = new Hono()
         );
 
         return c.json({ data: workspace });
-    });
+    })
+
+    .post('/:workspaceId/join', sessionMiddleware, zValidator('json', z.object({ code: z.string() })),
+        async (c) => {
+            const { workspaceId } = c.req.param();
+            const { code } = c.req.valid('json');
+
+            const databases = c.get('databases');
+            const user = c.get('user');
+
+            const member = await getMember({
+                databases,
+                workspaceId,
+                userId: user.$id,
+            });
+
+            if (member) {
+                return c.json({ error: 'Already a member.' }, 400);
+            }
+
+            const workspace = await databases.getDocument<Workspace>(DATABASE_ID, WORKSPACES_ID, workspaceId);
+
+            if (workspace.inviteCode !== code) {
+                return c.json({ error: 'Invalid invite code.' }, 400);
+            }
+
+            await databases.createDocument(DATABASE_ID, MEMBERS_ID, ID.unique(), {
+                workspaceId,
+                userid: user.$id,
+                role: MemberRole.MEMBER,
+            });
+
+            return c.json({ data: workspace });
+        },
+    )
+    
+    .get('/:workspaceId/info', sessionMiddleware, async (c) => {
+        const databases = c.get('databases');
+        const { workspaceId } = c.req.param();
+
+        const workspace = await databases.getDocument<Workspace>(DATABASE_ID, WORKSPACES_ID, workspaceId);
+
+        return c.json({
+            data: {
+                $id: workspace.$id,
+                name: workspace.name,
+            },
+        });
+    })
 
 
 
