@@ -1,14 +1,14 @@
 "use client";
 
-// 1️⃣ Components
+//  Components
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { DottedSeparator } from "@/components/dotted-seperator";
 
-// 2️⃣ Utils / Schemas / Hooks
+//  Utils / Schemas / Hooks
+import { type Workspace } from "@/types";
 import { useConfirm } from "@/hooks/use-confirm";
 import { useDeleteWorkspace } from "../api/client/use-workspace-delete";
-import { type Workspace } from "@/types";
 
 export function WorkspaceDangerZone({ workspace }: { workspace: Workspace }) {
   const { mutate, isPending } = useDeleteWorkspace();

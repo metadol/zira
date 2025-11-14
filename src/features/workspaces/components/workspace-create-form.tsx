@@ -1,13 +1,13 @@
 "use client";
 
-// 1️⃣ Libraries
+// Libraries
 import z from "zod";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createWorkspaceSchema } from "../schemas";
 
-// 2️⃣ Components
+// Components
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormField } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
@@ -15,7 +15,7 @@ import { DottedSeparator } from "@/components/dotted-seperator";
 import { FormInput } from "@/components/form-input";
 import { ImageUpload } from "@/components/image-upload";
 
-// 2️⃣ Utils / Schemas / Hooks
+// Utils / Schemas / Hooks
 import { useCreateWorkspace } from "../api/client/use-workspace-create";
 import { cn } from "@/lib/utils";
 

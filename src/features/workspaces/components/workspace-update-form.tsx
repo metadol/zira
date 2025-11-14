@@ -1,14 +1,13 @@
 "use client";
 
-// 1️⃣ Libraries
+// Libraries
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useRouter } from "next/navigation";
 import { ArrowLeftIcon } from "lucide-react";
 
-
-// 2️⃣ Components
+// Components
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Form, FormField } from "@/components/ui/form";
@@ -16,12 +15,11 @@ import { FormInput } from "@/components/form-input";
 import { ImageUpload } from "@/components/image-upload";
 import { DottedSeparator } from "@/components/dotted-seperator";
 
-// 3️⃣ Utils / Schemas/ Hooks
+// Utils / Schemas/ Hooks
 import { cn } from "@/lib/utils";
 import { type Workspace } from "@/types";
 import { updateWorkspaceSchema } from "../schemas";
 import { useUpdateWorkspace } from "../api/client/use-workspace-update";
-
 
 type UpdateWorkspaceFormValues = z.infer<typeof updateWorkspaceSchema>;
 
@@ -77,7 +75,9 @@ export function WorkspaceUpdateForm({
           <ArrowLeftIcon className="size-4 mr-1" />
           Back
         </Button>
-        <CardTitle className="text-xl font-bold">{initialValues?.name}</CardTitle>
+        <CardTitle className="text-xl font-bold">
+          {initialValues?.name}
+        </CardTitle>
       </CardHeader>
 
       <div className="px-7">
