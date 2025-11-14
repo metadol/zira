@@ -6,3 +6,8 @@ export type Workspace = Models.Document & {
   userid: string;
   inviteCode: string;
 };
+
+export enum MemberRole {
+  ADMIN = 'ADMIN',
+  MEMBER = 'MEMBER',
+}

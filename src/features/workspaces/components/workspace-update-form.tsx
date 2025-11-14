@@ -1,11 +1,14 @@
 "use client";
 
+// 1️⃣ Libraries
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useRouter } from "next/navigation";
 import { ArrowLeftIcon } from "lucide-react";
 
+
+// 2️⃣ Components
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Form, FormField } from "@/components/ui/form";
@@ -13,10 +16,12 @@ import { FormInput } from "@/components/form-input";
 import { ImageUpload } from "@/components/image-upload";
 import { DottedSeparator } from "@/components/dotted-seperator";
 
+// 3️⃣ Utils / Schemas/ Hooks
 import { cn } from "@/lib/utils";
-import { useUpdateWorkspace } from "../api/client/use-workspace-update";
-import { updateWorkspaceSchema } from "../schemas";
 import { type Workspace } from "@/types";
+import { updateWorkspaceSchema } from "../schemas";
+import { useUpdateWorkspace } from "../api/client/use-workspace-update";
+
 
 type UpdateWorkspaceFormValues = z.infer<typeof updateWorkspaceSchema>;
 

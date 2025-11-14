@@ -1,9 +1,11 @@
 "use client";
 
+// 1️⃣ Components
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { DottedSeparator } from "@/components/dotted-seperator";
 
+// 2️⃣ Utils / Schemas / Hooks
 import { useConfirm } from "@/hooks/use-confirm";
 import { useDeleteWorkspace } from "../api/client/use-workspace-delete";
 import { type Workspace } from "@/types";

@@ -1,15 +1,20 @@
 "use client";
 
+// 1️⃣ Libraries
 import { CopyIcon } from "lucide-react";
+import { toast } from "sonner";
+
+// 2️⃣ Components
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { DottedSeparator } from "@/components/dotted-seperator";
 
+// 3️⃣ Utils / Schemas / Hooks
 import { useConfirm } from "@/hooks/use-confirm";
 import { useResetInviteCode } from "../api/client/use-reset-invite-code";
-import { toast } from "sonner";
 import { type Workspace } from "@/types";
+
 export function WorkspaceInviteSection({
   workspace,
 }: {

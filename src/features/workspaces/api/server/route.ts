@@ -1,19 +1,26 @@
-import { zValidator } from '@hono/zod-validator';
+// 1️⃣ External libraries
+import z from 'zod';
 import { Hono } from 'hono';
-import { createWorkspaceSchema, updateWorkspaceSchema } from '../../schemas';
-import { sessionMiddleware } from '@/lib/session-middleware';
-import { DATABASE_ID, IMAGES_BUCKET_ID, MEMBERS_ID, WORKSPACES_ID } from '@/config';
+import { zValidator } from '@hono/zod-validator';
 import { ID, type Models, Query } from 'node-appwrite';
+
+// 2️⃣ Middleware & utilities
 import { generateInviteCode } from '@/lib/utils';
 import { getMember } from '@/features/members/utils';
-import { Workspace } from '@/types';
-import z from 'zod';
+import { sessionMiddleware } from '@/lib/session-middleware';
 
 
-enum MemberRole {
-    ADMIN = 'ADMIN',
-    MEMBER = 'MEMBER',
-}
+// 3️⃣ Config / Schemas / Types
+import { MemberRole, Workspace } from '@/types';
+import { createWorkspaceSchema, updateWorkspaceSchema } from '../../schemas';
+import {
+    DATABASE_ID,
+    IMAGES_BUCKET_ID,
+    MEMBERS_ID,
+    WORKSPACES_ID,
+} from '@/config';
+
+
 
 const app = new Hono()
     .post('/', sessionMiddleware, zValidator('form', createWorkspaceSchema), async (c) => {
@@ -322,7 +329,7 @@ const app = new Hono()
             }
 
             await databases.createDocument(DATABASE_ID, MEMBERS_ID, ID.unique(), {
-                workspaceid:workspaceId,
+                workspaceid: workspaceId,
                 userid: user.$id,
                 role: MemberRole.MEMBER,
             });
@@ -330,7 +337,7 @@ const app = new Hono()
             return c.json({ data: workspace });
         },
     )
-    
+
     .get('/:workspaceId/info', sessionMiddleware, async (c) => {
         const databases = c.get('databases');
         const { workspaceId } = c.req.param();
