@@ -1,16 +1,16 @@
-// 1️⃣ External libraries
+// External libraries
 import z from "zod";
 import { Hono } from "hono";
 import { Query } from "node-appwrite";
 import { zValidator } from "@hono/zod-validator";
 
-// 2️⃣ Middleware & utilities
+// Middleware & utilities
 import { getMember } from "../../utils";
 import { createAdminClient } from "@/lib/appwrite";
 import { sessionMiddleware } from "@/lib/session-middleware";
 
 
-// 3️⃣ Config / Schemas / Types
+// Config / Schemas / Types
 import { DATABASE_ID, MEMBERS_ID } from "@/config";
 import { MemberRole } from "@/types";
 
@@ -34,11 +34,11 @@ const app = new Hono()
                 return c.json({ error: 'Unauthorized.' }, 401);
             }
 
-            const members = await databases.listDocuments(DATABASE_ID, MEMBERS_ID, [Query.equal('workspaceId', workspaceId)]);
+            const members = await databases.listDocuments(DATABASE_ID, MEMBERS_ID, [Query.equal('workspaceid', workspaceId)]);
 
             const populatedMembers = await Promise.all(
                 members.documents.map(async (member) => {
-                    const user = await users.get(member.userId);
+                    const user = await users.get(member.userid);
 
                     return { ...member, name: user.name, email: user.email };
                 }),
@@ -112,7 +112,7 @@ const app = new Hono()
             const memberToUpdate = await databases.getDocument(DATABASE_ID, MEMBERS_ID, memberId);
 
             const allMembersInWorkspace = await databases.listDocuments(DATABASE_ID, MEMBERS_ID, [
-                Query.equal('workspaceId', memberToUpdate.workspaceid),
+                Query.equal('workspaceid', memberToUpdate.workspaceid),
             ]);
 
             if (allMembersInWorkspace.total === 1) {
@@ -126,7 +126,7 @@ const app = new Hono()
 
             const member = await getMember({
                 databases,
-                workspaceId: memberToUpdate.workspaceId,
+                workspaceId: memberToUpdate.workspaceid,
                 userId: user.$id,
             });
 
@@ -150,7 +150,7 @@ const app = new Hono()
 
             await databases.updateDocument(DATABASE_ID, MEMBERS_ID, memberId, { role });
 
-            return c.json({ data: { $id: memberToUpdate.$id, workspaceId: memberToUpdate.workspaceId } });
+            return c.json({ data: { $id: memberToUpdate.$id, workspaceId: memberToUpdate.workspaceid } });
         },
     );
 

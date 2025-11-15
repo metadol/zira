@@ -1,6 +1,6 @@
 "use client";
 
-import { useGetWorkspaces } from "@/features/workspaces/api/client/use-workpsace-get";
+import { useGetWorkspaces } from "@/features/workspaces/api/client/use-workpsaces-get";
 import { RiAddFill } from "react-icons/ri";
 
 import {
@@ -12,8 +12,8 @@ import {
 } from "./ui/select";
 import { WorkspaceAvatar } from "./workspace-avatar";
 import { useRouter } from "next/navigation";
-import { useWorkspaceId } from "@/hooks/use-workspace-id";
-import { useCreateWorkSpaceModal } from "@/hooks/use-workspace-modal";
+import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
+import { useCreateWorkSpaceModal } from "@/features/workspaces/hooks/use-workspace-modal";
 
 export const WorkspaceSwitcher = () => {
   const router = useRouter();

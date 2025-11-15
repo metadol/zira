@@ -11,3 +11,10 @@ export enum MemberRole {
   ADMIN = 'ADMIN',
   MEMBER = 'MEMBER',
 }
+
+export interface Member {
+  $id: string;
+  userid?: string;
+  role?: MemberRole;
+  name?: string;
+}

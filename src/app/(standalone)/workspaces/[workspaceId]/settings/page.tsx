@@ -3,7 +3,6 @@ import { authGuard } from "@/features/auth/utils";
 
 const WorkSpaceIdSettingsPage = async () => {
   await authGuard("protected");
-
   return <WorkspaceIdSettingsClient />;
 };
 

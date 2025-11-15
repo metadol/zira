@@ -16,8 +16,8 @@ import {
 } from "@/components/ui/card";
 
 // Utils / Schemas / Hooks
-import { useInviteCode } from "@/hooks/use-invite-code";
-import { useWorkspaceId } from "@/hooks/use-workspace-id";
+import { useInviteCode } from "@/features/workspaces/hooks/use-invite-code";
+import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 import { useJoinWorkspace } from "../api/client/use-workspace-join";
 
 interface WorkspaceJoinFormProps {
