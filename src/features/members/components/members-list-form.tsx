@@ -3,18 +3,11 @@
 import { DottedSeparator } from "@/components/dotted-seperator";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 import { ArrowLeftIcon, MoreVerticalIcon, Shield } from "lucide-react";
 import Link from "next/link";
 import { useGetMembers } from "../api/client/use-members-get";
 import { Fragment } from "react";
-import { MemberAvatar } from "@/components/member-avatar";
 import { useUpdateMember } from "../api/client/use-member-update";
 import { useDeleteMember } from "../api/client/use-member-delete";
 import { Member, MemberRole } from "@/types";
@@ -22,6 +15,7 @@ import { useConfirm } from "@/hooks/use-confirm";
 import { useCurrent } from "@/features/auth/api/client/use-current";
 import { MemberActionsDropdown } from "@/components/member-actions-dropdown";
 import { hasAdminRole } from "../utils";
+import { UserAvatar } from "@/components/user-avatar";
 
 export const MembersListForm = () => {
   const workspaceId = useWorkspaceId();
@@ -90,11 +84,7 @@ export const MembersListForm = () => {
         {members?.documents.map((member, index) => (
           <Fragment key={member.$id}>
             <div className="flex items-center gap-2">
-              <MemberAvatar
-                className="size-10"
-                fallbackClassName="text-lg"
-                name={member.name}
-              />
+              <UserAvatar name={member.name} />
 
               <div className="flex flex-col">
                 <div className="flex items-center gap-1.5">

@@ -30,7 +30,6 @@ export const MobileSidebar = () => {
   );
 };
 
-
 // the Sheet component (from shadcn/ui or Radix UI) automatically calls the function you pass to onOpenChange with the new open state whenever it changes — like this:
 
 // onOpenChange={setIsOpen}
@@ -38,11 +37,8 @@ export const MobileSidebar = () => {
 // onOpenChange(true)   // when opening
 // onOpenChange(false)  // when closing
 
-
 // Since onOpenChange={setIsOpen},
 // that’s the same as calling:
 
 // setIsOpen(true)
 // setIsOpen(false)
-
-

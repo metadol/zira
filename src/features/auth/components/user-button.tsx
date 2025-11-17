@@ -12,6 +12,7 @@ import { DottedSeparator } from "@/components/dotted-seperator";
 import { useLogout } from "../api/client/use-logout";
 import { useCurrent } from "../api/client/use-current";
 import { Loader, LogOut } from "lucide-react";
+import { UserAvatar } from "@/components/user-avatar";
 
 export const UserButton = () => {
   const { data: user, isLoading } = useCurrent();
@@ -29,21 +30,13 @@ export const UserButton = () => {
 
   const { name, email } = user;
 
-  const avatarFallback = name
-    ? name.charAt(0).toUpperCase()
-    : email.charAt(0).toUpperCase() ?? "U";
-
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger
         disabled={isPending}
         className="relative rounded-full outline-none focus-visible:ring-1 focus-visible:ring-ring"
       >
-        <Avatar className="size-10 border border-neutral-300 transition hover:opacity-75">
-          <AvatarFallback className="flex items-center justify-center bg-neutral-200 font-medium text-neutral-500">
-            {avatarFallback}
-          </AvatarFallback>
-        </Avatar>
+        <UserAvatar name={name} email={email} />
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
@@ -53,11 +46,7 @@ export const UserButton = () => {
         sideOffset={10}
       >
         <div className="flex flex-col items-center justify-center gap-2 px-2.5 py-4">
-          <Avatar className="size-10 border border-neutral-300">
-            <AvatarFallback className="flex items-center justify-center bg-neutral-200 text-xl font-medium text-neutral-500">
-              {avatarFallback}
-            </AvatarFallback>
-          </Avatar>
+          <UserAvatar name={name} email={email} />
 
           <div className="flex flex-col items-center justify-center">
             <p className="text-sm font-medium text-neutral-900">
