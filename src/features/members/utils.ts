@@ -32,11 +32,11 @@ export const getMember = async ({ databases, workspaceId, userId }: GetMemberPro
 };
 
 export function getMemberPermissions({ user, member, isLoggedInAdmin, }: getMemberPermissionsProps) {
-  const isCurrentUser = user.$id === member.userid;
+  const isCurrentUser = user?.$id === member?.userid;
   return {
     canSetAdmin: isLoggedInAdmin && !isCurrentUser && member.role !== MemberRole.ADMIN,
     canSetMember: isLoggedInAdmin && !isCurrentUser && member.role !== MemberRole.MEMBER,
-    canRemove: isLoggedInAdmin && !isCurrentUser,
+    canRemove: !isLoggedInAdmin && isCurrentUser,
   };
 }
 
