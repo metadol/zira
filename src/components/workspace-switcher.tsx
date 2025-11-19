@@ -20,7 +20,7 @@ export const WorkspaceSwitcher = () => {
 
   const workspaceId = useWorkspaceId();
   const { open } = useCreateWorkSpaceModal();
-  const { data: workspaces } = useGetWorkspaces();
+  const { data: workspaces, isLoading } = useGetWorkspaces();
 
   const onSelect = (Id: string) => {
     router.push(`/workspaces/${Id}`);
@@ -35,9 +35,13 @@ export const WorkspaceSwitcher = () => {
         />
       </div>
 
-      <Select onValueChange={onSelect} value={workspaceId}>
+      <Select onValueChange={onSelect} value={workspaceId} disabled={isLoading}>
         <SelectTrigger className="w-full bg-neutral-200 font-medium p-1 data-[placeholder]:text-muted-foreground">
-          <SelectValue placeholder="Select a workspace" />
+          {isLoading ? (
+            <span className="m-auto text-muted-foreground ">Loading...</span>
+          ) : (
+            <SelectValue placeholder="Select a workspace" />
+          )}
         </SelectTrigger>
 
         <SelectContent>
