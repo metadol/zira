@@ -37,11 +37,7 @@ export const WorkspaceSwitcher = () => {
 
       <Select onValueChange={onSelect} value={workspaceId} disabled={isLoading}>
         <SelectTrigger className="w-full bg-neutral-200 font-medium p-1 data-[placeholder]:text-muted-foreground">
-          {isLoading ? (
-            <span className="m-auto text-muted-foreground ">Loading...</span>
-          ) : (
-            <SelectValue placeholder="Select a workspace" />
-          )}
+          <SelectValue placeholder="Select a workspace" />
         </SelectTrigger>
 
         <SelectContent>

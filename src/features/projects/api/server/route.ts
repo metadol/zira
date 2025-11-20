@@ -1,0 +1,64 @@
+import { DATABASE_ID, IMAGES_BUCKET_ID, PROJECTS_ID } from "@/config";
+import { getMember } from "@/features/members/utils";
+import { sessionMiddleware } from "@/lib/session-middleware";
+import { Project } from "@/types";
+import { zValidator } from "@hono/zod-validator";
+import { Hono } from "hono";
+import { Query } from "node-appwrite";
+import z from "zod";
+
+const app = new Hono()
+    .get('/', sessionMiddleware, zValidator('query', z.object({ workspaceId: z.string() })),
+        async (c) => {
+            const user = c.get('user');
+            const databases = c.get('databases');
+            const storage = c.get('storage');
+
+            const { workspaceId } = c.req.valid('query');
+
+            const member = await getMember({
+                databases,
+                workspaceId,
+                userId: user.$id,
+            });
+
+            if (!member) {
+                return c.json({ error: 'Unauthorized.' }, 401);
+            }
+
+            const projects = await databases.listDocuments<Project>(DATABASE_ID, PROJECTS_ID, [
+                Query.equal('workspaceid', workspaceId),
+                Query.orderDesc('$createdAt'),
+            ]);
+
+            const projectsWithImages: Project[] = await Promise.all(
+                projects.documents.map(async (project) => {
+                    let image: string | undefined = undefined;
+
+                    if (project.imageId) {
+                        const arrayBuffer = await storage.getFileView(IMAGES_BUCKET_ID, project.imageid);
+                        image = `data:image/png;base64,${Buffer.from(arrayBuffer).toString('base64')}`;
+                    }
+
+                    return {
+                        ...project,
+                        image,
+                    };
+                }),
+            );
+
+            return c.json({
+                data: {
+                    documents: projectsWithImages,
+                    total: projects.total,
+                },
+            });
+        },
+    )
+    .post("/projects", async (c) => {
+        return c.json({ message: "Create a new project" });
+    });
+
+
+
+export default app;

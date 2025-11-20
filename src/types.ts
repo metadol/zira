@@ -18,3 +18,10 @@ export interface Member {
   role?: MemberRole;
   name?: string;
 }
+
+
+export type Project = Models.Document & {
+  name: string;
+  image?: string;
+  workspaceid: string;
+};
