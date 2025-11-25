@@ -4,8 +4,9 @@ import { sessionMiddleware } from "@/lib/session-middleware";
 import { Project } from "@/types";
 import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
-import { Query } from "node-appwrite";
+import { ID, Query } from "node-appwrite";
 import z from "zod";
+import { createProjectSchema } from "../../schema";
 
 const app = new Hono()
     .get('/', sessionMiddleware, zValidator('query', z.object({ workspaceId: z.string() })),
@@ -55,9 +56,47 @@ const app = new Hono()
             });
         },
     )
-    .post("/projects", async (c) => {
-        return c.json({ message: "Create a new project" });
-    });
+    .post('/', sessionMiddleware, zValidator('form', createProjectSchema), async (c) => {
+        const databases = c.get('databases');
+        const storage = c.get('storage');
+        const user = c.get('user');
+
+        const { name, image, workspaceId } = c.req.valid('form');
+
+        const member = await getMember({
+            databases,
+            workspaceId,
+            userId: user.$id,
+        });
+
+        if (!member) {
+            return c.json({ error: 'Unauthorized.' }, 401);
+        }
+
+        let uploadedImageId: string | undefined = undefined;
+
+        if (image instanceof File) {
+            const fileExt = image.name.split('.').at(-1) ?? 'png';
+            const fileName = `${ID.unique()}.${fileExt}`;
+
+            const renamedImage = new File([image], fileName, {
+                type: image.type,
+            });
+            const file = await storage.createFile(IMAGES_BUCKET_ID, ID.unique(), renamedImage);
+
+            uploadedImageId = file.$id;
+        } else {
+            uploadedImageId = image;
+        }
+
+        const project = await databases.createDocument(DATABASE_ID, PROJECTS_ID, ID.unique(), {
+            name,
+            image: uploadedImageId,
+            workspaceid: workspaceId,
+        });
+
+        return c.json({ data: project });
+    })
 
 
 
