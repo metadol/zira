@@ -8,17 +8,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { createWorkspaceSchema } from "../schemas";
 
 // Components
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Form, FormField } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
-import { DottedSeparator } from "@/components/dotted-seperator";
-import { FormInput } from "@/components/form-input";
-import { ImageUpload } from "@/components/image-upload";
+import { FormWrapper } from "@/components/work-form";
 
 // Utils / Schemas / Hooks
 import { useCreateWorkspace } from "../api/client/use-workspace-create";
-import { cn } from "@/lib/utils";
-import { FormWrapper } from "@/components/work-form";
 
 interface CreateWorkspaceFormProps {
   onCancel?: () => void;

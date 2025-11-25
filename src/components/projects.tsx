@@ -2,6 +2,7 @@
 
 import { useGetProjects } from "@/features/projects/api/client/use-projects-get";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
+import { useParamModal } from "@/hooks/use-param-modal";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -11,6 +12,7 @@ export const Projects = () => {
   const projectId = null;
   const pathname = usePathname();
   const workspaceId = useWorkspaceId();
+  const { open } = useParamModal("create-project");
   const { data } = useGetProjects({ workspaceId });
 
   return (
@@ -18,7 +20,7 @@ export const Projects = () => {
       <div className="flex items-center justify-between">
         <p className="text-xs uppercase text-neutral-500">Projects</p>
         <RiAddFill
-          onClick={() => {}}
+          onClick={open}
           className="size-5 text-neutral-500 cursor-pointer"
         />
       </div>
