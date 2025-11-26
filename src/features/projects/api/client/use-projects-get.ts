@@ -17,7 +17,7 @@ interface useGetProjectsProps {
  */
 export const useGetProjects = ({ workspaceId }: useGetProjectsProps) => {
     return useQuery({
-        queryKey: ['projects'],
+        queryKey: ['projects', workspaceId],
         queryFn: async () => {
             const response = await client.api.projects['$get']({ query: { workspaceId } }); //rpc in action
 

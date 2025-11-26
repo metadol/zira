@@ -8,8 +8,7 @@ import { usePathname } from "next/navigation";
 import { useParamModal } from "@/hooks/use-param-modal";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 import { useGetProjects } from "@/features/projects/api/client/use-projects-get";
-
-
+import { ProjectAvatar } from "./project-avatar";
 
 export const Projects = () => {
   const projectId = null;
@@ -27,6 +26,7 @@ export const Projects = () => {
           className="size-5 text-neutral-500 cursor-pointer"
         />
       </div>
+
       {data?.documents?.map((project) => {
         const fullHref = `/workspaces/${workspaceId}/projects/${projectId}`;
         const isActive = pathname === fullHref;
@@ -38,6 +38,7 @@ export const Projects = () => {
                 isActive && "bg-white text-primary shadow-sm hover:opacity-100"
               )}
             >
+              <ProjectAvatar image={project.image} name={project.name} />
               <span className="truncate">{project.name}</span>
             </div>
           </Link>

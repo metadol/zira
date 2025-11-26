@@ -36,8 +36,8 @@ const app = new Hono()
                 projects.documents.map(async (project) => {
                     let image: string | undefined = undefined;
 
-                    if (project.imageId) {
-                        const arrayBuffer = await storage.getFileView(IMAGES_BUCKET_ID, project.imageid);
+                    if (project.imageurl) {
+                        const arrayBuffer = await storage.getFileView(IMAGES_BUCKET_ID, project.imageurl);
                         image = `data:image/png;base64,${Buffer.from(arrayBuffer).toString('base64')}`;
                     }
 
@@ -91,7 +91,7 @@ const app = new Hono()
 
         const project = await databases.createDocument(DATABASE_ID, PROJECTS_ID, ID.unique(), {
             name,
-            image: uploadedImageId,
+            imageurl: uploadedImageId,
             workspaceid: workspaceId,
         });
 
