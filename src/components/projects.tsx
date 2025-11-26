@@ -11,7 +11,6 @@ import { useGetProjects } from "@/features/projects/api/client/use-projects-get"
 import { ProjectAvatar } from "./project-avatar";
 
 export const Projects = () => {
-  const projectId = null;
   const pathname = usePathname();
   const workspaceId = useWorkspaceId();
   const { open } = useParamModal("create-project");
@@ -28,7 +27,7 @@ export const Projects = () => {
       </div>
 
       {data?.documents?.map((project) => {
-        const fullHref = `/workspaces/${workspaceId}/projects/${projectId}`;
+        const fullHref = `/workspaces/${workspaceId}/projects/${project.$id}`;
         const isActive = pathname === fullHref;
         return (
           <Link href={fullHref} key={project.$id}>
