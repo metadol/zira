@@ -97,6 +97,44 @@ const app = new Hono()
 
         return c.json({ data: project });
     })
+    .get('/:projectId', sessionMiddleware, async (c) => {
+        const user = c.get('user');
+        const databases = c.get('databases');
+        const storage = c.get('storage');
+
+        const { projectId } = c.req.param();
+
+        const project = await databases.getDocument<Project>(DATABASE_ID, PROJECTS_ID, projectId);
+
+        const member = await getMember({
+            databases,
+            workspaceId: project.workspaceid,
+            userId: user.$id,
+        });
+
+        if (!member) {
+            return c.json(
+                {
+                    error: 'Unauthorized.',
+                },
+                401,
+            );
+        }
+
+        let image: string | undefined = undefined;
+
+        if (project.imageurl) {
+            const arrayBuffer = await storage.getFileView(IMAGES_BUCKET_ID, project.imageurl);
+            image = `data:image/png;base64,${Buffer.from(arrayBuffer).toString('base64')}`;
+        }
+
+        return c.json({
+            data: {
+                ...project,
+                image,
+            },
+        });
+    })
 
 
 

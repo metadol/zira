@@ -1,0 +1,50 @@
+"use client";
+
+import { useProjectId } from "@/features/projects/hooks/use-project-id";
+import { Pencil } from "lucide-react";
+import Link from "next/link";
+import { ProjectAvatar } from "./project-avatar";
+import { useGetProjectById } from "@/features/projects/api/client/use-project-get-id";
+import { Button } from "./ui/button";
+
+export const ProjectIdClient = () => {
+  const projectId = useProjectId();
+
+  const { data: project, isLoading } = useGetProjectById({ projectId });
+  //   const { data: projectAnalytics, isLoading: isLoadingProjectAnalytics } = useGetProjectAnalytics({ projectId });
+
+  //   const isLoading = isLoadingProject || isLoadingProjectAnalytics;
+
+  if (isLoading) return "loading";
+
+  if (!project) return "project not found";
+
+  return (
+    <div className="flex flex-col gap-y-4">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-x-2">
+          <ProjectAvatar
+            name={project.name}
+            image={project.image}
+            className="size-8"
+          />
+          <p className="text-lg font-semibold">{project.name}</p>
+        </div>
+
+        <div>
+          <Button variant="secondary" size="sm" asChild>
+            <Link
+              href={`/workspaces/${project.workspaceid}/projects/${project.$id}/settings`}
+            >
+              <Pencil className="size-4" />
+            </Link>
+          </Button>
+        </div>
+      </div>
+
+      {/* {projectAnalytics && <Analytics data={projectAnalytics} />} */}
+
+      {/* <TaskViewSwitcher projectId={projectId} hideProjectFilter /> */}
+    </div>
+  );
+};
