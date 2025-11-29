@@ -16,13 +16,13 @@ import { Project } from "@/types";
 
 interface UpdateProjectFormProps {
   onCancel?: () => void;
-  initialValues: Project;
+  project: Project;
 }
 
 type UpdateProjectFormValues = z.infer<typeof updateProjectSchema>;
 
 export const ProjectUpdateForm = ({
-  initialValues,
+  project: initialValues,
 }: UpdateProjectFormProps) => {
   const workspaceId = useWorkspaceId();
   const { mutate, isPending } = useUpdateProject();
