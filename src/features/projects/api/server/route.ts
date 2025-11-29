@@ -147,7 +147,7 @@ const app = new Hono()
 
         const member = await getMember({
             databases,
-            workspaceId: existingProject.workspaceId,
+            workspaceId: existingProject.workspaceid,
             userId: user.$id,
         });
 

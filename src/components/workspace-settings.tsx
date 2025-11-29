@@ -1,9 +1,11 @@
 "use client";
 
-import { WorkspaceUpdateForm } from "@/features/workspaces/components/workspace-update-form";
-import { WorkspaceInviteSection } from "@/features/workspaces/components/workspace-invite-form";
-import { WorkspaceDangerZone } from "@/features/workspaces/components/workspace-delete-form";
 import { type Workspace } from "@/types";
+
+import { WorkspaceUpdateForm } from "@/features/workspaces/components/workspace-update-form";
+import { WorkspaceDangerZone } from "@/features/workspaces/components/workspace-delete-form";
+import { WorkspaceInviteSection } from "@/features/workspaces/components/workspace-invite-form";
+
 interface WorkspaceSettingsProps {
   workspace: Workspace;
 }

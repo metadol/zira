@@ -7,6 +7,12 @@ export type Workspace = Models.Document & {
   inviteCode: string;
 };
 
+export type Project = Models.Document & {
+  name: string;
+  image?: string;
+  workspaceid: string;
+};
+
 export enum MemberRole {
   ADMIN = 'ADMIN',
   MEMBER = 'MEMBER',
@@ -20,8 +26,3 @@ export interface Member {
 }
 
 
-export type Project = Models.Document & {
-  name: string;
-  image?: string;
-  workspaceid: string;
-};
