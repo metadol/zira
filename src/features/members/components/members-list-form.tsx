@@ -1,6 +1,6 @@
 "use client";
 
-import { DottedSeparator } from "@/components/dotted-seperator";
+import { DottedSeparator } from "@/components/common/widgets/dotted-seperator";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
@@ -13,9 +13,9 @@ import { useDeleteMember } from "../api/client/use-member-delete";
 import { Member, MemberRole } from "@/types";
 import { useConfirm } from "@/hooks/use-confirm";
 import { useCurrent } from "@/features/auth/api/client/use-current";
-import { MemberActionsDropdown } from "@/components/member-actions-dropdown";
+import { MemberActionsDropdown } from "@/features/members/components/member-actions-dropdown";
 import { hasAdminRole } from "../utils";
-import { UserAvatar } from "@/components/user-avatar";
+import { UserAvatar } from "@/components/common/widgets/user-avatar";
 
 export const MembersListForm = () => {
   const workspaceId = useWorkspaceId();

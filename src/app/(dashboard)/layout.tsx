@@ -1,7 +1,7 @@
-import { Navbar } from "@/components/navbar";
-import { CreateProjectModal } from "@/components/project-create-modal";
-import { Sidebar } from "@/components/sidebar";
-import { CreateWorkspaceModal } from "@/components/workspace-create-modal";
+import { Navbar } from "@/components/common/layout/navbar/_navbar";
+import { CreateProjectModal } from "@/features/projects/components/modals/project-create-modal";
+import { Sidebar } from "@/components/common/layout/sidebar/_sidebar";
+import { CreateWorkspaceModal } from "@/features/workspaces/components/modals/workspace-create-modal";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;

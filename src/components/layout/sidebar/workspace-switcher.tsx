@@ -9,8 +9,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "./ui/select";
-import { WorkspaceAvatar } from "./workspace-avatar";
+} from "../../../components/ui/select";
+import { WorkspaceAvatar } from "../../../features/workspaces/components/common/workspace-avatar";
 import { useRouter } from "next/navigation";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 import { useParamModal } from "@/hooks/use-param-modal";

@@ -1,4 +1,4 @@
-import { Logo } from "@/components/zira-logo";
+import { Logo } from "@/components/common/widgets/zira-logo";
 import { UserButton } from "@/features/auth/components/user-button";
 import Link from "next/link";
 

@@ -3,7 +3,7 @@
 import { useProjectId } from "@/features/projects/hooks/use-project-id";
 import { Pencil } from "lucide-react";
 import Link from "next/link";
-import { ProjectAvatar } from "./project-avatar";
+import { ProjectAvatar } from "../features/projects/components/common/project-avatar";
 import { useGetProjectById } from "@/features/projects/api/client/use-project-get-id";
 import { Button } from "./ui/button";
 

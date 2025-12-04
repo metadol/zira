@@ -3,7 +3,7 @@
 import { MenuIcon } from "lucide-react";
 import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
-import { Sidebar } from "./sidebar";
+import { Sidebar } from "./common/layout/sidebar/sidebar";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
@@ -18,7 +18,7 @@ export const MobileSidebar = () => {
   return (
     <Sheet modal={false} open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
-        <Button variant="secondary" className="lg:hidden">
+        <Button variant="secondary" className="lg:hidden">  {/* this classname is the trick */}
           <MenuIcon className="size-4 text-neutral-500" />
         </Button>
       </SheetTrigger>

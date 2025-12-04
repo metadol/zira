@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 import { useParamModal } from "@/hooks/use-param-modal";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 import { useGetProjects } from "@/features/projects/api/client/use-projects-get";
-import { ProjectAvatar } from "./project-avatar";
+import { ProjectAvatar } from "./common/project-avatar";
 
 export const Projects = () => {
   const pathname = usePathname();

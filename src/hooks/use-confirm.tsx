@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { Button, type ButtonProps } from "@/components/ui/button";
-import { ResponsiveModal } from "@/components/responsive-modal";
+import { ResponsiveModal } from "@/components/common/widgets/responsive-modal";
 import {
   Card,
   CardContent,

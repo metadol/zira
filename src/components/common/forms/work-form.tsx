@@ -11,9 +11,9 @@ import { ArrowLeftIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Form, FormField } from "@/components/ui/form";
-import { FormInput } from "@/components/form-input";
-import { ImageUpload } from "@/components/image-upload";
-import { DottedSeparator } from "@/components/dotted-seperator";
+import { FormInput } from "@/components/common/forms/form-input";
+import { ImageUpload } from "@/components/common/widgets/image-upload";
+import { DottedSeparator } from "@/components/common/widgets/dotted-seperator";
 
 // Utils / Schemas/ Hooks
 import { cn } from "@/lib/utils";

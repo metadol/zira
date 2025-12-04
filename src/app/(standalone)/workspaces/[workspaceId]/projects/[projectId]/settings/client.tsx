@@ -5,7 +5,7 @@
 
 import { useProjectId } from "@/features/projects/hooks/use-project-id";
 import { useGetProjectById } from "@/features/projects/api/client/use-project-get-id";
-import { ProjectSettings } from "./project-settings";
+import { ProjectSettings } from "../features/projects/components/settings/project-settings";
 
 export const ProjectIdSettingsClient = () => {
   const projectId = useProjectId();

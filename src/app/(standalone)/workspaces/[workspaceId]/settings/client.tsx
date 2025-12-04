@@ -5,7 +5,7 @@
 
 import { useGetWorkspaceById } from "@/features/workspaces/api/client/use-workspace-get-id";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
-import { WorkspaceSettings } from "./workspace-settings";
+import { WorkspaceSettings } from "../features/workspaces/components/settings/workspace-settings";
 import { type Workspace } from "@/types";
 
 export const WorkspaceIdSettingsClient = () => {

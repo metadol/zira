@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { DottedSeparator } from "@/components/dotted-seperator";
+import { DottedSeparator } from "@/components/common/widgets/dotted-seperator";
 
 // Utils / Schemas / Hooks
 import { useConfirm } from "@/hooks/use-confirm";

@@ -3,7 +3,7 @@
 //  Components
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { DottedSeparator } from "@/components/dotted-seperator";
+import { DottedSeparator } from "@/components/common/widgets/dotted-seperator";
 
 //  Utils / Schemas / Hooks
 import { type Workspace } from "@/types";

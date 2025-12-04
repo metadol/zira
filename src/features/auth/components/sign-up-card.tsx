@@ -5,7 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { DottedSeparator } from "@/components/dotted-seperator";
+import { DottedSeparator } from "@/components/common/widgets/dotted-seperator";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -18,7 +18,7 @@ import {
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { Form } from "@/components/ui/form";
-import { FormInput } from "@/components/form-input";
+import { FormInput } from "@/components/common/forms/form-input";
 import { registerSchema } from "../schemas";
 import { useRegister } from "../api/client/use-register";
 

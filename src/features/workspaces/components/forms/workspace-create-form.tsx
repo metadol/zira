@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { createWorkspaceSchema } from "../schemas";
 
 // Components
-import { FormWrapper } from "@/components/work-form";
+import { FormWrapper } from "@/components/common/forms/work-form";
 
 // Utils / Schemas / Hooks
 import { useCreateWorkspace } from "../api/client/use-workspace-create";

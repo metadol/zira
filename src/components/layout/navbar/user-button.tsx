@@ -7,12 +7,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { DottedSeparator } from "@/components/dotted-seperator";
+import { DottedSeparator } from "@/components/common/widgets/dotted-seperator";
 
 import { useLogout } from "../api/client/use-logout";
 import { useCurrent } from "../api/client/use-current";
 import { Loader, LogOut } from "lucide-react";
-import { UserAvatar } from "@/components/user-avatar";
+import { UserAvatar } from "@/components/common/widgets/user-avatar";
 
 export const UserButton = () => {
   const { data: user, isLoading } = useCurrent();

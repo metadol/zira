@@ -1,7 +1,7 @@
 import { useMedia } from "react-use";
 
-import { Dialog, DialogContent } from "./ui/dialog";
-import { Drawer, DrawerContent } from "./ui/drawer";
+import { Dialog, DialogContent } from "../../ui/dialog";
+import { Drawer, DrawerContent } from "../../ui/drawer";
 
 interface RespomsiveModalProps {
   open: boolean;

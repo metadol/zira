@@ -1,10 +1,10 @@
 import { Eclipse } from "lucide-react";
 import Link from "next/link";
-import { DottedSeparator } from "./dotted-seperator";
+import { DottedSeparator } from "../../../dotted-seperator";
 import { Navigation } from "./navigation";
-import { WorkspaceSwitcher } from "./workspace-switcher";
-import { Logo } from "./zira-logo";
-import { Projects } from "./projects";
+import { WorkspaceSwitcher } from "../../../../features/workspaces/components/workspace-switcher";
+import { Logo } from "../../../zira-logo";
+import { Projects } from "../../../../features/projects/components/projects-switcher";
 
 export const Sidebar = () => {
   return (

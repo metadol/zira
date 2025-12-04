@@ -1,8 +1,8 @@
 "use client";
 
 import { useParamModal } from "@/hooks/use-param-modal";
-import { ResponsiveModal } from "@/components/responsive-modal";
-import { CreateProjectForm } from "@/features/projects/components/project-create-form";
+import { ResponsiveModal } from "@/components/common/widgets/responsive-modal";
+import { CreateProjectForm } from "@/features/projects/components/forms/project-create-form";
 
 export const CreateProjectModal = () => {
   const { isOpen, close, setIsOpen } = useParamModal("create-project");
