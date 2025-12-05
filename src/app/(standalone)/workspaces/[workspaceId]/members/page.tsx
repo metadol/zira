@@ -1,4 +1,4 @@
-import { WorkspaceIdMembersClient } from "@/components/workspace-members-client";
+import { WorkspaceIdMembersClient } from "./client";
 import { authGuard } from "@/features/auth/utils";
 
 const WorkspaceIdMembersPage = async () => {

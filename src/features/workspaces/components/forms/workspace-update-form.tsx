@@ -18,8 +18,8 @@ import { DottedSeparator } from "@/components/common/widgets/dotted-seperator";
 // Utils / Schemas/ Hooks
 import { cn } from "@/lib/utils";
 import { type Workspace } from "@/types";
-import { updateWorkspaceSchema } from "../schemas";
-import { useUpdateWorkspace } from "../api/client/use-workspace-update";
+import { updateWorkspaceSchema } from "../../schemas";
+import { useUpdateWorkspace } from "../../api/client/use-workspace-update";
 import { FormWrapper } from "@/components/common/forms/work-form";
 
 type UpdateWorkspaceFormValues = z.infer<typeof updateWorkspaceSchema>;

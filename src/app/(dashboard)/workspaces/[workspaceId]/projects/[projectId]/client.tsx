@@ -1,11 +1,13 @@
 "use client";
 
-import { useProjectId } from "@/features/projects/hooks/use-project-id";
-import { Pencil } from "lucide-react";
 import Link from "next/link";
-import { ProjectAvatar } from "../features/projects/components/common/project-avatar";
+import { Pencil } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+import { ProjectAvatar } from "@/features/projects/components/common/project-avatar";
+
+import { useProjectId } from "@/features/projects/hooks/use-project-id";
 import { useGetProjectById } from "@/features/projects/api/client/use-project-get-id";
-import { Button } from "./ui/button";
 
 export const ProjectIdClient = () => {
   const projectId = useProjectId();

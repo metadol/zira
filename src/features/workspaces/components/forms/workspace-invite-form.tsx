@@ -12,7 +12,7 @@ import { DottedSeparator } from "@/components/common/widgets/dotted-seperator";
 
 // Utils / Schemas / Hooks
 import { useConfirm } from "@/hooks/use-confirm";
-import { useResetInviteCode } from "../api/client/use-reset-invite-code";
+import { useResetInviteCode } from "../../api/client/use-reset-invite-code";
 import { type Workspace } from "@/types";
 
 export function WorkspaceInviteSection({

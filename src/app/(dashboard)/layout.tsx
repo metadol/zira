@@ -1,6 +1,7 @@
-import { Navbar } from "@/components/common/layout/navbar/_navbar";
+import { Navbar } from "@/components/layout/navbar/navbar";
+import { Sidebar } from "@/components/layout/sidebar/sidebar";
+
 import { CreateProjectModal } from "@/features/projects/components/modals/project-create-modal";
-import { Sidebar } from "@/components/common/layout/sidebar/_sidebar";
 import { CreateWorkspaceModal } from "@/features/workspaces/components/modals/workspace-create-modal";
 
 interface DashboardLayoutProps {

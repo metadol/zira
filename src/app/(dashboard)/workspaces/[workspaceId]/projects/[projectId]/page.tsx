@@ -1,4 +1,4 @@
-import { ProjectIdClient } from "@/components/project-id-client";
+import { ProjectIdClient } from "./client";
 import { authGuard } from "@/features/auth/utils";
 
 const ProjectPage = async () => {

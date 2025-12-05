@@ -4,7 +4,9 @@
 // import { PageLoader } from '@/components/page-loader';
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 import { useGetWorkspaceInfo } from "@/features/workspaces/api/client/use-workspace-get-info";
-import { WorkspaceJoinForm } from "@/features/workspaces/components/workspace-join-form";
+
+import { WorkspaceJoinForm } from "@/features/workspaces/components/forms/workspace-join-form";
+
 import { Workspace } from "@/types";
 
 export const WorkspaceIdJoinClient = () => {

@@ -8,7 +8,7 @@ import { DottedSeparator } from "@/components/common/widgets/dotted-seperator";
 //  Utils / Schemas / Hooks
 import { type Workspace } from "@/types";
 import { useConfirm } from "@/hooks/use-confirm";
-import { useDeleteWorkspace } from "../api/client/use-workspace-delete";
+import { useDeleteWorkspace } from "../../api/client/use-workspace-delete";
 
 export function WorkspaceDangerZone({ workspace }: { workspace: Workspace }) {
   const { mutate, isPending } = useDeleteWorkspace();

@@ -1,7 +1,8 @@
-import { ProjectDangerZone } from "@/features/projects/components/project-delete-form";
-import { ProjectUpdateForm } from "@/features/projects/components/project-update-form";
+
 import { Project } from "@/types";
 import React from "react";
+import { ProjectUpdateForm } from "../forms/project-update-form";
+import { ProjectDangerZone } from "../forms/project-delete-form";
 
 interface ProjectSettingsProps {
   initialValues: Project;

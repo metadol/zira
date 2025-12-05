@@ -1,6 +1,5 @@
 import { Logo } from "@/components/common/widgets/zira-logo";
-import { UserButton } from "@/features/auth/components/user-button";
-import Link from "next/link";
+import { UserButton } from "@/components/layout/navbar/user-button";
 
 interface StandaloneLayoutProps {
   children: React.ReactNode;

@@ -1,4 +1,4 @@
-import { WorkspaceIdJoinClient } from "@/components/workspace-join-client";
+import { WorkspaceIdJoinClient } from "./client";
 import { authGuard } from "@/features/auth/utils";
 
 const WorkSpaceIdJoinPage = async () => {
