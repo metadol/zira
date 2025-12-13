@@ -12,9 +12,6 @@ import { createTaskSchema } from '@/features/tasks/schema';
 import { sessionMiddleware } from '@/lib/session-middleware';
 import { DATABASE_ID, IMAGES_BUCKET_ID, MEMBERS_ID, PROJECTS_ID, TASKS_ID } from '@/config';
 
-
-
-
 const app = new Hono()
     .get(
         '/',
