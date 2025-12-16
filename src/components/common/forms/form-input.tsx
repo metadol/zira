@@ -6,13 +6,22 @@ import {
   FormMessage,
   FormLabel,
 } from "@/components/ui/form";
-import { Control, Form } from "react-hook-form";
+import { Control } from "react-hook-form";
 import { InputHTMLAttributes } from "react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { DatePicker } from "../widgets/date-picker";
 
 interface FormInputProps extends InputHTMLAttributes<HTMLInputElement> {
   control: Control<any>;
   name: string;
   label?: string;
+  options?: Array<{ id: string; value: string; label?: string }>;
 }
 
 export const FormInput = ({
@@ -21,32 +30,48 @@ export const FormInput = ({
   type = "text",
   placeholder,
   label,
+  options = [],
   ...rest
 }: FormInputProps) => {
+  const renderField = (field: any) => {
+    switch (type) {
+      case "select":
+        return (
+          <Select value={field.value} onValueChange={field.onChange}>
+            <SelectTrigger>
+              <SelectValue placeholder={placeholder} />
+            </SelectTrigger>
+            <SelectContent>
+              {options.map((option) => (
+                <SelectItem key={option.id} value={option.value}>
+                  {option.label ?? option.value}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        );
+
+      case "date":
+        return <DatePicker {...field} />;
+
+      default:
+        return (
+          <Input {...field} type={type} placeholder={placeholder} {...rest} />
+        );
+    }
+  };
+
   return (
     <FormField
-      name={name}
       control={control}
+      name={name}
       render={({ field }) => (
         <FormItem>
           {label && <FormLabel>{label}</FormLabel>}
-          <FormControl>
-            <Input {...field} type={type} placeholder={placeholder} {...rest} />
-          </FormControl>
+          <FormControl>{renderField(field)}</FormControl>
           <FormMessage />
         </FormItem>
       )}
     />
   );
 };
-
-//name attribute should match with the form schema fields
-
-//HOW TO USE:
-{/* <FormInput
-  control={form.control}
-  label="Workspace Name"
-  name="name"
-  type="text"
-  placeholder="Enter workspace name"
-/>; */}
