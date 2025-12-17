@@ -104,6 +104,7 @@ export const CreateTaskForm = ({
                 name="assigneeId"
                 label="Assignee"
                 type="select"
+                placeholder="Select assignee"
                 options={memberOptions?.map((member) => ({
                   id: member.id,
                   value: member.name,
@@ -114,6 +115,7 @@ export const CreateTaskForm = ({
                 name="status"
                 label="Status"
                 type="select"
+                placeholder="Select status"
                 options={statusOptions?.map((status) => ({
                   id: status.id,
                   value: status.id,
@@ -125,6 +127,7 @@ export const CreateTaskForm = ({
                 name="projectId"
                 label="Project"
                 type="select"
+                placeholder="Select project"
                 options={projectOptions?.map((project) => ({
                   id: project.id,
                   value: project.name,
