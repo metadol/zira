@@ -175,7 +175,7 @@ const app = new Hono()
 
         const highestPositionTask = await databases.listDocuments(DATABASE_ID, TASKS_ID, [
             Query.equal('status', status),
-            Query.equal('workspaceId', workspaceId),
+            Query.equal('workspaceid', workspaceId),
             Query.orderAsc('position'),
             Query.limit(1),
         ]);
@@ -185,10 +185,10 @@ const app = new Hono()
         const task = await databases.createDocument<Task>(DATABASE_ID, TASKS_ID, ID.unique(), {
             name,
             status,
-            workspaceId,
-            projectId,
-            dueDate,
-            assigneeId,
+            workspaceid: workspaceId,
+            projectid: projectId,
+            duedate: dueDate,
+            assigneeid: assigneeId,
             position: newPosition,
         });
 
