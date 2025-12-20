@@ -6,6 +6,7 @@ import { useGetProjects } from "@/features/projects/api/client/use-projects-get"
 // import { useTaskFilters } from '@/features/tasks/hooks/use-task-filters';
 import { TaskStatus } from "@/types";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
+import { useTaskFilters } from "../../hooks/use-task-filters";
 
 interface DataFiltersProps {
   hideProjectFilter?: boolean;
@@ -21,12 +22,8 @@ export const DataFilters = ({ hideProjectFilter }: DataFiltersProps) => {
   });
   const isLoading = isLoadingProjects || isLoadingMembers;
 
-  //   const [{ status, assigneeId, projectId, dueDate }, setFilters] = useTaskFilters();
-
-  const status = null;
-  const assigneeId = null;
-  const projectId = null;
-  const dueDate = null;
+  const [{ status, assigneeId, projectId, dueDate }, setFilters] =
+    useTaskFilters();
 
   const statusOptions = [
     { value: "all", label: "All statuses" },
@@ -54,15 +51,15 @@ export const DataFilters = ({ hideProjectFilter }: DataFiltersProps) => {
   ];
 
   const onStatusChange = (value: string) => {
-    // setFilters({ status: value === 'all' ? null : (value as TaskStatus) });
+    setFilters({ status: value === "all" ? null : (value as TaskStatus) });
   };
 
   const onAssigneeChange = (value: string) => {
-    // setFilters({ assigneeId: value === 'all' ? null : (value as string) });
+    setFilters({ assigneeId: value === "all" ? null : (value as string) });
   };
 
   const onProjectChange = (value: string) => {
-    // setFilters({ projectId: value === 'all' ? null : (value as string) });
+    setFilters({ projectId: value === "all" ? null : (value as string) });
   };
 
   if (isLoading) return null;
@@ -98,10 +95,10 @@ export const DataFilters = ({ hideProjectFilter }: DataFiltersProps) => {
       <DatePicker
         placeholder="Due date"
         className="h-8 w-full lg:w-auto"
-        // value={dueDate ? new Date(dueDate) : undefined}
-        // onChange={(date) => {
-        //   setFilters({ dueDate: date ? date.toISOString() : null });
-        // }}
+        value={dueDate ? new Date(dueDate) : new Date()}
+        onChange={(date) => {
+          setFilters({ dueDate: date ? date.toISOString() : null });
+        }}
         showReset
       />
     </div>
