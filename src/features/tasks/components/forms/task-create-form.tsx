@@ -3,6 +3,7 @@
 // Libraries
 import z from "zod";
 import { useForm } from "react-hook-form";
+import type { Resolver } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createTaskSchema } from "../../schema";
@@ -44,10 +45,10 @@ export const CreateTaskForm = ({
   const { mutate, isPending } = useCreateTask();
 
   const form = useForm<CreateTaskFormValues>({
-    resolver: zodResolver(createTaskSchema),
+    resolver: zodResolver(createTaskSchema) as Resolver<CreateTaskFormValues>,
     defaultValues: {
       name: "",
-      dueDate: undefined,
+      dueDate: new Date(),
       assigneeId: undefined,
       description: "",
       projectId: undefined,
@@ -56,12 +57,13 @@ export const CreateTaskForm = ({
     },
   });
 
-  const onSubmit = (data: CreateTaskFormValues) => {
+  const onSubmit = async (values: CreateTaskFormValues) => {
     mutate(
-      { json: { ...data, workspaceId } },
+      { json: values },
       {
-        onSuccess: () => {
+        onSuccess: ({ data }) => {
           form.reset();
+          onCancel?.();
           // TODO: Redirect to task page
         },
       }
