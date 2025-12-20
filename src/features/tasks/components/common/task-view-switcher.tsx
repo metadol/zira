@@ -4,15 +4,15 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useParamModal } from "@/hooks/use-param-modal";
 import { PlusIcon } from "lucide-react";
-import { useGetTasks } from "../api/client/use-tasks-get";
+import { useGetTasks } from "../../api/client/use-tasks-get";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 import { useQueryState } from "nuqs";
+import { DataFilters } from "./data-filters";
 
 export const TaskViewSwitcher = () => {
-  const [view, setView] = useQueryState("view", { defaultValue: "table" });
-
   const workspaceId = useWorkspaceId();
   const { open } = useParamModal("create-task");
+  const [view, setView] = useQueryState("view", { defaultValue: "table" });
 
   const { data: tasks, isLoading: isLoadingTasks } = useGetTasks({
     workspaceId: workspaceId,
@@ -43,15 +43,19 @@ export const TaskViewSwitcher = () => {
           </Button>
         </div>
         <DottedSeparator className="my-4" />
-        Filters
+        <DataFilters />
         <DottedSeparator className="my-4" />
-        <>
-          <TabsContent value="table">
-            {JSON.stringify(tasks, null, 2)}
-          </TabsContent>
-          <TabsContent value="kanban">Kanban</TabsContent>
-          <TabsContent value="calender">Calender</TabsContent>
-        </>
+        {isLoadingTasks ? (
+          "loading..."
+        ) : (
+          <>
+            <TabsContent value="table">
+              {JSON.stringify(tasks, null, 2)}
+            </TabsContent>
+            <TabsContent value="kanban">Kanban</TabsContent>
+            <TabsContent value="calender">Calender</TabsContent>
+          </>
+        )}
       </div>
     </Tabs>
   );
