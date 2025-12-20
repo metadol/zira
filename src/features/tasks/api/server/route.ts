@@ -45,23 +45,23 @@ const app = new Hono()
                 return c.json({ error: 'Unauthorized.' }, 401);
             }
 
-            const query = [Query.equal('workspaceId', workspaceId), Query.orderDesc('$createdAt')];
+            const query = [Query.equal('workspaceid', workspaceId), Query.orderDesc('$createdAt')];
 
             // Build the Query by Applying filters 
-            if (projectId) query.push(Query.equal('projectId', projectId));
+            if (projectId) query.push(Query.equal('projectid', projectId));
 
             if (status) query.push(Query.equal('status', status));
 
-            if (assigneeId) query.push(Query.equal('assigneeId', assigneeId));
+            if (assigneeId) query.push(Query.equal('assigneeid', assigneeId));
 
-            if (dueDate) query.push(Query.equal('dueDate', dueDate));
+            if (dueDate) query.push(Query.equal('duedate', dueDate));
 
             if (search) query.push(Query.search('name', search));
 
             const tasks = await databases.listDocuments<Task>(DATABASE_ID, TASKS_ID, query);
 
-            const projectIds = tasks.documents.map((task) => task.projectId);
-            const assigneeIds = tasks.documents.map((task) => task.assigneeId);
+            const projectIds = tasks.documents.map((task) => task.projectid);
+            const assigneeIds = tasks.documents.map((task) => task.assigneeid);
 
             const projects = await databases.listDocuments<Project>(
                 DATABASE_ID,
@@ -89,12 +89,12 @@ const app = new Hono()
 
             const populatedTasks: (Models.Document & Task)[] = await Promise.all(
                 tasks.documents.map(async (task) => {
-                    const project = projects.documents.find((project) => project.$id === task.projectId);
-                    const assignee = assignees.find((assignee) => assignee.$id === task.assigneeId);
+                    const project = projects.documents.find((project) => project.$id === task.projectid);
+                    const assignee = assignees.find((assignee) => assignee.$id === task.assigneeid);
 
                     let imageUrl: string | undefined = undefined;
 
-                    if (project?.imageId) {
+                    if (project?.imageid) {
                         const arrayBuffer = await storage.getFileView(IMAGES_BUCKET_ID, project.imageId);
                         imageUrl = `data:image/png;base64,${Buffer.from(arrayBuffer).toString('base64')}`;
                     }

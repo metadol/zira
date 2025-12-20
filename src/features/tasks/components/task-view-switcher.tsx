@@ -4,11 +4,25 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useParamModal } from "@/hooks/use-param-modal";
 import { PlusIcon } from "lucide-react";
+import { useGetTasks } from "../api/client/use-tasks-get";
+import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
+import { useQueryState } from "nuqs";
 
 export const TaskViewSwitcher = () => {
+  const [view, setView] = useQueryState("view", { defaultValue: "table" });
+
+  const workspaceId = useWorkspaceId();
   const { open } = useParamModal("create-task");
+
+  const { data: tasks, isLoading: isLoadingTasks } = useGetTasks({
+    workspaceId: workspaceId,
+  });
   return (
-    <Tabs className="flex-1 w-full border rounded-lg">
+    <Tabs
+      defaultValue={view}
+      onValueChange={setView}
+      className="flex-1 w-full border rounded-lg"
+    >
       <div className="h-full flex flex-col overflow-auto p-4">
         <div className="flex flex-col gap-y-2 lg:flex-row justify-between items-center">
           <TabsList className="w-full lg:w-auto">
@@ -32,7 +46,9 @@ export const TaskViewSwitcher = () => {
         Filters
         <DottedSeparator className="my-4" />
         <>
-          <TabsContent value="table">Table</TabsContent>
+          <TabsContent value="table">
+            {JSON.stringify(tasks, null, 2)}
+          </TabsContent>
           <TabsContent value="kanban">Kanban</TabsContent>
           <TabsContent value="calender">Calender</TabsContent>
         </>
