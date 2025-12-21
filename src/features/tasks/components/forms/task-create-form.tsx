@@ -108,8 +108,8 @@ export const CreateTaskForm = ({
                 type="select"
                 placeholder="Select assignee"
                 options={memberOptions?.map((member) => ({
-                  id: member.id,
-                  value: member.name,
+                  value: member.id,
+                  label: member.name,
                 }))}
               />
               <FormInput
@@ -119,7 +119,6 @@ export const CreateTaskForm = ({
                 type="select"
                 placeholder="Select status"
                 options={statusOptions?.map((status) => ({
-                  id: status.id,
                   value: status.id,
                   label: status.name,
                 }))}
@@ -131,8 +130,8 @@ export const CreateTaskForm = ({
                 type="select"
                 placeholder="Select project"
                 options={projectOptions?.map((project) => ({
-                  id: project.id,
-                  value: project.name,
+                  value: project.id,
+                  label: project.name,
                 }))}
               />
             </div>

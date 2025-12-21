@@ -8,14 +8,20 @@ import { useGetTasks } from "../../api/client/use-tasks-get";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 import { useQueryState } from "nuqs";
 import { DataFilters } from "./data-filters";
+import { useTaskFilters } from "../../hooks/use-task-filters";
 
 export const TaskViewSwitcher = () => {
   const workspaceId = useWorkspaceId();
   const { open } = useParamModal("create-task");
   const [view, setView] = useQueryState("view", { defaultValue: "table" });
 
+  const [{ status, assigneeId, projectId, dueDate }] = useTaskFilters();
   const { data: tasks, isLoading: isLoadingTasks } = useGetTasks({
-    workspaceId: workspaceId,
+    workspaceId,
+    status,
+    assigneeId,
+    projectId,
+    dueDate,
   });
   return (
     <Tabs

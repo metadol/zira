@@ -21,7 +21,7 @@ interface FormInputProps extends InputHTMLAttributes<HTMLInputElement> {
   control: Control<any>;
   name: string;
   label?: string;
-  options?: Array<{ id: string; value: string; label?: string }>;
+  options?: Array<{ value: string; label: string }>;
 }
 
 export const FormInput = ({
@@ -43,8 +43,8 @@ export const FormInput = ({
             </SelectTrigger>
             <SelectContent>
               {options.map((option) => (
-                <SelectItem key={option.id} value={option.value}>
-                  {option.label ?? option.value}
+                <SelectItem key={option.value} value={option.value}>
+                  {option.label}
                 </SelectItem>
               ))}
             </SelectContent>
