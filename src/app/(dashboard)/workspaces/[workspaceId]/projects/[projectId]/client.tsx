@@ -8,7 +8,7 @@ import { ProjectAvatar } from "@/features/projects/components/common/project-ava
 
 import { useProjectId } from "@/features/projects/hooks/use-project-id";
 import { useGetProjectById } from "@/features/projects/api/client/use-project-get-id";
-import { TaskViewSwitcher } from "@/features/tasks/components/common/task-view-switcher";
+import { TaskViewSwitcher } from "@/features/tasks/components/switcher/task-view-switcher";
 
 export const ProjectIdClient = () => {
   const projectId = useProjectId();
@@ -44,8 +44,8 @@ export const ProjectIdClient = () => {
           </Button>
         </div>
       </div>
-      
-      <TaskViewSwitcher/>
+
+      <TaskViewSwitcher />
 
       {/* {projectAnalytics && <Analytics data={projectAnalytics} />} */}
 

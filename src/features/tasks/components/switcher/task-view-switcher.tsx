@@ -7,8 +7,10 @@ import { PlusIcon } from "lucide-react";
 import { useGetTasks } from "../../api/client/use-tasks-get";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 import { useQueryState } from "nuqs";
-import { DataFilters } from "./data-filters";
+import { DataFilters } from "../common/data-filters";
 import { useTaskFilters } from "../../hooks/use-task-filters";
+import { DataTable } from "./table/data-table";
+import { columns } from "./table/columns";
 
 export const TaskViewSwitcher = () => {
   const workspaceId = useWorkspaceId();
@@ -56,7 +58,7 @@ export const TaskViewSwitcher = () => {
         ) : (
           <>
             <TabsContent value="table">
-              {JSON.stringify(tasks, null, 2)}
+              <DataTable data={tasks?.documents ?? []} columns={columns} />
             </TabsContent>
             <TabsContent value="kanban">Kanban</TabsContent>
             <TabsContent value="calender">Calender</TabsContent>
