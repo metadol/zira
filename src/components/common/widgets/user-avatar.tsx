@@ -4,9 +4,16 @@ import { cn } from "@/lib/utils";
 interface UserAvatarProps {
   name?: string;
   email?: string;
+  className?: string;
+  fallbackclassName?: string;
 }
 
-export const UserAvatar = ({ name, email }: UserAvatarProps) => {
+export const UserAvatar = ({
+  name,
+  email,
+  className,
+  fallbackclassName,
+}: UserAvatarProps) => {
   const avatarFallback = name
     ? name.charAt(0).toUpperCase()
     : email
@@ -14,10 +21,13 @@ export const UserAvatar = ({ name, email }: UserAvatarProps) => {
     : "U";
 
   return (
-    <Avatar className={cn("size-10 border border-neutral-300 transition")}>
+    <Avatar
+      className={cn("size-10 border border-neutral-300 transition", className)}
+    >
       <AvatarFallback
         className={cn(
-          "flex items-center justify-center bg-neutral-200 font-medium text-neutral-500"
+          "flex items-center justify-center bg-neutral-200 font-medium text-neutral-500",
+          fallbackclassName
         )}
       >
         {avatarFallback}
