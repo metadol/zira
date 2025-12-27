@@ -129,7 +129,7 @@ const app = new Hono()
 
         const currentMember = await getMember({
             databases,
-            workspaceId: task.workspaceId,
+            workspaceId: task.workspaceid,
             userId: currentUser.$id,
         });
 
@@ -137,11 +137,11 @@ const app = new Hono()
             return c.json({ error: 'Unauthorized.' }, 401);
         }
 
-        const project = await databases.getDocument<Project>(DATABASE_ID, PROJECTS_ID, task.projectId);
+        const project = await databases.getDocument<Project>(DATABASE_ID, PROJECTS_ID, task.projectid);
 
-        const member = await databases.getDocument(DATABASE_ID, MEMBERS_ID, task.assigneeId);
+        const member = await databases.getDocument(DATABASE_ID, MEMBERS_ID, task.assigneeid);
 
-        const user = await users.get(member.userId);
+        const user = await users.get(member.userid);
 
         const assignee = {
             ...member,

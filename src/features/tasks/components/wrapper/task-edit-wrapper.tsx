@@ -3,16 +3,24 @@ import { useGetMembers } from "@/features/members/api/client/use-members-get";
 import { useGetProjects } from "@/features/projects/api/client/use-projects-get";
 import { CreateTaskForm } from "../forms/task-create-form";
 import { TaskStatus } from "@/types";
+import { useParamIdModal } from "@/hooks/use-param-id-modal";
+import { useGetTaskById } from "../../api/client/use-task-get-id";
+import { EditTaskForm } from "../forms/task-edit-form";
 
 interface CreateTaskFormWrapperProps {
+  id: string;
   onCancel: () => void;
 }
 
 export const EditTaskFormWrapper = ({
+  id,
   onCancel,
 }: CreateTaskFormWrapperProps) => {
   const workspaceId = useWorkspaceId();
 
+  const { data: task, isLoading: isLoadingTask } = useGetTaskById({
+    taskId: id,
+  });
   const { data: projects, isLoading: isLoadingProjects } = useGetProjects({
     workspaceId,
   });
@@ -39,18 +47,23 @@ export const EditTaskFormWrapper = ({
     { id: TaskStatus.DONE, name: "Done" },
   ];
 
-  const isLoading = isLoadingProjects || isLoadingMembers;
+  const isLoading = isLoadingProjects || isLoadingMembers || isLoadingTask;
 
   if (isLoading) {
     return <div>loading</div>;
   }
 
+  if (!task) {
+    return <div>Task not found</div>;
+  }
+
   return (
-    <CreateTaskForm
+    <EditTaskForm
       onCancel={onCancel}
       projectOptions={projectOptions}
       memberOptions={memberOptions}
       statusOptions={statusOptions}
+      initialValues={task}
     />
   );
 };

@@ -11,7 +11,7 @@ export const EditTaskModal = () => {
 
   return (
     <ResponsiveModal open={!!id} onOpenChange={close}>
-      <EditTaskFormWrapper onCancel={close} />
+      {id && <EditTaskFormWrapper id={id} onCancel={close} />}
     </ResponsiveModal>
   );
 };
