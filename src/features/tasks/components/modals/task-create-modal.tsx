@@ -10,7 +10,6 @@ export const CreateTaskModal = () => {
 
   return (
     <ResponsiveModal open={isOpen} onOpenChange={setIsOpen}>
-      {/* <CreateTaskForm /> */}
       <CreateTaskFormWrapper onCancel={close} />
     </ResponsiveModal>
   );

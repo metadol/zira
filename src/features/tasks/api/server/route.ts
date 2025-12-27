@@ -205,7 +205,7 @@ const app = new Hono()
 
         const member = await getMember({
             databases,
-            workspaceId: existingTask.workspaceId,
+            workspaceId: existingTask.workspaceid,
             userId: user.$id,
         });
 
@@ -216,9 +216,9 @@ const app = new Hono()
         const task = await databases.updateDocument(DATABASE_ID, TASKS_ID, taskId, {
             name,
             status,
-            projectId,
-            dueDate,
-            assigneeId,
+            projectid: projectId,
+            duedate: dueDate,
+            assigneeid: assigneeId,
             description,
         });
 

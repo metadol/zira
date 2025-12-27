@@ -16,6 +16,7 @@ import { useRouter } from "next/navigation";
 import { useConfirm } from "@/hooks/use-confirm";
 import { useDeleteTask } from "../../api/client/use-task-delete";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
+import { useParamIdModal } from "@/hooks/use-param-id-modal";
 
 interface TaskActionsProps {
   id: string;
@@ -33,6 +34,8 @@ export const TaskActions = ({ id, projectId, children }: TaskActionsProps) => {
     variant: "destructive",
   });
   const { mutate, isPending } = useDeleteTask();
+
+  const { open } = useParamIdModal("edit-task");
 
   const handleDelete = async () => {
     const ok = await confirmDelete();
@@ -61,7 +64,10 @@ export const TaskActions = ({ id, projectId, children }: TaskActionsProps) => {
             <ExternalLinkIcon className="mr-2 size-4 stroke-2" />
             Task Details
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => {}} className="p-[10px] font-medium">
+          <DropdownMenuItem
+            onClick={() => open(id)}
+            className="p-[10px] font-medium"
+          >
             <Edit className="mr-2 size-4 stroke-2" />
             Edit Task
           </DropdownMenuItem>
