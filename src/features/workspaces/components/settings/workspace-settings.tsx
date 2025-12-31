@@ -5,9 +5,6 @@ import { WorkspaceUpdateForm } from "../forms/workspace-update-form";
 import { WorkspaceDangerZone } from "../forms/workspace-delete-form";
 import { WorkspaceInviteSection } from "../forms/workspace-invite-form";
 
-
-
-
 interface WorkspaceSettingsProps {
   workspace: Workspace;
 }
