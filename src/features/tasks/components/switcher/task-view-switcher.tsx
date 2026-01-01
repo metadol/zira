@@ -62,7 +62,7 @@ export const TaskViewSwitcher = () => {
               <DataTable data={tasks?.documents ?? []} columns={columns} />
             </TabsContent>
             <TabsContent value="kanban">
-              <DataKanban data={tasks?.documents[0]!} />
+              <DataKanban data={tasks?.documents ?? []} />
             </TabsContent>
             <TabsContent value="calender">Calender</TabsContent>
           </>
