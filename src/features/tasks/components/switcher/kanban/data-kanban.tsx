@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { Children, useCallback, useEffect, useState } from "react";
 
 import {
   Draggable,
@@ -7,7 +7,8 @@ import {
   type DropResult,
 } from "@hello-pangea/dnd";
 import { Task, TaskStatus } from "@/types";
-import { KanbanColumnHeader } from "./kanban-column-header";
+import { KanbanHeader } from "./kanban-header";
+import { KanbanCard } from "./kanban-card";
 
 interface DataKanbanProps {
   data: Task[];
@@ -60,10 +61,36 @@ export const DataKanban = ({ data }: DataKanbanProps) => {
               key={board}
               className="flex-1 bg-muted p-1.5 rounded-md min-w-[200px]"
             >
-              <KanbanColumnHeader
-                board={board}
-                taskCount={tasks[board].length}
-              />
+              <KanbanHeader board={board} taskCount={tasks[board].length} />
+              <Droppable droppableId={board}>
+                {(provided) => (
+                  <div
+                    ref={provided.innerRef}
+                    {...provided.droppableProps}
+                    className="min-h-[200px]  py-1.5"
+                  >
+                    {tasks[board].map((task, index) => (
+                      <Draggable
+                        key={task.$id}
+                        draggableId={task.$id}
+                        index={index}
+                      >
+                        {(provided) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            className=" rounded-md p-2 mb-2"
+                          >
+                            <KanbanCard task={task} />
+                          </div>
+                        )}
+                      </Draggable>
+                    ))}
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
             </div>
           );
         })}
