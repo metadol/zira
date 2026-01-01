@@ -31,7 +31,7 @@ export const KanbanCard = ({ task }: KanbanCardProps) => {
         />
         <div aria-hidden className="size-1 rounded-full bg-neutral-300" />
         <span className={cn("truncate text-[11px]")}>
-          {format(task.duedate, "PPP")}
+          {format(task.duedate, "MMM do, yyyy")}
         </span>
       </div>
 
