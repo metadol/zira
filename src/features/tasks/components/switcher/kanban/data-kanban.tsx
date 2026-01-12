@@ -169,7 +169,7 @@ export const DataKanban = ({ data, onChange }: DataKanbanProps) => {
           return (
             <div
               key={board}
-              className="flex-1 bg-muted p-1.5 rounded-md min-w-[200px]"
+              className="flex-1 bg-muted p-2 rounded-md min-w-[200px]"
             >
               <KanbanHeader board={board} taskCount={tasks[board].length} />
               <Droppable droppableId={board}>
@@ -190,7 +190,7 @@ export const DataKanban = ({ data, onChange }: DataKanbanProps) => {
                             ref={provided.innerRef}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
-                            className=" rounded-md p-2 mb-2"
+                            className="rounded-md p-2"
                           >
                             <KanbanCard task={task} />
                           </div>
