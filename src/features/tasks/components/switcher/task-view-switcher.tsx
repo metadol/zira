@@ -16,6 +16,12 @@ import { useCallback } from "react";
 import { TaskStatus } from "@/types";
 import { useBulkUpdateTasks } from "../../api/client/use-task-update-bulk";
 
+type KanbanTask = {
+  $id: string;
+  status: TaskStatus;
+  position: number;
+};
+
 export const TaskViewSwitcher = () => {
   const workspaceId = useWorkspaceId();
   const { open } = useParamModal("create-task");
@@ -33,7 +39,7 @@ export const TaskViewSwitcher = () => {
   const { mutate: bulkUpdateTasks } = useBulkUpdateTasks();
 
   const onKanbanChange = useCallback(
-    (tasks: { $id: string; status: TaskStatus; position: number }[]) => {
+    (tasks: KanbanTask[]) => {
       bulkUpdateTasks({
         json: { tasks },
       });

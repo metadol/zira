@@ -30,7 +30,6 @@ const boards: TaskStatus[] = [
 ];
 
 export const DataKanban = ({ data, onChange }: DataKanbanProps) => {
-  console.log("DATA KANBAN DATA:", data);
   const [tasks, setTasks] = useState<TasksState>(() => {
     const initialTasks: TasksState = {
       [TaskStatus.BACKLOG]: [],

@@ -17,7 +17,7 @@ export const KanbanCard = ({ task }: KanbanCardProps) => {
       <div className="flex items-start justify-between gap-x-2">
         <p className="text-sm line-clamp-2">{task.name}</p>
         <TaskActions id={task.$id} projectId={task.projectid}>
-          <MoreHorizontal className="size-4" />
+          <MoreHorizontal className="size-4 cursor-pointer" />
         </TaskActions>
       </div>
 
