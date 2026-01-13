@@ -251,7 +251,7 @@ const app = new Hono()
                 ),
             ]);
 
-            const workspaceIds = new Set(tasksToUpdate.documents.map((task) => task.workspaceId));
+            const workspaceIds = new Set(tasksToUpdate.documents.map((task) => task.workspaceid));
 
             if (workspaceIds.size !== 1) {
                 return c.json({ error: 'All tasks must belong to the same workspace.' }, 401);
