@@ -15,6 +15,7 @@ import { DataKanban } from "./kanban/data-kanban";
 import { useCallback } from "react";
 import { TaskStatus } from "@/types";
 import { useBulkUpdateTasks } from "../../api/client/use-task-update-bulk";
+import { DataCalender } from "./calender/data-calender";
 
 type KanbanTask = {
   $id: string;
@@ -35,7 +36,6 @@ export const TaskViewSwitcher = () => {
     projectId,
     dueDate,
   });
-
   const { mutate: bulkUpdateTasks } = useBulkUpdateTasks();
 
   const onKanbanChange = useCallback(
@@ -88,7 +88,9 @@ export const TaskViewSwitcher = () => {
                 onChange={onKanbanChange}
               />
             </TabsContent>
-            <TabsContent value="calender">Calender</TabsContent>
+            <TabsContent value="calender">
+              <DataCalender data={tasks?.documents ?? []} />
+            </TabsContent>
           </>
         )}
       </div>
