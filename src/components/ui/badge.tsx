@@ -19,7 +19,7 @@ const badgeVariants = cva(
         outline:
           "text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
         [TaskStatus.TODO]:
-          "border border-slate-300 bg-slate-100 text-slate-700 hover:bg-slate-200",
+          "border border-red-300 bg-red-100 text-red-700 hover:bg-red-200",
         [TaskStatus.IN_PROGRESS]:
           "border border-amber-300 bg-amber-100 text-amber-800 hover:bg-amber-200",
         [TaskStatus.IN_REVIEW]:

@@ -34,7 +34,7 @@ export const ProjectAvatar = ({
           fallbackClassName
         )}
       >
-        {name.charAt(0)}
+        {name?.charAt(0)}
       </AvatarFallback>
     </Avatar>
   );

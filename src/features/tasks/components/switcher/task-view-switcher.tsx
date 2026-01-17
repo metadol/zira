@@ -1,21 +1,27 @@
 "use client";
-import { DottedSeparator } from "@/components/common/widgets/dotted-seperator";
-import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useParamModal } from "@/hooks/use-param-modal";
-import { PlusIcon } from "lucide-react";
-import { useGetTasks } from "../../api/client/use-tasks-get";
-import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
-import { useQueryState } from "nuqs";
-import { DataFilters } from "../common/data-filters";
-import { useTaskFilters } from "../../hooks/use-task-filters";
-import { DataTable } from "./table/data-table";
-import { columns } from "./table/columns";
-import { DataKanban } from "./kanban/data-kanban";
+
+
 import { useCallback } from "react";
-import { TaskStatus } from "@/types";
-import { useBulkUpdateTasks } from "../../api/client/use-task-update-bulk";
+import { useQueryState } from "nuqs";
+import { PlusIcon } from "lucide-react";
+
+import { DataTable } from "./table/data-table";
+import { DataKanban } from "./kanban/data-kanban";
 import { DataCalender } from "./calender/data-calender";
+
+import { columns } from "./table/columns";
+import { Button } from "@/components/ui/button";
+import { DataFilters } from "../common/data-filters";
+import { DottedSeparator } from "@/components/common/widgets/dotted-seperator";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
+import { TaskStatus } from "@/types";
+import { useParamModal } from "@/hooks/use-param-modal";
+import { useGetTasks } from "../../api/client/use-tasks-get";
+import { useTaskFilters } from "../../hooks/use-task-filters";
+import { useBulkUpdateTasks } from "../../api/client/use-task-update-bulk";
+import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
+
 
 type KanbanTask = {
   $id: string;
