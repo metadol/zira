@@ -26,8 +26,6 @@ const statusColorMap: Record<TaskStatus, string> = {
 
 export const CalenderCard = ({
   title,
-  assignee,
-  project,
   status,
   id,
 }: CalenderCardProps) => {
@@ -41,31 +39,15 @@ export const CalenderCard = ({
   };
 
   return (
-    <div className="px-2 pb-2">
+    <div className="p-0 xs:px-2 pb-2">
       <button
         onClick={onClick}
         className={cn(
-          "flex w-full text-left cursor-pointer flex-col gap-y-1.5 rounded-md border border-l-4 bg-white p-1.5 text-xs text-primary transition hover:opacity-75",
+          "flex w-full text-left cursor-pointer flex-col gap-y-1.5 rounded-md border border-l-4 bg-white p-1.5  text-[6px] xs:text-xs text-primary transition hover:opacity-75",
           statusColorMap[status]
         )}
       >
         <p>{title}</p>
-
-        {/* <div className="flex items-center gap-x-1">
-          <UserAvatar
-            name={assignee?.name}
-            className="size-5"
-            fallbackclassName="text-[9px]"
-          />
-
-          <div aria-hidden className="size-1 rounded-full bg-neutral-300" />
-          <ProjectAvatar
-            name={project?.name}
-            image={project?.image}
-            className="size-5 rounded-full"
-            fallbackClassName="text-[9px]"
-          />
-        </div> */}
       </button>
     </div>
   );
