@@ -6,9 +6,9 @@ import { Pencil } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProjectAvatar } from "@/features/projects/components/common/project-avatar";
 
-import { useProjectId } from "@/features/projects/hooks/use-project-id";
 import { useGetProjectById } from "@/features/projects/api/client/use-project-get-id";
 import { TaskViewSwitcher } from "@/features/tasks/components/switcher/task-view-switcher";
+import { useParamId } from "@/hooks/use-param-id";
 
 export const ProjectIdClient = () => {
   const projectId = useParamId("projectId");

@@ -10,9 +10,12 @@ import { Toaster } from "@/components/ui/sonner";
 const InterFont = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Zira:Task Manager App",
+  title: "ZIRA",
   description:
     "Manage your tasks efficiently and stay organized with our Task Manager App.",
+  icons: {
+    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+  },
 };
 
 export default function RootLayout({
