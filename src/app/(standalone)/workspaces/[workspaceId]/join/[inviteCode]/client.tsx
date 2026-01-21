@@ -8,6 +8,7 @@ import { useGetWorkspaceInfo } from "@/features/workspaces/api/client/use-worksp
 import { WorkspaceJoinForm } from "@/features/workspaces/components/forms/workspace-join-form";
 
 import { Workspace } from "@/types";
+import { useParamId } from "@/hooks/use-param-id";
 
 export const WorkspaceIdJoinClient = () => {
   const workspaceId = useParamId("workspaceId");
