@@ -6,13 +6,13 @@ import { RiAddFill } from "react-icons/ri";
 
 import { usePathname } from "next/navigation";
 import { useParamModal } from "@/hooks/use-param-modal";
-import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 import { useGetProjects } from "@/features/projects/api/client/use-projects-get";
 import { ProjectAvatar } from "@/features/projects/components/common/project-avatar";
+import { useParamId } from "@/hooks/use-param-id";
 
 export const Projects = () => {
   const pathname = usePathname();
-  const workspaceId = useWorkspaceId();
+  const workspaceId = useParamId("workspaceId");
   const { open } = useParamModal("create-project");
   const { data } = useGetProjects({ workspaceId });
 

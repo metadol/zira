@@ -1,6 +1,6 @@
 "use client";
 
-import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
+import { useParamId } from "@/hooks/use-param-id";
 import { cn } from "@/lib/utils";
 import { Settings, UsersIcon } from "lucide-react";
 import Link from "next/link";
@@ -40,7 +40,7 @@ const routes = [
 ];
 
 export const Navigation = () => {
-  const workspaceId = useWorkspaceId();
+  const workspaceId = useParamId("workspaceId");
   const pathname = usePathname();
   return (
     <ul className="flex flex-col">

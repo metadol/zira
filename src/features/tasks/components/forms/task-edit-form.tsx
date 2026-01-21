@@ -23,6 +23,7 @@ import { Form } from "@/components/ui/form";
 import { DatePicker } from "@/components/common/widgets/date-picker";
 import { Task, TaskStatus } from "@/types";
 import { useUpdateTask } from "../../api/client/use-task-update";
+import { useParamId } from "@/hooks/use-param-id";
 
 interface CreateTaskFormProps {
   onCancel?: () => void;
@@ -42,7 +43,7 @@ export const EditTaskForm = ({
   initialValues,
 }: CreateTaskFormProps) => {
   const router = useRouter();
-  const workspaceId = useWorkspaceId();
+  const workspaceId = useParamId("workspaceId");
   const { mutate, isPending } = useUpdateTask();
 
   const form = useForm<CreateTaskFormValues>({

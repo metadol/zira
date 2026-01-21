@@ -3,7 +3,6 @@
 import { DottedSeparator } from "@/components/common/widgets/dotted-seperator";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 import { ArrowLeftIcon, MoreVerticalIcon, Shield } from "lucide-react";
 import Link from "next/link";
 import { useGetMembers } from "../api/client/use-members-get";
@@ -16,9 +15,10 @@ import { useCurrent } from "@/features/auth/api/client/use-current";
 import { MemberActionsDropdown } from "@/features/members/components/member-actions-dropdown";
 import { hasAdminRole } from "../utils";
 import { UserAvatar } from "@/components/common/widgets/user-avatar";
+import { useParamId } from "@/hooks/use-param-id";
 
 export const MembersListForm = () => {
-  const workspaceId = useWorkspaceId();
+  const workspaceId = useParamId("workspaceId");
   const { data: user } = useCurrent();
   const { data: members } = useGetMembers({ workspaceId });
 

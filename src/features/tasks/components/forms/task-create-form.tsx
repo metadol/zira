@@ -22,6 +22,7 @@ import { FormInput } from "@/components/common/forms/form-input";
 import { Form } from "@/components/ui/form";
 import { DatePicker } from "@/components/common/widgets/date-picker";
 import { TaskStatus } from "@/types";
+import { useParamId } from "@/hooks/use-param-id";
 
 interface CreateTaskFormProps {
   onCancel?: () => void;
@@ -41,7 +42,7 @@ export const CreateTaskForm = ({
   statusOptions,
 }: CreateTaskFormProps) => {
   const router = useRouter();
-  const workspaceId = useWorkspaceId();
+  const workspaceId = useParamId("workspaceId");
   const { mutate, isPending } = useCreateTask();
 
   const form = useForm<CreateTaskFormValues>({

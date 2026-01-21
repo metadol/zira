@@ -7,7 +7,7 @@ import { MembersListForm } from "@/features/members/components/members-list-form
 import { useGetMembers } from "@/features/members/api/client/use-members-get";
 
 export const WorkspaceIdMembersClient = () => {
-  const workspaceId = useWorkspaceId();
+  const workspaceId = useParamId("workspaceId");
   const { data: initialValues, isLoading } = useGetMembers({
     workspaceId,
   });

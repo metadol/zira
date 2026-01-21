@@ -79,3 +79,10 @@ export const useConfirm = ({
 
   return [ConfirmationDialog, confirm];
 };
+
+
+// Example usage:
+// const [ConfirmDialog, confirm] = useConfirm({
+//   title: "Delete Item",
+//   message: "Are you sure you want to delete this item?",
+// });

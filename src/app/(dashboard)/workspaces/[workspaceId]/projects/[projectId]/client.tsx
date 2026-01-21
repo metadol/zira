@@ -11,7 +11,7 @@ import { useGetProjectById } from "@/features/projects/api/client/use-project-ge
 import { TaskViewSwitcher } from "@/features/tasks/components/switcher/task-view-switcher";
 
 export const ProjectIdClient = () => {
-  const projectId = useProjectId();
+  const projectId = useParamId("projectId");
 
   const { data: project, isLoading } = useGetProjectById({ projectId });
   //   const { data: projectAnalytics, isLoading: isLoadingProjectAnalytics } = useGetProjectAnalytics({ projectId });
@@ -45,7 +45,7 @@ export const ProjectIdClient = () => {
         </div>
       </div>
 
-      <TaskViewSwitcher />
+      <TaskViewSwitcher hideProjectFilter={true} />
 
       {/* {projectAnalytics && <Analytics data={projectAnalytics} />} */}
 

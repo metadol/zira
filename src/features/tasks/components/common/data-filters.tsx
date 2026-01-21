@@ -7,13 +7,14 @@ import { useGetProjects } from "@/features/projects/api/client/use-projects-get"
 import { TaskStatus } from "@/types";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 import { useTaskFilters } from "../../hooks/use-task-filters";
+import { useParamId } from "@/hooks/use-param-id";
 
 interface DataFiltersProps {
   hideProjectFilter?: boolean;
 }
 
 export const DataFilters = ({ hideProjectFilter }: DataFiltersProps) => {
-  const workspaceId = useWorkspaceId();
+  const workspaceId = useParamId("workspaceId");
   const { data: projects, isLoading: isLoadingProjects } = useGetProjects({
     workspaceId,
   });
@@ -62,7 +63,7 @@ export const DataFilters = ({ hideProjectFilter }: DataFiltersProps) => {
     setFilters({ projectId: value === "all" ? null : (value as string) });
   };
 
-  if (isLoading) return null;
+  if (isLoading) return "loading...";
 
   return (
     <div className="flex flex-col lg:flex-row gap-2">

@@ -11,3 +11,6 @@ export const useParamModal = (param: string) => {
 
   return { isOpen, setIsOpen, open, close };
 };
+
+// Example usage:
+// const { isOpen, open, close } = useParamModal("showModal");

@@ -12,13 +12,13 @@ import {
 } from "../../../components/ui/select";
 import { WorkspaceAvatar } from "../../../features/workspaces/components/common/workspace-avatar";
 import { useRouter } from "next/navigation";
-import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 import { useParamModal } from "@/hooks/use-param-modal";
+import { useParamId } from "@/hooks/use-param-id";
 
 export const WorkspaceSwitcher = () => {
   const router = useRouter();
 
-  const workspaceId = useWorkspaceId();
+  const workspaceId = useParamId("workspaceId");
   const { open } = useParamModal("create-workspace");
   const { data: workspaces, isLoading } = useGetWorkspaces();
 

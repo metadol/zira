@@ -10,7 +10,7 @@ import { WorkspaceJoinForm } from "@/features/workspaces/components/forms/worksp
 import { Workspace } from "@/types";
 
 export const WorkspaceIdJoinClient = () => {
-  const workspaceId = useWorkspaceId();
+  const workspaceId = useParamId("workspaceId");
   const { data: initialValues, isLoading } = useGetWorkspaceInfo({
     workspaceId,
   });

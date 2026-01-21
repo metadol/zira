@@ -16,7 +16,8 @@ import { useRouter } from "next/navigation";
 import { useConfirm } from "@/hooks/use-confirm";
 import { useDeleteTask } from "../../api/client/use-task-delete";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
-import { useParamIdModal } from "@/hooks/use-param-id-modal";
+import { useParamIdModal } from "@/hooks/use-param-modal-id";
+import { useParamId } from "@/hooks/use-param-id";
 
 interface TaskActionsProps {
   id: string;
@@ -26,7 +27,8 @@ interface TaskActionsProps {
 
 export const TaskActions = ({ id, projectId, children }: TaskActionsProps) => {
   const router = useRouter();
-  const workspaceId = useWorkspaceId();
+  const workspaceId = useParamId("workspaceId");
+  const { open } = useParamIdModal("edit-task");
 
   const [DeleteDialog, confirmDelete] = useConfirm({
     title: "Delete task",
@@ -34,8 +36,6 @@ export const TaskActions = ({ id, projectId, children }: TaskActionsProps) => {
     variant: "destructive",
   });
   const { mutate, isPending } = useDeleteTask();
-
-  const { open } = useParamIdModal("edit-task");
 
   const handleDelete = async () => {
     const ok = await confirmDelete();

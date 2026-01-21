@@ -13,3 +13,6 @@ export const useParamIdModal = (param: string) => {
     close,
   };
 };
+
+// Example usage:
+// const { id, open, close } = useParamIdModal("itemId");

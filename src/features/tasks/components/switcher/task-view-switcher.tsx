@@ -1,6 +1,5 @@
 "use client";
 
-
 import { useCallback } from "react";
 import { useQueryState } from "nuqs";
 import { PlusIcon } from "lucide-react";
@@ -21,7 +20,7 @@ import { useGetTasks } from "../../api/client/use-tasks-get";
 import { useTaskFilters } from "../../hooks/use-task-filters";
 import { useBulkUpdateTasks } from "../../api/client/use-task-update-bulk";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
-
+import { useParamId } from "@/hooks/use-param-id";
 
 type KanbanTask = {
   $id: string;
@@ -29,8 +28,14 @@ type KanbanTask = {
   position: number;
 };
 
-export const TaskViewSwitcher = () => {
-  const workspaceId = useWorkspaceId();
+interface TaskViewSwitcherProps {
+  hideProjectFilter?: boolean;
+}
+
+export const TaskViewSwitcher = ({
+  hideProjectFilter,
+}: TaskViewSwitcherProps) => {
+  const workspaceId = useParamId("workspaceId");
   const { open } = useParamModal("create-task");
   const [view, setView] = useQueryState("view", { defaultValue: "table" });
 
@@ -50,7 +55,7 @@ export const TaskViewSwitcher = () => {
         json: { tasks },
       });
     },
-    [bulkUpdateTasks]
+    [bulkUpdateTasks],
   );
 
   return (
@@ -79,7 +84,7 @@ export const TaskViewSwitcher = () => {
           </Button>
         </div>
         <DottedSeparator className="my-4" />
-        <DataFilters />
+        <DataFilters hideProjectFilter={hideProjectFilter} />
         <DottedSeparator className="my-4" />
         {isLoadingTasks ? (
           "loading..."

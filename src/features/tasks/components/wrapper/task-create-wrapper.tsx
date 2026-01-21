@@ -3,6 +3,7 @@ import { useGetMembers } from "@/features/members/api/client/use-members-get";
 import { useGetProjects } from "@/features/projects/api/client/use-projects-get";
 import { CreateTaskForm } from "../forms/task-create-form";
 import { TaskStatus } from "@/types";
+import { useParamId } from "@/hooks/use-param-id";
 
 interface CreateTaskFormWrapperProps {
   onCancel: () => void;
@@ -11,7 +12,7 @@ interface CreateTaskFormWrapperProps {
 export const CreateTaskFormWrapper = ({
   onCancel,
 }: CreateTaskFormWrapperProps) => {
-  const workspaceId = useWorkspaceId();
+  const workspaceId = useParamId("workspaceId");
 
   const { data: projects, isLoading: isLoadingProjects } = useGetProjects({
     workspaceId,

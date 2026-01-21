@@ -19,6 +19,7 @@ import {
 import { useInviteCode } from "@/features/workspaces/hooks/use-invite-code";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 import { useJoinWorkspace } from "../../api/client/use-workspace-join";
+import { useParamId } from "@/hooks/use-param-id";
 
 interface WorkspaceJoinFormProps {
   initialValues: {
@@ -30,8 +31,8 @@ export const WorkspaceJoinForm = ({
   initialValues,
 }: WorkspaceJoinFormProps) => {
   const router = useRouter();
-  const workspaceId = useWorkspaceId();
-  const inviteCode = useInviteCode();
+  const workspaceId = useParamId("workspaceId");
+  const inviteCode = useParamId("inviteCode");
 
   const { mutate, isPending } = useJoinWorkspace();
 

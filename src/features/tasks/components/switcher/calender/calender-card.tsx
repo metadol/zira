@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { TaskStatus, type Member, type Project } from "@/types";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
+import { useParamId } from "@/hooks/use-param-id";
 
 
 interface CalenderCardProps {
@@ -26,7 +27,7 @@ export const CalenderCard = ({
   id,
 }: CalenderCardProps) => {
   const router = useRouter();
-  const workspaceId = useWorkspaceId();
+  const workspaceId = useParamId("workspaceId");
 
   const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();

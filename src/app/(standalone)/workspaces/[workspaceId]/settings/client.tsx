@@ -9,7 +9,7 @@ import { WorkspaceSettings } from "@/features/workspaces/components/settings/wor
 import { type Workspace } from "@/types";
 
 export const WorkspaceIdSettingsClient = () => {
-  const workspaceId = useWorkspaceId();
+  const workspaceId = useParamId("workspaceId");
   const { data: initialValues, isLoading } = useGetWorkspaceById({
     workspaceId,
   });

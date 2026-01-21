@@ -8,7 +8,7 @@ import { useGetProjectById } from "@/features/projects/api/client/use-project-ge
 import { ProjectSettings } from "@/features/projects/components/settings/project-settings";
 
 export const ProjectIdSettingsClient = () => {
-  const projectId = useProjectId();
+  const projectId = useParamId("projectId");
   const { data, isLoading } = useGetProjectById({
     projectId,
   });

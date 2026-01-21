@@ -3,7 +3,7 @@
 import { useParamModal } from "@/hooks/use-param-modal";
 import { ResponsiveModal } from "@/components/common/widgets/responsive-modal";
 import { CreateTaskForm } from "../forms/task-create-form";
-import { useParamIdModal } from "@/hooks/use-param-id-modal";
+import { useParamIdModal } from "@/hooks/use-param-modal-id";
 import { EditTaskFormWrapper } from "../wrapper/task-edit-wrapper";
 
 export const EditTaskModal = () => {

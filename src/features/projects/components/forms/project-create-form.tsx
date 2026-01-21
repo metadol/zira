@@ -12,7 +12,7 @@ import { FormWrapper } from "@/components/common/forms/work-form";
 
 // Utils / Schemas / Hooks
 import { useCreateProject } from "../../api/client/use-project-create";
-import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
+import { useParamId } from "@/hooks/use-param-id";
 
 interface CreateProjectFormProps {
   onCancel?: () => void;
@@ -22,7 +22,7 @@ type CreateProjectFormValues = z.infer<typeof createProjectSchema>;
 
 export const CreateProjectForm = ({ onCancel }: CreateProjectFormProps) => {
   const router = useRouter();
-  const workspaceId = useWorkspaceId();
+  const workspaceId = useParamId("workspaceId");
   const { mutate, isPending } = useCreateProject();
 
   const form = useForm<CreateProjectFormValues>({
