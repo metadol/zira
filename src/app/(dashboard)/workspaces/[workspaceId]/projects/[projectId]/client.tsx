@@ -12,7 +12,6 @@ import { useParamId } from "@/hooks/use-param-id";
 
 export const ProjectIdClient = () => {
   const projectId = useParamId("projectId");
-
   const { data: project, isLoading } = useGetProjectById({ projectId });
   //   const { data: projectAnalytics, isLoading: isLoadingProjectAnalytics } = useGetProjectAnalytics({ projectId });
 
