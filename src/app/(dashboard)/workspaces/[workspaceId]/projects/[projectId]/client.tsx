@@ -29,7 +29,6 @@ export const ProjectIdClient = () => {
   const isLoading = isProjectLoading || isAnalyticsLoading;
 
   if (isLoading) return "loading";
-
   if (!project) return "project not found";
 
   return (
@@ -56,6 +55,7 @@ export const ProjectIdClient = () => {
       </div>
 
       {analytics && <Analytics data={analytics} />}
+
       <TaskViewSwitcher hideProjectFilter/>
 
       {/* {analytics && <Analytics data={projectAnalytics} />} */}
