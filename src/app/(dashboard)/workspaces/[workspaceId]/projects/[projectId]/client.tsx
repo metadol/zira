@@ -9,13 +9,24 @@ import { ProjectAvatar } from "@/features/projects/components/common/project-ava
 import { useGetProjectById } from "@/features/projects/api/client/use-project-get-id";
 import { TaskViewSwitcher } from "@/features/tasks/components/switcher/task-view-switcher";
 import { useParamId } from "@/hooks/use-param-id";
+import { useGetProjectAnalytics } from "@/features/projects/api/client/use-projects-get-analytics";
+import { Analytics } from "@/features/projects/components/common/analytics";
 
 export const ProjectIdClient = () => {
   const projectId = useParamId("projectId");
-  const { data: project, isLoading } = useGetProjectById({ projectId });
-  //   const { data: projectAnalytics, isLoading: isLoadingProjectAnalytics } = useGetProjectAnalytics({ projectId });
 
-  //   const isLoading = isLoadingProject || isLoadingProjectAnalytics;
+  const {
+    data: project,
+    isLoading: isProjectLoading,
+  } = useGetProjectById({ projectId });
+
+  const {
+    data: analytics,
+    isLoading: isAnalyticsLoading,
+  } = useGetProjectAnalytics({ projectId });
+
+
+  const isLoading = isProjectLoading || isAnalyticsLoading;
 
   if (isLoading) return "loading";
 
@@ -44,9 +55,10 @@ export const ProjectIdClient = () => {
         </div>
       </div>
 
-      <TaskViewSwitcher hideProjectFilter={true} />
+      {analytics && <Analytics data={analytics} />}
+      <TaskViewSwitcher hideProjectFilter/>
 
-      {/* {projectAnalytics && <Analytics data={projectAnalytics} />} */}
+      {/* {analytics && <Analytics data={projectAnalytics} />} */}
 
       {/* <TaskViewSwitcher projectId={projectId} hideProjectFilter /> */}
     </div>
