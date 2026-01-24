@@ -4,7 +4,6 @@ import { Task } from "@/types";
 import { PenIcon, X, XIcon } from "lucide-react";
 import { useState } from "react";
 import { useUpdateTask } from "../../api/client/use-task-update";
-import { set } from "zod";
 import { Textarea } from "@/components/ui/textarea";
 
 interface TaskDescriptionProps {
@@ -52,6 +51,7 @@ export const TaskDescription = ({ task }: TaskDescriptionProps) => {
             autoFocus
             value={value}
             disabled={isPending}
+            className="text-sm"
             placeholder="Add a description..."
             onChange={(e) => setValue(e.target.value)}
           />
