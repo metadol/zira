@@ -28,6 +28,7 @@ export const ProjectIdClient = () => {
   const isLoading = isProjectLoading || isAnalyticsLoading;
 
   if (isLoading) return "loading";
+  
   if (!project) return "project not found";
 
   return (
