@@ -36,26 +36,17 @@ export const Analytics = ({ data }: ProjectAnalyticsResponseType) => {
 
   return (
     <ScrollArea className="border rounded-lg w-full whitespace-nowrap shrink-0">
-      <div className="flex">
-        {analyticsCards.map((card, index) => {
-          const isLastCard = index === analyticsCards.length - 1;
-          return (
-            <div
-              key={card.title}
-              className={cn(
-                "flex items-center flex-1",
-                !isLastCard && "border-r",
-              )}
-            >
-              <AnalyticsCard
-                title={card.title}
-                value={card.value}
-                delta={card.delta}
-                variant={card.delta >= 0 ? "up" : "down"}
-              />
-            </div>
-          );
-        })}
+      <div className="flex [&>*:not(:last-child)]:border-r">
+        {analyticsCards.map((card) => (
+          <div key={card.title} className={"flex items-center flex-1"}>
+            <AnalyticsCard
+              title={card.title}
+              value={card.value}
+              delta={card.delta}
+              variant={card.delta >= 0 ? "up" : "down"}
+            />
+          </div>
+        ))}
       </div>
       <ScrollBar orientation="horizontal" />
     </ScrollArea>
