@@ -1,9 +1,10 @@
 import { authGuard } from "@/features/auth/utils";
+import { WorkspaceIdClient } from "./client";
 
 const WorkspacePage = async () => {
   await authGuard("protected");
 
-  return <div className="flex flex-col">workpace id</div>;
+  return <WorkspaceIdClient />;
 };
 
 export default WorkspacePage;

@@ -28,8 +28,8 @@ export const ProjectIdClient = () => {
   const isLoading = isProjectLoading || isAnalyticsLoading;
 
   if (isLoading) return "loading";
-  
-  if (!project) return "project not found";
+
+  if (!project || !analytics) return "failed to load";
 
   return (
     <div className="flex flex-col gap-y-4">
@@ -54,9 +54,8 @@ export const ProjectIdClient = () => {
         </div>
       </div>
 
-      {analytics && <Analytics data={analytics} />}
-
-      <TaskViewSwitcher hideProjectFilter/>
+      <Analytics data={analytics} />
+      <TaskViewSwitcher hideProjectFilter />
 
       {/* {analytics && <Analytics data={projectAnalytics} />} */}
 

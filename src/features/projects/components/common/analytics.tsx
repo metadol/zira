@@ -1,7 +1,6 @@
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { ProjectAnalyticsResponseType } from "../../api/client/use-projects-get-analytics";
 import { AnalyticsCard } from "@/components/common/widgets/analytics-card";
-import { cn } from "@/lib/utils";
 
 export const Analytics = ({ data }: ProjectAnalyticsResponseType) => {
   if (!data) return null;
