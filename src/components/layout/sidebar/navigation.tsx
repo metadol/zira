@@ -19,12 +19,12 @@ const routes = [
     icon: GoHome,
     activeIcon: GoHomeFill,
   },
-  {
-    label: "My Tasks",
-    href: "/tasks",
-    icon: GoCheckCircle,
-    activeIcon: GoCheckCircleFill,
-  },
+  // {
+  //   label: "My Tasks",
+  //   href: "/tasks",
+  //   icon: GoCheckCircle,
+  //   activeIcon: GoCheckCircleFill,
+  // },
   {
     label: "Settings",
     href: "/settings",

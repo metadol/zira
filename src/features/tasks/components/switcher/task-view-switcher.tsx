@@ -19,7 +19,6 @@ import { useParamModal } from "@/hooks/use-param-modal";
 import { useGetTasks } from "../../api/client/use-tasks-get";
 import { useTaskFilters } from "../../hooks/use-task-filters";
 import { useBulkUpdateTasks } from "../../api/client/use-task-update-bulk";
-import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 import { useParamId } from "@/hooks/use-param-id";
 
 type KanbanTask = {
@@ -36,6 +35,7 @@ export const TaskViewSwitcher = ({
   hideProjectFilter,
 }: TaskViewSwitcherProps) => {
   const workspaceId = useParamId("workspaceId");
+  const paramProjectId = useParamId("projectId");
   const { open } = useParamModal("create-task");
   const [view, setView] = useQueryState("view", { defaultValue: "table" });
 
@@ -44,7 +44,7 @@ export const TaskViewSwitcher = ({
     workspaceId,
     status,
     assigneeId,
-    projectId,
+    projectId: paramProjectId ?? projectId,
     dueDate,
   });
   const { mutate: bulkUpdateTasks } = useBulkUpdateTasks();
@@ -83,9 +83,11 @@ export const TaskViewSwitcher = ({
             New
           </Button>
         </div>
+
         <DottedSeparator className="my-4" />
         <DataFilters hideProjectFilter={hideProjectFilter} />
         <DottedSeparator className="my-4" />
+
         {isLoadingTasks ? (
           "loading..."
         ) : (

@@ -5,22 +5,14 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { ArrowLeftIcon } from "lucide-react";
 
 // Components
-import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Form, FormField } from "@/components/ui/form";
-import { FormInput } from "@/components/common/forms/form-input";
-import { ImageUpload } from "@/components/common/widgets/image-upload";
-import { DottedSeparator } from "@/components/common/widgets/dotted-seperator";
+import { FormWrapper } from "@/components/common/forms/work-form";
 
 // Utils / Schemas/ Hooks
-import { cn } from "@/lib/utils";
 import { type Workspace } from "@/types";
 import { updateWorkspaceSchema } from "../../schemas";
 import { useUpdateWorkspace } from "../../api/client/use-workspace-update";
-import { FormWrapper } from "@/components/common/forms/work-form";
 
 type UpdateWorkspaceFormValues = z.infer<typeof updateWorkspaceSchema>;
 
