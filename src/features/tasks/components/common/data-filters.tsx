@@ -1,13 +1,11 @@
+import { TaskStatus } from "@/types";
+import { useParamId } from "@/hooks/use-param-id";
 import { Folder, ListChecks, UserIcon } from "lucide-react";
+import { useTaskFilters } from "../../hooks/use-task-filters";
 import { DatePicker } from "@/components/common/widgets/date-picker";
-import { FilterSelect } from "@/components/common/widgets/filter-select";
+import { FilterSelect } from "@/components/common/forms/filter-select";
 import { useGetMembers } from "@/features/members/api/client/use-members-get";
 import { useGetProjects } from "@/features/projects/api/client/use-projects-get";
-// import { useTaskFilters } from '@/features/tasks/hooks/use-task-filters';
-import { TaskStatus } from "@/types";
-import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
-import { useTaskFilters } from "../../hooks/use-task-filters";
-import { useParamId } from "@/hooks/use-param-id";
 
 interface DataFiltersProps {
   hideProjectFilter?: boolean;

@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 
 // Components
-import { FormWrapper } from "@/components/common/forms/work-form";
+import { FormWrapper } from "@/components/common/forms/form-create";
 
 // Utils / Schemas/ Hooks
 import { type Workspace } from "@/types";
@@ -23,7 +23,6 @@ interface WorkspaceUpdateFormProps {
 
 export function WorkspaceUpdateForm({
   initialValues,
-  onCancel,
 }: WorkspaceUpdateFormProps) {
   const router = useRouter();
   const { mutate, isPending } = useUpdateWorkspace();

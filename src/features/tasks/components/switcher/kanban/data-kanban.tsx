@@ -1,4 +1,4 @@
-import { Children, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import {
   Draggable,
@@ -13,7 +13,7 @@ import { KanbanCard } from "./kanban-card";
 interface DataKanbanProps {
   data: Task[];
   onChange: (
-    tasks: { $id: string; status: TaskStatus; position: number }[]
+    tasks: { $id: string; status: TaskStatus; position: number }[],
   ) => void;
 }
 
@@ -45,7 +45,7 @@ export const DataKanban = ({ data, onChange }: DataKanbanProps) => {
 
     Object.keys(initialTasks).forEach((status) => {
       initialTasks[status as TaskStatus].sort(
-        (a, b) => a.position - b.position
+        (a, b) => a.position - b.position,
       );
     });
 
@@ -157,7 +157,7 @@ export const DataKanban = ({ data, onChange }: DataKanbanProps) => {
 
       onChange(updatesPayload);
     },
-    [onChange]
+    [onChange],
   );
 
   return (

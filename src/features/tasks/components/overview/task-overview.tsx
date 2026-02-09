@@ -3,10 +3,9 @@ import { Button } from "@/components/ui/button";
 import { Task } from "@/types";
 import { PenIcon } from "lucide-react";
 import { OverviewProperty } from "./overview-property";
-import { UserAvatar } from "@/components/common/widgets/user-avatar";
 import { format } from "date-fns";
 import { Badge } from "@/components/ui/badge";
-import { cn, snakeCaseToTitleCase } from "@/lib/utils";
+import { snakeCaseToTitleCase } from "@/lib/utils";
 import { useParamIdModal } from "@/hooks/use-param-modal-id";
 
 interface TaskOverviewProps {

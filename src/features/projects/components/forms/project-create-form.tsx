@@ -3,12 +3,11 @@
 // Libraries
 import z from "zod";
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createProjectSchema } from "../../schema";
 
 // Components
-import { FormWrapper } from "@/components/common/forms/work-form";
+import { FormWrapper } from "@/components/common/forms/form-create";
 
 // Utils / Schemas / Hooks
 import { useCreateProject } from "../../api/client/use-project-create";
@@ -21,7 +20,6 @@ interface CreateProjectFormProps {
 type CreateProjectFormValues = z.infer<typeof createProjectSchema>;
 
 export const CreateProjectForm = ({ onCancel }: CreateProjectFormProps) => {
-  const router = useRouter();
   const workspaceId = useParamId("workspaceId");
   const { mutate, isPending } = useCreateProject();
 

@@ -1,28 +1,21 @@
 "use client";
 
-// Libraries
 import z from "zod";
-import { useForm } from "react-hook-form";
-import type { Resolver } from "react-hook-form";
-import { useRouter } from "next/navigation";
+import { Resolver, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+
 import { createTaskSchema } from "../../schema";
-
-// Components
-import { FormWrapper } from "@/components/common/forms/work-form";
-
-// Utils / Schemas / Hooks
 import { useCreateTask } from "../../api/client/use-task-create";
-import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { DottedSeparator } from "@/components/common/widgets/dotted-seperator";
-import { FormInput } from "@/components/common/forms/form-input";
-import { Form } from "@/components/ui/form";
-import { DatePicker } from "@/components/common/widgets/date-picker";
-import { TaskStatus } from "@/types";
 import { useParamId } from "@/hooks/use-param-id";
+import { Button } from "@/components/ui/button";
+import { Form } from "@/components/ui/form";
+import { FormInput } from "@/components/common/forms/form-input";
+import { DottedSeparator } from "@/components/common/widgets/dotted-seperator";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+
+import { cn } from "@/lib/utils";
+import { TaskStatus } from "@/types";
 
 interface CreateTaskFormProps {
   onCancel?: () => void;
@@ -41,7 +34,6 @@ export const CreateTaskForm = ({
   memberOptions,
   statusOptions,
 }: CreateTaskFormProps) => {
-  const router = useRouter();
   const workspaceId = useParamId("workspaceId");
   const { mutate, isPending } = useCreateTask();
 
@@ -62,12 +54,12 @@ export const CreateTaskForm = ({
     mutate(
       { json: values },
       {
-        onSuccess: ({ data }) => {
+        onSuccess: ({  }) => {
           form.reset();
           onCancel?.();
           // TODO: Redirect to task page
         },
-      }
+      },
     );
   };
 

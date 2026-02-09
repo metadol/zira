@@ -5,10 +5,10 @@ import { cn } from "@/lib/utils";
 import { RiAddFill } from "react-icons/ri";
 
 import { usePathname } from "next/navigation";
+import { useParamId } from "@/hooks/use-param-id";
 import { useParamModal } from "@/hooks/use-param-modal";
 import { useGetProjects } from "@/features/projects/api/client/use-projects-get";
 import { ProjectAvatar } from "@/features/projects/components/common/project-avatar";
-import { useParamId } from "@/hooks/use-param-id";
 
 export const Projects = () => {
   const pathname = usePathname();
@@ -26,7 +26,7 @@ export const Projects = () => {
         />
       </div>
 
-      {data?.documents?.map((project) => {
+      {data?.documents?.map((project: typeof data.documents[number]) => {
         const fullHref = `/workspaces/${workspaceId}/projects/${project.$id}`;
         const isActive = pathname === fullHref;
         return (

@@ -7,21 +7,17 @@ import members from '@/features/members/api/server/route'
 import projects from '@/features/projects/api/server/route'
 import workspaces from '@/features/workspaces/api/server/route'
 
-
-
-const app = new Hono().basePath('/api')
-
-const routes = app
+const app = new Hono()
+    .basePath('/api')
     .route('/auth', auth)
     .route('/tasks', tasks)
     .route('/members', members)
     .route('/projects', projects)
     .route('/workspaces', workspaces)
 
-
 export const GET = handle(app)
 export const POST = handle(app)
 export const PATCH = handle(app)
 export const DELETE = handle(app)
 
-export type AppType = typeof routes
+export type AppType = typeof app

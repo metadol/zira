@@ -1,4 +1,4 @@
-import { ChevronRight, Slash, Trash } from "lucide-react";
+import { Trash } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -56,7 +56,7 @@ export const TaskBreadcrumbs = ({ project, task }: TaskBreadcrumbsProps) => {
           {project.name.toLowerCase()}
         </p>
       </Link>
-      /{/* <Slash className="size-4 text-muted-foreground lg:size-5" /> */}
+      /
       <p className="text-sm font-semibold lg:text-lg">
         {task.name.toLowerCase()}
       </p>

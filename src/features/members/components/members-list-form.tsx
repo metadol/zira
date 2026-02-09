@@ -3,7 +3,7 @@
 import { DottedSeparator } from "@/components/common/widgets/dotted-seperator";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { ArrowLeftIcon, MoreVerticalIcon, Shield } from "lucide-react";
+import { ArrowLeftIcon, Shield } from "lucide-react";
 import Link from "next/link";
 import { useGetMembers } from "../api/client/use-members-get";
 import { Fragment } from "react";

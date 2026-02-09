@@ -3,7 +3,6 @@ import { WorkspaceIdClient } from "./client";
 
 const WorkspacePage = async () => {
   await authGuard("protected");
-
   return <WorkspaceIdClient />;
 };
 

@@ -6,8 +6,6 @@ import { Analytics } from "@/features/projects/components/common/analytics";
 import { TaskViewSwitcher } from "@/features/tasks/components/switcher/task-view-switcher";
 import { useGetWorkspaceAnalytics } from "@/features/workspaces/api/client/use-workspace-get-analytics";
 
-
-
 export const WorkspaceIdClient = () => {
     const workspaceId = useParamId("workspaceId");
 

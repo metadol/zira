@@ -1,14 +1,9 @@
 "use client";
 
-// import { PageError } from '@/components/page-error';
-// import { PageLoader } from '@/components/page-loader';
-import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
-import { useGetWorkspaceInfo } from "@/features/workspaces/api/client/use-workspace-get-info";
-
-import { WorkspaceJoinForm } from "@/features/workspaces/components/forms/workspace-join-form";
-
 import { Workspace } from "@/types";
 import { useParamId } from "@/hooks/use-param-id";
+import { useGetWorkspaceInfo } from "@/features/workspaces/api/client/use-workspace-get-info";
+import { WorkspaceJoinForm } from "@/features/workspaces/components/forms/workspace-join-form";
 
 export const WorkspaceIdJoinClient = () => {
   const workspaceId = useParamId("workspaceId");
@@ -17,7 +12,8 @@ export const WorkspaceIdJoinClient = () => {
   });
 
   if (isLoading) return "loading";
-  //   if (!initialValues) return <PageError message="Workspace not found." />;
+  
+  if (!initialValues) return "workspace not found";
 
   return (
     <div className="w-full lg:max-w-xl">

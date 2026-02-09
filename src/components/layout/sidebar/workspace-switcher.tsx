@@ -1,5 +1,6 @@
 "use client";
 
+import { WorkspaceAvatar } from "../../../features/workspaces/components/common/workspace-avatar";
 import { useGetWorkspaces } from "@/features/workspaces/api/client/use-workpsaces-get";
 import { RiAddFill } from "react-icons/ri";
 
@@ -10,7 +11,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../../../components/ui/select";
-import { WorkspaceAvatar } from "../../../features/workspaces/components/common/workspace-avatar";
 import { useRouter } from "next/navigation";
 import { useParamModal } from "@/hooks/use-param-modal";
 import { useParamId } from "@/hooks/use-param-id";

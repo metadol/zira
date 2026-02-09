@@ -5,8 +5,8 @@ import { toast } from 'sonner';
 
 import { client } from '@/lib/hono';
 
-type ResponseType = InferResponseType<(typeof client.api.auth.login)['$post']>;
-type RequestType = InferRequestType<(typeof client.api.auth.login)['$post']>;
+type ResponseType = InferResponseType<typeof client.api.auth.login['$post']>;
+type RequestType = InferRequestType<typeof client.api.auth.login['$post']>;
 
 export const useLogin = () => {
   const router = useRouter();

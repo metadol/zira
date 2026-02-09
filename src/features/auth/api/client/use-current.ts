@@ -14,7 +14,7 @@ export const useCurrent = () => {
     return useQuery({
         queryKey: ['current'],
         queryFn: async () => {
-            const response = await client.api.auth.current['$get'](); //rpc in action
+            const response = await (client as any).api.auth.current['$get'](); //rpc in action
 
             if (!response.ok) {
                 return null

@@ -6,11 +6,11 @@ import { Pencil } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProjectAvatar } from "@/features/projects/components/common/project-avatar";
 
+import { useParamId } from "@/hooks/use-param-id";
+import { Analytics } from "@/features/projects/components/common/analytics";
 import { useGetProjectById } from "@/features/projects/api/client/use-project-get-id";
 import { TaskViewSwitcher } from "@/features/tasks/components/switcher/task-view-switcher";
-import { useParamId } from "@/hooks/use-param-id";
 import { useGetProjectAnalytics } from "@/features/projects/api/client/use-projects-get-analytics";
-import { Analytics } from "@/features/projects/components/common/analytics";
 
 export const ProjectIdClient = () => {
   const projectId = useParamId("projectId");
@@ -56,10 +56,6 @@ export const ProjectIdClient = () => {
 
       <Analytics data={analytics} />
       <TaskViewSwitcher hideProjectFilter />
-
-      {/* {analytics && <Analytics data={projectAnalytics} />} */}
-
-      {/* <TaskViewSwitcher projectId={projectId} hideProjectFilter /> */}
     </div>
   );
 };

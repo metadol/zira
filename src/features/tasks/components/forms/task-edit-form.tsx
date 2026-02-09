@@ -1,29 +1,18 @@
 "use client";
 
-// Libraries
 import z from "zod";
-import { useForm } from "react-hook-form";
-import type { Resolver } from "react-hook-form";
-import { useRouter } from "next/navigation";
+import { Resolver, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+
+import { Task } from "@/types";
 import { createTaskSchema } from "../../schema";
-
-// Components
-import { FormWrapper } from "@/components/common/forms/work-form";
-
-// Utils / Schemas / Hooks
-import { useCreateTask } from "../../api/client/use-task-create";
-import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { DottedSeparator } from "@/components/common/widgets/dotted-seperator";
-import { FormInput } from "@/components/common/forms/form-input";
-import { Form } from "@/components/ui/form";
-import { DatePicker } from "@/components/common/widgets/date-picker";
-import { Task, TaskStatus } from "@/types";
-import { useUpdateTask } from "../../api/client/use-task-update";
 import { useParamId } from "@/hooks/use-param-id";
+import { Button } from "@/components/ui/button";
+import { Form } from "@/components/ui/form";
+import { FormInput } from "@/components/common/forms/form-input";
+import { DottedSeparator } from "@/components/common/widgets/dotted-seperator";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useUpdateTask } from "../../api/client/use-task-update";
 
 interface CreateTaskFormProps {
   onCancel?: () => void;
@@ -42,7 +31,6 @@ export const EditTaskForm = ({
   statusOptions,
   initialValues,
 }: CreateTaskFormProps) => {
-  const router = useRouter();
   const workspaceId = useParamId("workspaceId");
   const { mutate, isPending } = useUpdateTask();
 
@@ -68,19 +56,19 @@ export const EditTaskForm = ({
         param: { taskId: initialValues?.$id || "" },
       },
       {
-        onSuccess: ({ data }) => {
+        onSuccess: ({}) => {
           form.reset();
           onCancel?.();
           // TODO: Redirect to task page
         },
-      }
+      },
     );
   };
 
   return (
-    <Card className={cn("border-none shadow-none")}>
-      <CardHeader className={cn("flex p-7")}>
-        <CardTitle className="text-xl font-bold">Create a New Task</CardTitle>
+    <Card className="border-none shadow-none">
+      <CardHeader className="flex p-7">
+        <CardTitle className="text-xl font-bold">Edit Task</CardTitle>
       </CardHeader>
 
       <div className="px-7">

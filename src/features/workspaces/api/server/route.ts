@@ -12,7 +12,7 @@ import { sessionMiddleware } from '@/lib/session-middleware';
 
 
 // 3️⃣ Config / Schemas / Types
-import { MemberRole, Task, TaskStatus, Workspace } from '@/types';
+import { MemberRole,  TaskStatus, Workspace } from '@/types';
 import { createWorkspaceSchema, updateWorkspaceSchema } from '../../schemas';
 import {
     DATABASE_ID,

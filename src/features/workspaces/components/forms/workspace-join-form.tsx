@@ -16,8 +16,6 @@ import {
 } from "@/components/ui/card";
 
 // Utils / Schemas / Hooks
-import { useInviteCode } from "@/features/workspaces/hooks/use-invite-code";
-import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 import { useJoinWorkspace } from "../../api/client/use-workspace-join";
 import { useParamId } from "@/hooks/use-param-id";
 
@@ -46,7 +44,7 @@ export const WorkspaceJoinForm = ({
         onSuccess: ({ data }) => {
           router.push(`/workspaces/${data.$id}`);
         },
-      }
+      },
     );
   };
   return (
@@ -54,7 +52,7 @@ export const WorkspaceJoinForm = ({
       <CardHeader className="p-7">
         <CardTitle className="text-xl font-bold">Join Workspace</CardTitle>
         <CardDescription>
-          You've been invited to join <strong>{initialValues.name}</strong>
+          You&apos;ve been invited to join <strong>{initialValues.name}</strong>{" "}
           workspace
         </CardDescription>
       </CardHeader>
