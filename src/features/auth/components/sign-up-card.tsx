@@ -18,6 +18,7 @@ import { Form } from "@/components/ui/form";
 import { FormInput } from "@/components/common/forms/form-input";
 import { registerSchema } from "../schemas";
 import { useRegister } from "../api/client/use-register";
+import { Logo } from "@/components/common/widgets/zira-logo";
 
 type RegisterFormValues = z.infer<typeof registerSchema>;
 
@@ -41,8 +42,8 @@ export const SignUpCard = () => {
   return (
     <Card className="w-full h-full md:w-[486px] border-none shadow-none">
       <CardHeader className="flex items-center justify-center p-7 text-center">
-        <CardTitle className="text-2xl">Sign Up</CardTitle>
-        <CardDescription>
+        {/* <CardTitle className="text-2xl">Sign Up</CardTitle> */}
+        {/* <CardDescription>
           By signing up you agree to our{" "}
           <Link href={"/terms"} className="text-blue-500">
             Privacy Policy
@@ -51,7 +52,8 @@ export const SignUpCard = () => {
           <Link href={"/privacy"} className="text-blue-500">
             Terms of Service
           </Link>
-        </CardDescription>
+        </CardDescription> */}
+        <Logo />
       </CardHeader>
 
       <div className="px-7">

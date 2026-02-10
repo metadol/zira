@@ -6,19 +6,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { DottedSeparator } from "@/components/common/widgets/dotted-seperator";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  Form,
-} from "@/components/ui/form";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Form } from "@/components/ui/form";
 import { FormInput } from "@/components/common/forms/form-input";
 import Link from "next/link";
 import { loginSchema } from "../schemas";
 import { useLogin } from "../api/client/use-login";
+import { Logo } from "@/components/common/widgets/zira-logo";
 
 type LoginFormValues = z.infer<typeof loginSchema>;
 
@@ -40,7 +34,8 @@ export const SignInCard = () => {
   return (
     <Card className="w-full h-full md:w-[486px] border-none shadow-none">
       <CardHeader className="flex items-center justify-center p-7 text-center">
-        <CardTitle className="text-2xl">Welcome Back</CardTitle>
+        <Logo  />
+        {/* <CardTitle className="text-2xl">Welcome Back</CardTitle> */}
       </CardHeader>
 
       <div className="px-7">
