@@ -22,7 +22,8 @@ import { OAuthButton } from "./oauth-button";
 type LoginFormValues = z.infer<typeof loginSchema>;
 
 export const SignInCard = () => {
-  const { mutate, isPending } = useLogin();
+  const { mutate, isPending: isSignInPending } = useLogin();
+  const [isOAuthPending, setIsOAuthPending] = useState(false);
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -35,6 +36,8 @@ export const SignInCard = () => {
   const onSubmit = (data: LoginFormValues) => {
     mutate({ json: data });
   };
+
+  const isPending = isSignInPending || isOAuthPending;
 
   return (
     <Card className="w-full h-full md:w-[486px] border-none shadow-none">
@@ -78,7 +81,7 @@ export const SignInCard = () => {
       </div>
 
       <CardContent className="p-7 flex flex-col gap-y-4">
-        <OAuthButton disabled={isPending} />
+        <OAuthButton disabled={isPending} onLoading={setIsOAuthPending} />
       </CardContent>
 
       <div className="px-7">

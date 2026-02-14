@@ -1,7 +1,6 @@
 "use client";
 
 import { toast } from "sonner";
-import { useState } from "react";
 import { onOAuth } from "@/lib/oauth";
 import { FcGoogle } from "react-icons/fc";
 import { OAuthProvider } from "node-appwrite";
@@ -9,26 +8,28 @@ import { Button } from "@/components/ui/button";
 
 interface OAuthButtonProps {
   disabled?: boolean;
+  onLoading?: (isLoading: boolean) => void; // Notify parent
 }
 
-export const OAuthButton = ({ disabled = false }: OAuthButtonProps) => {
-  const [isRedirecting, setIsRedirecting] = useState(false);
-
+export const OAuthButton = ({
+  disabled = false,
+  onLoading,
+}: OAuthButtonProps) => {
   const handleOAuth = async () => {
-    setIsRedirecting(true);
+    onLoading?.(true); // Notify parent
+
     try {
       await onOAuth(OAuthProvider.Google);
     } catch (error) {
       console.error(error);
       toast.error("Something went wrong.");
-    } finally {
-      setIsRedirecting(false);
+      onLoading?.(false); // only set loading to false on error, on success the page will redirect
     }
   };
 
   return (
     <Button
-      disabled={disabled || isRedirecting}
+      disabled={disabled}
       variant="secondary"
       size="lg"
       className="w-full"

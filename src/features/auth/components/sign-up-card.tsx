@@ -20,11 +20,13 @@ import { registerSchema } from "../schemas";
 import { useRegister } from "../api/client/use-register";
 import { Logo } from "@/components/common/widgets/zira-logo";
 import { OAuthButton } from "./oauth-button";
+import { useState } from "react";
 
 type RegisterFormValues = z.infer<typeof registerSchema>;
 
 export const SignUpCard = () => {
-  const { mutate, isPending } = useRegister();
+  const { mutate, isPending: isSignUpPending } = useRegister();
+  const [isOAuthPending, setIsOAuthPending] = useState(false);
 
   const form = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
@@ -39,6 +41,8 @@ export const SignUpCard = () => {
     console.log(data);
     mutate({ json: data });
   };
+
+  const isPending = isSignUpPending || isOAuthPending;
 
   return (
     <Card className="w-full h-full md:w-[486px] border-none shadow-none">
@@ -87,7 +91,7 @@ export const SignUpCard = () => {
       </div>
 
       <CardContent className="p-7 flex flex-col gap-y-4">
-        <OAuthButton disabled={isPending} />
+        <OAuthButton disabled={isPending} onLoading={setIsOAuthPending} />
       </CardContent>
 
       <div className="px-7">
