@@ -13,6 +13,11 @@ import Link from "next/link";
 import { loginSchema } from "../schemas";
 import { useLogin } from "../api/client/use-login";
 import { Logo } from "@/components/common/widgets/zira-logo";
+import { OAuthProvider } from "node-appwrite";
+import { onOAuth } from "@/lib/oauth";
+import { toast } from "sonner";
+import { useState } from "react";
+import { OAuthButton } from "./oauth-button";
 
 type LoginFormValues = z.infer<typeof loginSchema>;
 
@@ -34,8 +39,7 @@ export const SignInCard = () => {
   return (
     <Card className="w-full h-full md:w-[486px] border-none shadow-none">
       <CardHeader className="flex items-center justify-center p-7 text-center">
-        <Logo  />
-        {/* <CardTitle className="text-2xl">Welcome Back</CardTitle> */}
+        <Logo />
       </CardHeader>
 
       <div className="px-7">
@@ -74,15 +78,7 @@ export const SignInCard = () => {
       </div>
 
       <CardContent className="p-7 flex flex-col gap-y-4">
-        <Button
-          disabled={isPending}
-          variant={"secondary"}
-          size={"lg"}
-          className="w-full"
-        >
-          <FcGoogle className="mr-2 size-6" />
-          {/* Login with google */}
-        </Button>
+        <OAuthButton disabled={isPending} />
       </CardContent>
 
       <div className="px-7">
