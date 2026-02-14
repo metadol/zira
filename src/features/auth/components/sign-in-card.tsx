@@ -1,21 +1,17 @@
 "use client";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
-import { FcGoogle } from "react-icons/fc";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { DottedSeparator } from "@/components/common/widgets/dotted-seperator";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Form } from "@/components/ui/form";
 import { FormInput } from "@/components/common/forms/form-input";
 import Link from "next/link";
 import { loginSchema } from "../schemas";
 import { useLogin } from "../api/client/use-login";
 import { Logo } from "@/components/common/widgets/zira-logo";
-import { OAuthProvider } from "node-appwrite";
-import { onOAuth } from "@/lib/oauth";
-import { toast } from "sonner";
 import { useState } from "react";
 import { OAuthButton } from "./oauth-button";
 

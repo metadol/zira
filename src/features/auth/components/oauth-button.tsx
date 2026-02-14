@@ -17,7 +17,6 @@ export const OAuthButton = ({
 }: OAuthButtonProps) => {
   const handleOAuth = async () => {
     onLoading?.(true); // Notify parent
-
     try {
       await onOAuth(OAuthProvider.Google);
     } catch (error) {

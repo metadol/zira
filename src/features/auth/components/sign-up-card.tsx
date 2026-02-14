@@ -1,7 +1,6 @@
 "use client";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
-import { FcGoogle } from "react-icons/fc";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { DottedSeparator } from "@/components/common/widgets/dotted-seperator";
@@ -9,9 +8,7 @@ import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
+  CardHeader
 } from "@/components/ui/card";
 import Link from "next/link";
 import { Form } from "@/components/ui/form";
