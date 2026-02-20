@@ -68,7 +68,7 @@ export const MembersListForm = () => {
       <DeleteDialog />
       <CardHeader className="flex flex-row items-center p-7 gap-x-4 space-y-0">
         <Button asChild size="sm" variant="secondary">
-          <Link href="/workspaces">
+          <Link href={`/workspaces/${workspaceId}`}>
             <ArrowLeftIcon className="size-4 mr-1" />
             <span className="hidden xs:block">Back</span>
           </Link>

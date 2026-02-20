@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Pencil } from "lucide-react";
+import { Settings } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { ProjectAvatar } from "@/features/projects/components/common/project-avatar";
@@ -48,7 +48,7 @@ export const ProjectIdClient = () => {
             <Link
               href={`/workspaces/${project.workspaceid}/projects/${project.$id}/settings`}
             >
-              <Pencil className="size-4" />
+              <Settings className="size-4 text-neutral-500" />
             </Link>
           </Button>
         </div>

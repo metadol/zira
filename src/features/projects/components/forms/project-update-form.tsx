@@ -13,6 +13,7 @@ import { FormWrapper } from "@/components/common/forms/form-create";
 import { useUpdateProject } from "../../api/client/use-project-update";
 import { Project } from "@/types";
 import { useParamId } from "@/hooks/use-param-id";
+import { useRouter } from "next/navigation";
 
 interface UpdateProjectFormProps {
   onCancel?: () => void;
@@ -24,6 +25,7 @@ type UpdateProjectFormValues = z.infer<typeof updateProjectSchema>;
 export const ProjectUpdateForm = ({
   project: initialValues,
 }: UpdateProjectFormProps) => {
+  const router = useRouter();
   const workspaceId = useParamId("workspaceId");
   const { mutate, isPending } = useUpdateProject();
 
@@ -44,10 +46,14 @@ export const ProjectUpdateForm = ({
     });
   };
 
+  const handleBack = () => {
+    router.push(`/workspaces/${initialValues.workspaceid}/projects/${initialValues.$id}`);
+  };
+
   return (
     <FormWrapper
       form={form}
-      onBack={() => {}}
+      onBack={handleBack}
       isPending={isPending}
       module={"update-project"}
       entityName={initialValues?.name}

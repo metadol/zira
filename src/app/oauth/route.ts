@@ -19,6 +19,8 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   const { account } = await createAdminClient();
   const session = await account.createSession(userId, secret);
 
+  console.log("OAuth session created:", session);
+
   cookies().set(AUTH_COOKIE, session.secret, {
     path: "/",
     httpOnly: true,
