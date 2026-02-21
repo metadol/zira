@@ -80,7 +80,6 @@ export const ImageUpload = ({
         )}
 
         <div className="flex flex-col">
-          <p className="text-sm">Workspace Icon</p>
           <p className="text-xs text-muted-foreground">
             JPG, PNG, or JPEG, max 1MB
           </p>
