@@ -25,15 +25,19 @@ export const useUpdateTask = () => {
             queryClient.invalidateQueries({
                 queryKey: ['workspace-analytics', data.workspaceid],
                 exact: true, // only invalidate the specific workspace id analytics query
-            }); 
+            });
             queryClient.invalidateQueries({
                 queryKey: ['project-analytics', data.projectid],
                 exact: true,
             });
-            // queryClient.invalidateQueries({
-            //     queryKey: ['tasks', data.workspaceId],
-            //     exact: false,
-            // });
+            queryClient.invalidateQueries({
+                queryKey: ['tasks', data.workspaceid],
+                exact: false,
+            });
+            queryClient.invalidateQueries({
+                queryKey: ['task', data.$id],
+                exact: true, // only invalidate the specific task so when click edit modal again it will have the updated data
+            });
         },
         onError: (error) => {
             console.error('[UPDATE_TASK]: ', error);
