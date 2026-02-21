@@ -1,6 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { InferRequestType, InferResponseType } from 'hono';
-import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 
 import { client } from '@/lib/hono';
@@ -9,7 +8,6 @@ type ResponseType = InferResponseType<(typeof client.api.tasks)['$post'], 200>;
 type RequestType = InferRequestType<(typeof client.api.tasks)['$post']>;
 
 export const useCreateTask = () => {
-  const router = useRouter();
   const queryClient = useQueryClient();
 
   const mutation = useMutation<ResponseType, Error, RequestType>({
@@ -20,12 +18,27 @@ export const useCreateTask = () => {
 
       return await response.json();
     },
-    onSuccess: () => {
+    onSuccess: ({data}) => {
       toast.success('Task created.');
 
-      router.refresh();
       queryClient.invalidateQueries({
         queryKey: ['tasks'],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['workspace-analytics', data.workspaceid],
+        exact: true, // only invalidate the specific workspace id analytics query
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['project-analytics', data.projectid],
+        exact: true,
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['tasks', data.workspaceid],
+        exact: false,
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['task', data.$id],
+        exact: true, // only invalidate the specific task so when click edit modal again it will have the updated data
       });
     },
     onError: (error) => {
