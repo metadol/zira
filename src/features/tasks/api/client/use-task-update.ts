@@ -1,17 +1,13 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { InferRequestType, InferResponseType } from 'hono';
 import { toast } from 'sonner';
-
 import { client } from '@/lib/hono';
-import { useRouter } from 'next/navigation';
 
 type ResponseType = InferResponseType<(typeof client.api.tasks)[':taskId']['$patch'], 200>;
 type RequestType = InferRequestType<(typeof client.api.tasks)[':taskId']['$patch']>;
 
 export const useUpdateTask = () => {
-    const router = useRouter();
     const queryClient = useQueryClient();
-
 
     const mutation = useMutation<ResponseType, Error, RequestType>({
         mutationFn: async ({ json, param }) => {
@@ -21,29 +17,22 @@ export const useUpdateTask = () => {
 
             return await response.json();
         },
-        onSuccess: ({  }) => {
+        onSuccess: ({ data }) => {
             toast.success('Task updated.');
-            router.refresh();
             queryClient.invalidateQueries({
                 queryKey: ['tasks'],
             });
-
-
-            //   queryClient.invalidateQueries({
-            //     queryKey: ['workspace-analytics', data.workspaceId],
-            //     exact: true,
-            //   });
-            //   queryClient.invalidateQueries({
-            //     queryKey: ['project-analytics', data.projectId],
-            //     exact: true,
-            //   });
+            queryClient.invalidateQueries({
+                queryKey: ['workspace-analytics', data.workspaceid],
+                exact: true, // only invalidate the specific workspace id analytics query
+            }); 
+            queryClient.invalidateQueries({
+                queryKey: ['project-analytics', data.projectid],
+                exact: true,
+            });
             // queryClient.invalidateQueries({
             //     queryKey: ['tasks', data.workspaceId],
             //     exact: false,
-            // });
-            // queryClient.invalidateQueries({
-            //     queryKey: ['task', data.$id],
-            //     exact: true,
             // });
         },
         onError: (error) => {
