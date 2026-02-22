@@ -1,5 +1,6 @@
 "use client";
 
+import { LoadingLogo } from "@/components/common/widgets/loading";
 import { useGetProjectById } from "@/features/projects/api/client/use-project-get-id";
 import { ProjectSettings } from "@/features/projects/components/settings/project-settings";
 import { useParamId } from "@/hooks/use-param-id";
@@ -10,7 +11,7 @@ export const ProjectIdSettingsClient = () => {
     projectId,
   });
 
-  if (isLoading) return "loading";
+  if (isLoading) return <LoadingLogo />;
 
   if (!data) return "project not found";
 

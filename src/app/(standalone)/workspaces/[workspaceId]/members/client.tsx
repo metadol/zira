@@ -3,6 +3,7 @@
 import { MembersListForm } from "@/features/members/components/members-list-form";
 import { useGetMembers } from "@/features/members/api/client/use-members-get";
 import { useParamId } from "@/hooks/use-param-id";
+import { LoadingLogo } from "@/components/common/widgets/loading";
 
 export const WorkspaceIdMembersClient = () => {
   const workspaceId = useParamId("workspaceId");
@@ -10,7 +11,7 @@ export const WorkspaceIdMembersClient = () => {
     workspaceId,
   });
 
-  if (isLoading) return "loading";
+  if (isLoading) return <LoadingLogo />;
 
   if (!initialValues) return "members not found";
 

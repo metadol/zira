@@ -6,6 +6,7 @@ import { DatePicker } from "@/components/common/widgets/date-picker";
 import { FilterSelect } from "@/components/common/forms/filter-select";
 import { useGetMembers } from "@/features/members/api/client/use-members-get";
 import { useGetProjects } from "@/features/projects/api/client/use-projects-get";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface DataFiltersProps {
   hideProjectFilter?: boolean;
@@ -61,8 +62,15 @@ export const DataFilters = ({ hideProjectFilter }: DataFiltersProps) => {
     setFilters({ projectId: value === "all" ? null : (value as string) });
   };
 
-  if (isLoading) return "loading...";
-
+  if (isLoading) {
+    return (
+      <div className="flex gap-2 w-1/2">
+        {Array.from({ length: 4 }).map((_, i) => (
+          <Skeleton key={i} className="h-4 rounded flex-1" />
+        ))}
+      </div>
+    );
+  }
   return (
     <div className="flex flex-col lg:flex-row gap-2">
       <FilterSelect

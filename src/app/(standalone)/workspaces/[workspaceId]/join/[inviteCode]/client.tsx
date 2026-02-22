@@ -4,6 +4,7 @@ import { Workspace } from "@/types";
 import { useParamId } from "@/hooks/use-param-id";
 import { useGetWorkspaceInfo } from "@/features/workspaces/api/client/use-workspace-get-info";
 import { WorkspaceJoinForm } from "@/features/workspaces/components/forms/workspace-join-form";
+import { LoadingLogo } from "@/components/common/widgets/loading";
 
 export const WorkspaceIdJoinClient = () => {
   const workspaceId = useParamId("workspaceId");
@@ -11,8 +12,8 @@ export const WorkspaceIdJoinClient = () => {
     workspaceId,
   });
 
-  if (isLoading) return "loading";
-  
+  if (isLoading) return <LoadingLogo />;
+
   if (!initialValues) return "workspace not found";
 
   return (

@@ -20,6 +20,7 @@ import { useGetTasks } from "../../api/client/use-tasks-get";
 import { useTaskFilters } from "../../hooks/use-task-filters";
 import { useBulkUpdateTasks } from "../../api/client/use-task-update-bulk";
 import { useParamId } from "@/hooks/use-param-id";
+import { LoadingTable } from "@/components/common/widgets/loading";
 
 type KanbanTask = {
   $id: string;
@@ -89,7 +90,7 @@ export const TaskViewSwitcher = ({
         <DottedSeparator className="my-4" />
 
         {isLoadingTasks ? (
-          "loading..."
+          <LoadingTable />
         ) : (
           <>
             <TabsContent value="table">

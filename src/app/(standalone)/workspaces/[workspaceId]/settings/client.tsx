@@ -1,5 +1,6 @@
 "use client";
 
+import { LoadingLogo } from "@/components/common/widgets/loading";
 import { useGetWorkspaceById } from "@/features/workspaces/api/client/use-workspace-get-id";
 import { WorkspaceSettings } from "@/features/workspaces/components/settings/workspace-settings";
 import { useParamId } from "@/hooks/use-param-id";
@@ -11,7 +12,7 @@ export const WorkspaceIdSettingsClient = () => {
     workspaceId,
   });
 
-  if (isLoading) return "loading";
+  if (isLoading) return <LoadingLogo />;
 
   if (!initialValues) return "workspace not found";
 
