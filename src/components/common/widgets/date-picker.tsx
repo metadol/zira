@@ -21,6 +21,7 @@ interface DatePickerProps {
   className?: string;
   placeholder?: string;
   showReset?: boolean;
+  showIcon?: boolean;
 }
 
 export const DatePicker = ({
@@ -28,8 +29,9 @@ export const DatePicker = ({
   onChange,
   disabled = false,
   className,
-  placeholder = "Select date",
+  placeholder = "Due date",
   showReset = false,
+  showIcon = false,
 }: DatePickerProps) => {
   const [open, setOpen] = useState(false);
 
@@ -46,7 +48,7 @@ export const DatePicker = ({
             className,
           )}
         >
-          <CalendarIcon className="mr-2 size-4" />
+          {showIcon && <CalendarIcon className="size-4 mr-2" />}
           {value ? format(value, "PPP") : <span>{placeholder}</span>}
         </Button>
       </PopoverTrigger>

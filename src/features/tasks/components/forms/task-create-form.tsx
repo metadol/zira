@@ -41,7 +41,7 @@ export const CreateTaskForm = ({
     resolver: zodResolver(createTaskSchema) as Resolver<CreateTaskFormValues>,
     defaultValues: {
       name: "",
-      dueDate: new Date(),
+      dueDate: undefined,
       assigneeId: undefined,
       description: "",
       projectId: undefined,
