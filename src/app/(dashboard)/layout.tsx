@@ -6,6 +6,10 @@ import { CreateTaskModal } from "@/features/tasks/components/modals/task-create-
 import { CreateProjectModal } from "@/features/projects/components/modals/project-create-modal";
 import { CreateWorkspaceModal } from "@/features/workspaces/components/modals/workspace-create-modal";
 
+export const metadata = {
+  title: "Dashboard",
+};
+
 interface DashboardLayoutProps {
   children: React.ReactNode;
 }

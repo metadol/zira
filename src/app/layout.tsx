@@ -10,7 +10,10 @@ import { Toaster } from "@/components/ui/sonner";
 const InterFont = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Zira",
+  title: {
+    default: "Zira",
+    template: "%s | Zira",
+  },
   description:
     "Manage your tasks efficiently and stay organized with our Task Manager App.",
   icons: {
