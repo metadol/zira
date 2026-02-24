@@ -3,6 +3,7 @@ import { useGetProjects } from "@/features/projects/api/client/use-projects-get"
 import { CreateTaskForm } from "../forms/task-create-form";
 import { TaskStatus } from "@/types";
 import { useParamId } from "@/hooks/use-param-id";
+import { LoadingLogo } from "@/components/common/widgets/loading";
 
 interface CreateTaskFormWrapperProps {
   onCancel: () => void;
@@ -42,7 +43,7 @@ export const CreateTaskFormWrapper = ({
   const isLoading = isLoadingProjects || isLoadingMembers;
 
   if (isLoading) {
-    return <div>loading</div>;
+    return <LoadingLogo />;
   }
 
   return (

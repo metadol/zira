@@ -4,6 +4,7 @@ import { TaskStatus } from "@/types";
 import { useGetTaskById } from "../../api/client/use-task-get-id";
 import { EditTaskForm } from "../forms/task-edit-form";
 import { useParamId } from "@/hooks/use-param-id";
+import { LoadingLogo } from "@/components/common/widgets/loading";
 
 interface CreateTaskFormWrapperProps {
   id: string;
@@ -48,7 +49,7 @@ export const EditTaskFormWrapper = ({
   const isLoading = isLoadingProjects || isLoadingMembers || isLoadingTask;
 
   if (isLoading) {
-    return <div>loading</div>;
+    return <LoadingLogo />;
   }
 
   if (!task) {

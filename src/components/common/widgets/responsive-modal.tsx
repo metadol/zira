@@ -19,7 +19,7 @@ export const ResponsiveModal = ({
   if (isDesktop) {
     return (
       <Dialog open={open} onOpenChange={onOpenChange}>
-        <DialogContent className="w-full sm:max-w-lg p-0 border-none overflow-y-auto hide-scrollbar max-h-[85vh]">
+        <DialogContent className="w-full sm:max-w-lg p-0 border-none overflow-y-auto hide-scrollbar max-h-[80vh]">
           {children}
         </DialogContent>
       </Dialog>
@@ -29,7 +29,9 @@ export const ResponsiveModal = ({
   return (
     <Drawer open={open} onOpenChange={onOpenChange}>
       <DrawerContent>
-        <div className="w-full  p-0 border-none max-h-[85vh] overflow-y-auto">{children}</div>
+        <div className="w-full  p-0 border-none max-h-[85vh] overflow-y-auto">
+          {children}
+        </div>
       </DrawerContent>
     </Drawer>
   );
