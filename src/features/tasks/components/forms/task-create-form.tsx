@@ -13,7 +13,6 @@ import { FormInput } from "@/components/common/forms/form-input";
 import { DottedSeparator } from "@/components/common/widgets/dotted-seperator";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-
 import { cn } from "@/lib/utils";
 import { TaskStatus } from "@/types";
 
@@ -35,6 +34,7 @@ export const CreateTaskForm = ({
   statusOptions,
 }: CreateTaskFormProps) => {
   const workspaceId = useParamId("workspaceId");
+  const projectId = useParamId("projectId");
   const { mutate, isPending } = useCreateTask();
 
   const form = useForm<CreateTaskFormValues>({
@@ -44,7 +44,7 @@ export const CreateTaskForm = ({
       dueDate: undefined,
       assigneeId: undefined,
       description: "",
-      projectId: undefined,
+      projectId: projectId ?? undefined,
       status: initialStatus ?? undefined,
       workspaceId,
     },
@@ -54,7 +54,7 @@ export const CreateTaskForm = ({
     mutate(
       { json: values },
       {
-        onSuccess: ({  }) => {
+        onSuccess: ({}) => {
           form.reset();
           onCancel?.();
           // TODO: Redirect to task page
