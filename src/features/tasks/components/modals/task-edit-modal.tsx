@@ -8,7 +8,12 @@ export const EditTaskModal = () => {
   const { id, close } = useParamIdModal("edit-task");
 
   return (
-    <ResponsiveModal open={!!id} onOpenChange={close}>
+    <ResponsiveModal
+      open={!!id}
+      onOpenChange={close}
+      title="Edit Task"
+      description="Modify the details of your task"
+    >
       {id && <EditTaskFormWrapper id={id} onCancel={close} />}
     </ResponsiveModal>
   );

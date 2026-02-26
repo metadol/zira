@@ -46,7 +46,12 @@ export const useConfirm = ({
   };
 
   const ConfirmationDialog = () => (
-    <ResponsiveModal open={promise !== null} onOpenChange={handleClose}>
+    <ResponsiveModal
+      open={promise !== null}
+      onOpenChange={handleClose}
+      title={title}
+      description={message}
+    >
       <Card className="size-full border-none shadow-none">
         <CardContent className="pt-8">
           <CardHeader className="p-0">
@@ -79,7 +84,6 @@ export const useConfirm = ({
 
   return [ConfirmationDialog, confirm];
 };
-
 
 // Example usage:
 // const [ConfirmDialog, confirm] = useConfirm({

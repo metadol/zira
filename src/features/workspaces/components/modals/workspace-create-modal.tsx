@@ -6,7 +6,12 @@ import { useParamModal } from "@/hooks/use-param-modal";
 export const CreateWorkspaceModal = () => {
   const { isOpen, close, setIsOpen } = useParamModal("create-workspace");
   return (
-    <ResponsiveModal open={isOpen} onOpenChange={setIsOpen}>
+    <ResponsiveModal
+      open={isOpen}
+      onOpenChange={setIsOpen}
+      title="Create Workspace"
+      description="Fill the form to create a new workspace"
+    >
       <CreateWorkspaceForm onCancel={close} />
     </ResponsiveModal>
   );

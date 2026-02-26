@@ -5,6 +5,7 @@ export const LoadingLogo = () => {
   return (
     <div className="flex min-h-[80vh] items-center justify-center">
       <Image
+        priority
         src="/favicon-loading.svg"
         alt="Zira Logo"
         width={40}
