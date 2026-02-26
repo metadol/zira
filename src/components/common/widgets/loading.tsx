@@ -8,7 +8,7 @@ export const LoadingLogo = () => {
         src="/favicon-loading.svg"
         alt="Zira Logo"
         width={40}
-        height={40}
+        height={Math.round((40 * 39) / 50)} // Maintain aspect ratio based on original dimensions (50x39)
       />
     </div>
   );
