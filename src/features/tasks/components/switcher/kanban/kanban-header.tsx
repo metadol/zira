@@ -11,6 +11,8 @@ import { Button } from "@/components/ui/button";
 import { TaskStatus } from "@/types";
 import { snakeCaseToTitleCase } from "@/lib/utils";
 import { useParamModal } from "@/hooks/use-param-modal";
+import { useTaskStatusParam } from "@/features/tasks/hooks/use-task-status";
+import { useCreateTaskModal } from "@/features/tasks/hooks/use-task-create";
 
 interface KanbanHeaderProps {
   board: TaskStatus;
@@ -27,11 +29,9 @@ const statusIconMap: Record<TaskStatus, React.ReactNode> = {
   [TaskStatus.DONE]: <CircleCheck className="size-[18px] text-emerald-400" />,
 };
 
-export const KanbanHeader = ({
-  board,
-  taskCount,
-}: KanbanHeaderProps) => {
-  const { open } = useParamModal("create-task");
+export const KanbanHeader = ({ board, taskCount }: KanbanHeaderProps) => {
+  const { open } = useCreateTaskModal();
+
   const icon = statusIconMap[board];
 
   return (
@@ -46,7 +46,9 @@ export const KanbanHeader = ({
       </div>
 
       <Button
-        onClick={open}
+        onClick={() => {
+          open(board);
+        }}
         variant="ghost"
         size="icon"
         className="size-5"

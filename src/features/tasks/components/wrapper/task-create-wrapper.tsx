@@ -7,10 +7,12 @@ import { LoadingLogo } from "@/components/common/widgets/loading";
 
 interface CreateTaskFormWrapperProps {
   onCancel: () => void;
+  initialStatus?: TaskStatus | null;
 }
 
 export const CreateTaskFormWrapper = ({
   onCancel,
+  initialStatus,
 }: CreateTaskFormWrapperProps) => {
   const workspaceId = useParamId("workspaceId");
 
@@ -49,6 +51,7 @@ export const CreateTaskFormWrapper = ({
   return (
     <CreateTaskForm
       onCancel={onCancel}
+      initialStatus={initialStatus}
       projectOptions={projectOptions}
       memberOptions={memberOptions}
       statusOptions={statusOptions}
