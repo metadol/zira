@@ -64,7 +64,7 @@ export const DataFilters = ({ hideProjectFilter }: DataFiltersProps) => {
 
   if (isLoading) {
     return (
-      <div className="flex gap-2 w-1/2">
+      <div className="flex gap-2 lg:w-1/2 w-full">
         {Array.from({ length: 4 }).map((_, i) => (
           <Skeleton key={i} className="h-4 rounded flex-1" />
         ))}

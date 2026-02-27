@@ -71,7 +71,7 @@ export function WorkspaceInviteSection({
           <DottedSeparator className="py-7" />
 
           <Button
-            className="mt-6 w-fit ml-auto"
+            className="mt-6 w-full xs:w-fit ml-auto"
             size="sm"
             variant="destructive"
             type="button"
