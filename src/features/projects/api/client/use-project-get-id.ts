@@ -8,14 +8,15 @@ interface UseGetProjectProps {
 
 export const useGetProjectById = ({ projectId }: UseGetProjectProps) => {
     const query = useQuery({
-        queryKey: ["workspace", projectId],
+        // key needs to align with what mutations invalidate
+        queryKey: ["project", projectId],
         queryFn: async () => {
             const response = await client.api.projects[":projectId"].$get({
                 param: { projectId },
             });
 
             if (!response.ok) {
-                throw new Error("Failed to fetch the workspace.");
+                throw new Error("Failed to fetch the project.");
             }
 
             const { data } = await response.json();

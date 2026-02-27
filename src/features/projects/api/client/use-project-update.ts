@@ -20,13 +20,24 @@ export const useUpdateProject = () => {
         },
         onSuccess: ({ data }) => {
             toast.success('Project updated.');
-
+            
             queryClient.invalidateQueries({
-                queryKey: ['projects'],
+                queryKey: ['project', data.$id],
+                exact: true,
             });
             queryClient.invalidateQueries({
-                queryKey: ['projects', data.$id],
+                queryKey: ['projects', data.workspaceid],
                 exact: true,
+            });
+            // invalidate any task queries for this workspace/project combination
+            // don't use `exact` since filter params (status/search/etc) extend the key
+            queryClient.invalidateQueries({
+                queryKey: ['tasks', data.workspaceid, data.$id],
+            });
+            // also invalidate workspace-wide task lists in case the project filter
+            // wasn't applied; this ensures views showing all tasks refetch.
+            queryClient.invalidateQueries({
+                queryKey: ['tasks', data.workspaceid],
             });
         },
         onError: (error) => {
