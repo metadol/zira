@@ -4,7 +4,6 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogPortal,
   DialogTitle,
 } from "../../ui/dialog";
 import {
@@ -34,7 +33,6 @@ export const ResponsiveModal = ({
   if (isDesktop) {
     return (
       <Dialog open={open} onOpenChange={onOpenChange}>
-        {/* <DialogPortal> */}
           <DialogContent className="w-full sm:max-w-lg p-0 border-none overflow-y-auto hide-scrollbar max-h-[80vh]">
             <DialogTitle className="sr-only">{title}</DialogTitle>
             <DialogDescription className="sr-only">
@@ -42,7 +40,6 @@ export const ResponsiveModal = ({
             </DialogDescription>
             {children}
           </DialogContent>
-        {/* </DialogPortal> */}
       </Dialog>
     );
   }

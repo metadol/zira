@@ -42,7 +42,7 @@ export const EditTaskForm = ({
         ? new Date(initialValues.duedate)
         : undefined,
       assigneeId: initialValues?.assigneeid || undefined,
-      description: "",
+      description: initialValues?.description || "",
       projectId: initialValues?.projectid || undefined,
       status: initialValues?.status || undefined,
       workspaceId: initialValues?.workspaceid || workspaceId,
@@ -128,6 +128,13 @@ export const EditTaskForm = ({
                   value: project.id,
                   label: project.name,
                 }))}
+              />
+              <FormInput
+                control={form.control}
+                name="description"
+                label="Description"
+                type="textarea"
+                placeholder="Enter description..."
               />
             </div>
 

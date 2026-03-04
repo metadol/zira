@@ -16,6 +16,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { DatePicker } from "../widgets/date-picker";
+import { Textarea } from "@/components/ui/textarea";
 
 interface FormInputProps extends InputHTMLAttributes<HTMLInputElement> {
   control: Control<any>;
@@ -53,6 +54,16 @@ export const FormInput = ({
 
       case "date":
         return <DatePicker {...field} />;
+
+      case "textarea":
+        return (
+          <Textarea
+            {...field}
+            className="min-h-[100px]"
+            placeholder={placeholder}
+            {...(rest as React.TextareaHTMLAttributes<HTMLTextAreaElement>)}
+          />
+        );
 
       default:
         return (

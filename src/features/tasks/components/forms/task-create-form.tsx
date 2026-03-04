@@ -127,6 +127,13 @@ export const CreateTaskForm = ({
                   label: project.name,
                 }))}
               />
+              <FormInput
+                control={form.control}
+                name="description"
+                label="Description"
+                type="textarea"
+                placeholder="Enter description..."
+              />
             </div>
 
             <DottedSeparator className="py-7" />
