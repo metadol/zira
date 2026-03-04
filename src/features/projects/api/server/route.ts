@@ -38,8 +38,12 @@ const app = new Hono()
                     let image: string | undefined = undefined;
 
                     if (project.imageurl) {
-                        const arrayBuffer = await storage.getFileView(IMAGES_BUCKET_ID, project.imageurl);
-                        image = `data:image/png;base64,${Buffer.from(arrayBuffer).toString('base64')}`;
+                        try {
+                            const arrayBuffer = await storage.getFileView(IMAGES_BUCKET_ID, project.imageurl);
+                            image = `data:image/png;base64,${Buffer.from(arrayBuffer).toString('base64')}`;
+                        } catch (error) {
+                            console.error(`Error fetching image for project ${project.$id}:`, error);
+                        }
                     }
 
                     return {
@@ -125,8 +129,12 @@ const app = new Hono()
         let image: string | undefined = undefined;
 
         if (project.imageurl) {
-            const arrayBuffer = await storage.getFileView(IMAGES_BUCKET_ID, project.imageurl);
-            image = `data:image/png;base64,${Buffer.from(arrayBuffer).toString('base64')}`;
+            try {
+                const arrayBuffer = await storage.getFileView(IMAGES_BUCKET_ID, project.imageurl);
+                image = `data:image/png;base64,${Buffer.from(arrayBuffer).toString('base64')}`;
+            } catch (error) {
+                console.error(`Error fetching image for project ${project.$id}:`, error);
+            }
         }
 
         return c.json({
@@ -161,7 +169,7 @@ const app = new Hono()
             );
         }
 
-        let uploadedImageId: string | undefined = undefined;
+        let uploadedImageId: string | null | undefined = undefined;
 
         if (image instanceof File) {
             const fileExt = image.name.split('.').at(-1) ?? 'png';
@@ -177,12 +185,20 @@ const app = new Hono()
             if (existingProject.imageurl) await storage.deleteFile(IMAGES_BUCKET_ID, existingProject.imageurl);
 
             uploadedImageId = file.$id;
+        } else if (image === '' || image === undefined) {
+            // User wants to remove the image
+            if (existingProject.imageurl) {
+                await storage.deleteFile(IMAGES_BUCKET_ID, existingProject.imageurl);
+            }
+            uploadedImageId = null;
         }
 
-        const project = await databases.updateDocument(DATABASE_ID, PROJECTS_ID, projectId, {
-            name,
-            image: uploadedImageId,
-        });
+        const updateData: Record<string, any> = { name };
+        if (uploadedImageId !== undefined) {
+            updateData.imageurl = uploadedImageId;
+        }
+
+        const project = await databases.updateDocument(DATABASE_ID, PROJECTS_ID, projectId, updateData);
 
         return C.json({ data: project });
     })

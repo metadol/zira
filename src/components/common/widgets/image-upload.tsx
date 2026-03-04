@@ -18,7 +18,7 @@ import { toast } from "sonner";
 
 interface ImageUploadProps {
   value?: File | string | null;
-  onChange: (file: File | null) => void;
+  onChange: (file: File | string | null) => void;
   disabled?: boolean;
 }
 
@@ -51,7 +51,8 @@ export const ImageUpload = ({
   };
 
   const handleRemove = () => {
-    onChange(null);
+    // send empty string to match form schema ('' => treated as no image)
+    onChange("");
     if (inputRef.current) {
       inputRef.current.value = "";
     }

@@ -35,6 +35,7 @@ export const ProjectUpdateForm = ({
   });
 
   const onSubmit = (data: UpdateProjectFormValues) => {
+    console.log("🚀 ~ file: project-update-form.tsx:50 ~ onSubmit ~ data:", data);
     const finalValues = {
       ...data,
       workspaceId,

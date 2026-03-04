@@ -217,7 +217,7 @@ const app = new Hono()
             );
         }
 
-        let uploadedImageId: string | undefined = undefined;
+        let uploadedImageId: string | null | undefined = undefined;
 
         if (image instanceof File) {
             const fileExt = image.name.split('.').at(-1) ?? 'png';
@@ -233,12 +233,20 @@ const app = new Hono()
             if (existingWorkspace.image) await storage.deleteFile(IMAGES_BUCKET_ID, existingWorkspace.image);
 
             uploadedImageId = file.$id;
+        } else if (image === '' || image === undefined) {
+            // User wants to remove the image
+            if (existingWorkspace.image) {
+                await storage.deleteFile(IMAGES_BUCKET_ID, existingWorkspace.image);
+            }
+            uploadedImageId = null;
         }
 
-        const workspace = await databases.updateDocument(DATABASE_ID, WORKSPACES_ID, workspaceId, {
-            name,
-            image: uploadedImageId,
-        });
+        const updateData: Record<string, any> = { name };
+        if (uploadedImageId !== undefined) {
+            updateData.image = uploadedImageId;
+        }
+
+        const workspace = await databases.updateDocument(DATABASE_ID, WORKSPACES_ID, workspaceId, updateData);
 
         return c.json({ data: workspace });
     })
