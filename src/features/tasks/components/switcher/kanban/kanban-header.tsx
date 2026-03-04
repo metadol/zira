@@ -10,8 +10,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { TaskStatus } from "@/types";
 import { snakeCaseToTitleCase } from "@/lib/utils";
-import { useParamModal } from "@/hooks/use-param-modal";
-import { useTaskStatusParam } from "@/features/tasks/hooks/use-task-status";
 import { useCreateTaskModal } from "@/features/tasks/hooks/use-task-create";
 
 interface KanbanHeaderProps {

@@ -162,7 +162,6 @@ export const DataKanban = ({ data, onChange }: DataKanbanProps) => {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      {/* kanban board header with task count */}
       <div className="flex gap-4 overflow-auto">
         {boards.map((board) => {
           return (
