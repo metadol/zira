@@ -32,6 +32,7 @@ export function WorkspaceUpdateForm({
     defaultValues: {
       ...initialValues,
       image: initialValues?.image ?? "",
+      name: initialValues?.name ?? "",
     },
   });
 
@@ -41,15 +42,10 @@ export function WorkspaceUpdateForm({
       image: data.image instanceof File ? data.image : "",
     };
 
-    mutate(
-      { form: finalValues, param: { workspaceId: initialValues.$id } },
-      {
-        onSuccess: ({ data }) => {
-          form.reset();
-          router.push(`/workspaces/${data.$id}`);
-        },
-      }
-    );
+    mutate({
+      form: finalValues,
+      param: { workspaceId: initialValues.$id },
+    });
   };
 
   const handleBack = () => {
