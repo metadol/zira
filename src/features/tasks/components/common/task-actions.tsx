@@ -1,6 +1,4 @@
-import { Edit, ExternalLinkIcon, Trash } from "lucide-react";
-import { useRouter } from "next/navigation";
-
+import { Edit, Trash } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,7 +7,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import { useConfirm } from "@/hooks/use-confirm";
-import { useParamId } from "@/hooks/use-param-id";
 import { useParamIdModal } from "@/hooks/use-param-modal-id";
 import { useDeleteTask } from "../../api/client/use-task-delete";
 
@@ -20,21 +17,13 @@ interface TaskActionsProps {
 }
 
 export const TaskActions = ({ id, children }: TaskActionsProps) => {
-  const router = useRouter();
-  const workspaceId = useParamId("workspaceId");
-  const { open: openEditModal } = useParamIdModal("edit-task");
-
   const { mutate, isPending } = useDeleteTask();
-
+  const { open: openEditModal } = useParamIdModal("edit-task");
   const [DeleteDialog, confirmDelete] = useConfirm({
     title: "Delete task",
     message: "This action cannot be undone.",
     variant: "destructive",
   });
-
-  const openTask = () => {
-    router.push(`/workspaces/${workspaceId}/tasks/${id}`);
-  };
 
   const editTask = () => {
     openEditModal(id);
@@ -47,8 +36,6 @@ export const TaskActions = ({ id, children }: TaskActionsProps) => {
     mutate({ param: { taskId: id } });
   };
 
-  const itemClass = "p-[10px] font-medium";
-
   return (
     <div className="flex justify-end">
       <DeleteDialog />
@@ -59,19 +46,17 @@ export const TaskActions = ({ id, children }: TaskActionsProps) => {
         </DropdownMenuTrigger>
 
         <DropdownMenuContent className="w-40" align="end">
-          <DropdownMenuItem onClick={openTask} className={itemClass}>
-            <ExternalLinkIcon className="mr-2 size-4 stroke-2" />
-            Task Details
-          </DropdownMenuItem>
-
-          <DropdownMenuItem onClick={editTask} className={itemClass}>
+          <DropdownMenuItem
+            onClick={editTask}
+            className={"p-[10px] font-medium"}
+          >
             <Edit className="mr-2 size-4 stroke-2" />
             Edit Task
           </DropdownMenuItem>
 
           <DropdownMenuItem
             onClick={deleteTask}
-            className={`${itemClass} text-amber-700 focus:text-amber-700`}
+            className={`p-[10px] font-medium text-amber-700 focus:text-amber-700`}
           >
             <Trash className="mr-2 size-4 stroke-2" />
             Delete Task

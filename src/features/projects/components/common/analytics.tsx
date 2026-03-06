@@ -21,11 +21,6 @@ export const Analytics = ({ data }: ProjectAnalyticsResponseType) => {
       value: data.completedTaskCount,
       delta: data.completedTaskDifference,
     },
-    // {
-    //   title: "Overdue tasks",
-    //   value: data.overdueTaskCount,
-    //   delta: data.overdueTaskDifference,
-    // },
     {
       title: "Incomplete tasks",
       value: data.incompleteTaskCount,
