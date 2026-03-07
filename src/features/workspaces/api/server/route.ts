@@ -12,7 +12,7 @@ import { sessionMiddleware } from '@/lib/session-middleware';
 
 
 // 3️⃣ Config / Schemas / Types
-import { MemberRole,  TaskStatus, Workspace } from '@/types';
+import { MemberRole, TaskStatus, Workspace } from '@/types';
 import { createWorkspaceSchema, updateWorkspaceSchema } from '../../schemas';
 import {
     DATABASE_ID,
@@ -230,10 +230,17 @@ const app = new Hono()
             const file = await storage.createFile(IMAGES_BUCKET_ID, ID.unique(), renamedImage);
 
             // delete old project image
-            if (existingWorkspace.image) await storage.deleteFile(IMAGES_BUCKET_ID, existingWorkspace.image);
+
+            if (existingWorkspace.imageurl) {
+                try {
+                    await storage.deleteFile(IMAGES_BUCKET_ID, existingWorkspace.imageurl);
+                } catch {
+                    console.error(`Error deleting old image for workspace ${existingWorkspace.$id}`);
+                }
+            }
 
             uploadedImageId = file.$id;
-        } else if (image === '' || image === undefined) {
+        } else if (image === null) {
             // User wants to remove the image
             if (existingWorkspace.image) {
                 await storage.deleteFile(IMAGES_BUCKET_ID, existingWorkspace.image);

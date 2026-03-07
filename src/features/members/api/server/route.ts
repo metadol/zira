@@ -61,7 +61,7 @@ const app = new Hono()
         const memberToDelete = await databases.getDocument(DATABASE_ID, MEMBERS_ID, memberId);
 
         const allMembersInWorkspace = await databases.listDocuments(DATABASE_ID, MEMBERS_ID, [
-            Query.equal('workspaceId', memberToDelete.workspaceId),
+            Query.equal('workspaceid', memberToDelete.workspaceid),
         ]);
 
         if (allMembersInWorkspace.total === 1) {
@@ -99,7 +99,7 @@ const app = new Hono()
 
         await databases.deleteDocument(DATABASE_ID, MEMBERS_ID, memberId);
 
-        return c.json({ data: { $id: memberToDelete.$id, workspaceId: memberToDelete.workspaceId } });
+        return c.json({ data: { $id: memberToDelete.$id, workspaceId: memberToDelete.workspaceid } });
     })
 
     .patch('/:memberId', sessionMiddleware, zValidator('json', z.object({ role: z.enum(MemberRole) })),

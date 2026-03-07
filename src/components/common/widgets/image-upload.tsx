@@ -52,7 +52,7 @@ export const ImageUpload = ({
 
   const handleRemove = () => {
     // send empty string to match form schema ('' => treated as no image)
-    onChange("");
+    onChange(null);
     if (inputRef.current) {
       inputRef.current.value = "";
     }

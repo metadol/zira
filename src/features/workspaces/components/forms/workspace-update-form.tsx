@@ -37,9 +37,13 @@ export function WorkspaceUpdateForm({
   });
 
   const onSubmit = (data: UpdateWorkspaceFormValues) => {
+    let imageValue: File | string = "";
+    if (data.image instanceof File) imageValue = data.image;
+    else if (data.image === null) imageValue = "null";
+
     const finalValues = {
       ...data,
-      image: data.image instanceof File ? data.image : "",
+      image: imageValue,  
     };
 
     mutate({

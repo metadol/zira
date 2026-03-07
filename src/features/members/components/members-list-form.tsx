@@ -41,17 +41,24 @@ export const MembersListForm = () => {
     });
   };
 
-  const handleDeleteMember = async (memberId: string) => {
+  const handleDeleteMember = async (member: Member) => {
     const ok = await confirmDelete();
     if (!ok) return;
+
+    const memberId = member?.$id;
+    const isCurrentUser = user?.$id === member?.userid;
 
     deleteMember(
       { param: { memberId } },
       {
         onSuccess: () => {
-          window.location.reload();
+          if (isCurrentUser) {
+            window.location.href = "/";
+          } else {
+            window.location.reload();
+          }
         },
-      }
+      },
     );
   };
 
@@ -102,7 +109,7 @@ export const MembersListForm = () => {
                 isDisabled={isDisabled}
                 isLoggedInAdmin={isLoggedInAdmin}
                 onUpdate={(role) => handleUpateMemeber(member.$id, role)}
-                onDelete={() => handleDeleteMember(member.$id)}
+                onDelete={() => handleDeleteMember(member)}
               />
             </div>
 

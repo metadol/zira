@@ -152,6 +152,8 @@ const app = new Hono()
         const { projectId } = C.req.param();
         const { name, image } = C.req.valid('form');
 
+        console.log('image value:', image, typeof image);
+
         const existingProject = await databases.getDocument<Project>(DATABASE_ID, PROJECTS_ID, projectId);
 
         const member = await getMember({
@@ -182,10 +184,16 @@ const app = new Hono()
             const file = await storage.createFile(IMAGES_BUCKET_ID, ID.unique(), renamedImage);
 
             // delete old project image
-            if (existingProject.imageurl) await storage.deleteFile(IMAGES_BUCKET_ID, existingProject.imageurl);
+            if (existingProject.imageurl) {
+                try {
+                    await storage.deleteFile(IMAGES_BUCKET_ID, existingProject.imageurl);
+                } catch {
+                    console.error(`Error deleting old image for project ${existingProject.$id}`);
+                }
+            }
 
             uploadedImageId = file.$id;
-        } else if (image === '' || image === undefined) {
+        } else if (image === null) {
             // User wants to remove the image
             if (existingProject.imageurl) {
                 await storage.deleteFile(IMAGES_BUCKET_ID, existingProject.imageurl);
@@ -357,7 +365,7 @@ const app = new Hono()
 
                 incompleteTaskCount,
                 incompleteTaskDifference,
-                
+
                 overdueTaskCount,
                 overdueTaskDifference,
             },

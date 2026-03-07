@@ -18,6 +18,7 @@ import {
 // Utils / Schemas / Hooks
 import { useJoinWorkspace } from "../../api/client/use-workspace-join";
 import { useParamId } from "@/hooks/use-param-id";
+import { useTransition } from "react";
 
 interface WorkspaceJoinFormProps {
   initialValues: {
@@ -32,7 +33,9 @@ export const WorkspaceJoinForm = ({
   const workspaceId = useParamId("workspaceId");
   const inviteCode = useParamId("inviteCode");
 
-  const { mutate, isPending } = useJoinWorkspace();
+  const { mutate, isPending} = useJoinWorkspace();
+  const [isRouting, startTransition] = useTransition();
+
 
   const handleJoinWorkspace = () => {
     mutate(
@@ -42,11 +45,16 @@ export const WorkspaceJoinForm = ({
       },
       {
         onSuccess: ({ data }) => {
-          router.push(`/workspaces/${data.$id}`);
+          startTransition(() => {
+            router.push(`/workspaces/${data.$id}`);
+          });
         },
-      },
+      }
     );
   };
+
+  const isLoading = isPending || isRouting;
+
   return (
     <Card className="w-full h-full border-none shadow-none">
       <CardHeader className="p-7">
@@ -67,7 +75,7 @@ export const WorkspaceJoinForm = ({
             variant="secondary"
             size="lg"
             type="button"
-            disabled={isPending}
+            disabled={isLoading}
             className={"w-full xs:w-auto"}
           >
             <Link href="/">Cancel</Link>
@@ -75,7 +83,7 @@ export const WorkspaceJoinForm = ({
           <Button
             size="lg"
             type="button"
-            disabled={isPending}
+            disabled={isLoading}
             className="w-full xs:w-auto"
             onClick={handleJoinWorkspace}
           >

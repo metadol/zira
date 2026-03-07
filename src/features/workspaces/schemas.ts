@@ -7,5 +7,13 @@ export const createWorkspaceSchema = z.object({
 
 export const updateWorkspaceSchema = z.object({
     name: z.string().trim().min(1, 'Workspace name must be 1 or more characters.').optional(),
-    image: z.union([z.instanceof(File), z.string().transform((value) => (value === '' ? undefined : value))]).optional(),
+    image: z.union([
+        z.instanceof(File),
+        z.string().transform((value) => {
+            if (value === 'null') return null;
+            if (value === '') return undefined;
+            return value;
+        }),
+        z.null(),
+    ]).optional(),
 });

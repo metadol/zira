@@ -35,11 +35,15 @@ export const ProjectUpdateForm = ({
   });
 
   const onSubmit = (data: UpdateProjectFormValues) => {
-    console.log("🚀 ~ file: project-update-form.tsx:50 ~ onSubmit ~ data:", data);
+    
+    let imageValue: File | string = "";
+    if (data.image instanceof File) imageValue = data.image;
+    else if (data.image === null) imageValue = "null";
+
     const finalValues = {
       ...data,
       workspaceId,
-      image: data.image instanceof File ? data.image : "",
+      image: imageValue,
     };
     mutate({
       form: finalValues,
@@ -48,7 +52,9 @@ export const ProjectUpdateForm = ({
   };
 
   const handleBack = () => {
-    router.push(`/workspaces/${initialValues.workspaceid}/projects/${initialValues.$id}`);
+    router.push(
+      `/workspaces/${initialValues.workspaceid}/projects/${initialValues.$id}`,
+    );
   };
 
   return (
