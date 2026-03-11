@@ -15,9 +15,5 @@ export const ProjectIdSettingsClient = () => {
 
   if (!data) return "project not found";
 
-  return (
-    <div className="w-full lg:max-w-xl">
-      <ProjectSettings initialValues={data} />
-    </div>
-  );
+  return <ProjectSettings initialValues={data} />;
 };

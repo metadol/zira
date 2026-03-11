@@ -14,7 +14,7 @@ export default function StandaloneLayout({ children }: StandaloneLayoutProps) {
           <UserButton />
         </nav>
         <div className="flex flex-col items-center justify-center">
-          {children}
+          <div className="w-full lg:max-w-xl">{children}</div>
         </div>
       </div>
     </main>

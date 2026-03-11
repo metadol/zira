@@ -1,10 +1,10 @@
 import { Navbar } from "@/components/layout/navbar/navbar";
 import { Sidebar } from "@/components/layout/sidebar/sidebar";
-
 import { EditTaskModal } from "@/features/tasks/components/modals/task-edit-modal";
 import { CreateTaskModal } from "@/features/tasks/components/modals/task-create-modal";
 import { CreateProjectModal } from "@/features/projects/components/modals/project-create-modal";
 import { CreateWorkspaceModal } from "@/features/workspaces/components/modals/workspace-create-modal";
+
 
 export const metadata = {
   title: "Dashboard",

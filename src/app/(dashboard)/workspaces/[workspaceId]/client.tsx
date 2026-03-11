@@ -1,11 +1,10 @@
 "use client"
 
 import { useParamId } from "@/hooks/use-param-id";
-
+import { LoadingLogo } from "@/components/common/widgets/loading";
 import { Analytics } from "@/features/projects/components/common/analytics";
 import { TaskViewSwitcher } from "@/features/tasks/components/switcher/task-view-switcher";
 import { useGetWorkspaceAnalytics } from "@/features/workspaces/api/client/use-workspace-get-analytics";
-import { LoadingLogo } from "@/components/common/widgets/loading";
 
 export const WorkspaceIdClient = () => {
     const workspaceId = useParamId("workspaceId");

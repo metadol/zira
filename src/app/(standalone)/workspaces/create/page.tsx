@@ -8,11 +8,7 @@ export const metadata = {
 const createWorkSpacePage = async () => {
   await authGuard("protected");
 
-  return (
-    <div className="w-full lg:max-w-xl">
-      <CreateWorkspaceForm />
-    </div>
-  );
+  return <CreateWorkspaceForm />;
 };
 
 export default createWorkSpacePage;

@@ -2,16 +2,15 @@
 
 import Link from "next/link";
 import { Settings } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
-import { ProjectAvatar } from "@/features/projects/components/common/project-avatar";
-
 import { useParamId } from "@/hooks/use-param-id";
+import { LoadingLogo } from "@/components/common/widgets/loading";
 import { Analytics } from "@/features/projects/components/common/analytics";
+import { ProjectAvatar } from "@/features/projects/components/common/project-avatar";
 import { useGetProjectById } from "@/features/projects/api/client/use-project-get-id";
 import { TaskViewSwitcher } from "@/features/tasks/components/switcher/task-view-switcher";
 import { useGetProjectAnalytics } from "@/features/projects/api/client/use-projects-get-analytics";
-import { LoadingLogo } from "@/components/common/widgets/loading";
+
 
 export const ProjectIdClient = () => {
   const projectId = useParamId("projectId");

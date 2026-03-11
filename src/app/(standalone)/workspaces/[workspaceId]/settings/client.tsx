@@ -16,9 +16,5 @@ export const WorkspaceIdSettingsClient = () => {
 
   if (!initialValues) return "workspace not found";
 
-  return (
-    <div className="w-full lg:max-w-xl">
-      <WorkspaceSettings workspace={initialValues as Workspace} />
-    </div>
-  );
+  return <WorkspaceSettings workspace={initialValues as Workspace} />;
 };

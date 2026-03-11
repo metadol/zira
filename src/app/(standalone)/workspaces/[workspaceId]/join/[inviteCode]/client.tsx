@@ -16,9 +16,5 @@ export const WorkspaceIdJoinClient = () => {
 
   if (!initialValues) return "workspace not found";
 
-  return (
-    <div className="w-full lg:max-w-xl">
-      <WorkspaceJoinForm initialValues={initialValues as Workspace} />
-    </div>
-  );
+  return <WorkspaceJoinForm initialValues={initialValues as Workspace} />;
 };

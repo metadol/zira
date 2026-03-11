@@ -15,9 +15,5 @@ export const WorkspaceIdMembersClient = () => {
 
   if (!initialValues) return "members not found";
 
-  return (
-    <div className="w-full lg:max-w-xl">
-      <MembersListForm />
-    </div>
-  );
+  return <MembersListForm />;
 };
