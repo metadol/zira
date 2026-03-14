@@ -1,20 +1,11 @@
 "use client";
 
-// React
 import { useRef } from "react";
-
-// Next.js
 import Image from "next/image";
-
-// Icons
-import { ImageIcon } from "lucide-react";
-
-// UI Components
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-
-// Utils
 import { toast } from "sonner";
+import { ImageIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 interface ImageUploadProps {
   value?: File | string | null;
@@ -51,7 +42,6 @@ export const ImageUpload = ({
   };
 
   const handleRemove = () => {
-    // send empty string to match form schema ('' => treated as no image)
     onChange(null);
     if (inputRef.current) {
       inputRef.current.value = "";

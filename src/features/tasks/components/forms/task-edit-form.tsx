@@ -59,7 +59,6 @@ export const EditTaskForm = ({
         onSuccess: ({}) => {
           form.reset();
           onCancel?.();
-          // TODO: Redirect to task page
         },
       },
     );

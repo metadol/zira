@@ -44,7 +44,5 @@ export const useLogout = () => {
 // useLogout() returns the mutation object.
 // That object has a mutate property.
 // Destructuring extracts mutate so you can call it directly.
-
 // const { mutate, isPending, isSuccess, isError, error } = useLogout();
-
-//👉 It’s automatically provided by React Query’s useMutation() hook. mutate, pending etc...
+// It’s automatically provided by React Query’s useMutation() hook. mutate, pending etc...

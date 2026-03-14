@@ -1,11 +1,9 @@
 "use client";
 
-//  Components
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { DottedSeparator } from "@/components/common/widgets/dotted-seperator";
 
-//  Utils / Schemas / Hooks
 import { type Project } from "@/types";
 import { useConfirm } from "@/hooks/use-confirm";
 import { useDeleteProject } from "../../api/client/use-project-delete";

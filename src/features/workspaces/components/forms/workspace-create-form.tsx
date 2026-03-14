@@ -1,16 +1,12 @@
 "use client";
 
-// Libraries
 import z from "zod";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createWorkspaceSchema } from "../../schemas";
 
-// Components
 import { FormWrapper } from "@/components/common/forms/form-create";
-
-// Utils / Schemas / Hooks
 import { useCreateWorkspace } from "../../api/client/use-workspace-create";
 
 interface CreateWorkspaceFormProps {

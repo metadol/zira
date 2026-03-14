@@ -57,7 +57,6 @@ export const CreateTaskForm = ({
         onSuccess: ({}) => {
           form.reset();
           onCancel?.();
-          // TODO: Redirect to task page
         },
       },
     );

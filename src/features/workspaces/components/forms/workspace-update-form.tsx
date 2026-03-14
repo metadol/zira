@@ -1,15 +1,11 @@
 "use client";
 
-// Libraries
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 
-// Components
 import { FormWrapper } from "@/components/common/forms/form-create";
-
-// Utils / Schemas/ Hooks
 import { type Workspace } from "@/types";
 import { updateWorkspaceSchema } from "../../schemas";
 import { useUpdateWorkspace } from "../../api/client/use-workspace-update";

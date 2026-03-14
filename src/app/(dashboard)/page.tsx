@@ -2,7 +2,7 @@ import { authGuard } from "@/features/auth/utils";
 import { redirect } from "next/navigation";
 import { getWorkspaces } from "@/features/workspaces/utils";
 
-//“do not try to prerender this page at build time.render it on every request instead.”
+//do not try to prerender this page at build time.render it on every request instead.
 export const dynamic = "force-dynamic";
 
 
@@ -18,5 +18,3 @@ const HomePage = async () => {
 }
 
 export default HomePage
-
-// asdf@r.com

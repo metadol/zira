@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 
 interface OAuthButtonProps {
   disabled?: boolean;
-  onLoading?: (isLoading: boolean) => void; // Notify parent
+  onLoading?: (isLoading: boolean) => void; 
 }
 
 export const OAuthButton = ({

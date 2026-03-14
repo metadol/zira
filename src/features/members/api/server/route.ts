@@ -1,16 +1,12 @@
-// External libraries
 import z from "zod";
 import { Hono } from "hono";
 import { Query } from "node-appwrite";
 import { zValidator } from "@hono/zod-validator";
 
-// Middleware & utilities
 import { getMember } from "../../utils";
 import { createAdminClient } from "@/lib/appwrite";
 import { sessionMiddleware } from "@/lib/session-middleware";
 
-
-// Config / Schemas / Types
 import { DATABASE_ID, MEMBERS_ID } from "@/config";
 import { MemberRole } from "@/types";
 

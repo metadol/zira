@@ -1,10 +1,7 @@
 "use client";
 
-// Libraries
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-
-// Components
 import { DottedSeparator } from "@/components/common/widgets/dotted-seperator";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,7 +12,6 @@ import {
   CardContent,
 } from "@/components/ui/card";
 
-// Utils / Schemas / Hooks
 import { useJoinWorkspace } from "../../api/client/use-workspace-join";
 import { useParamId } from "@/hooks/use-param-id";
 import { useTransition } from "react";

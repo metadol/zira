@@ -4,7 +4,7 @@ import { UserButton } from "@/components/layout/navbar/user-button";
 interface StandaloneLayoutProps {
   children: React.ReactNode;
 }
-//make this more reusable
+
 export default function StandaloneLayout({ children }: StandaloneLayoutProps) {
   return (
     <main className="bg-neutral-100 min-h-screen">

@@ -1,10 +1,8 @@
-// 1️⃣ External dependencies
 import { Hono } from 'hono';
 import { zValidator } from '@hono/zod-validator';
 import { deleteCookie } from 'hono/cookie';
 import { ID } from 'node-appwrite';
 
-// 2️⃣ Internal schemas & utilities
 import { loginSchema, registerSchema } from '../../schemas';
 import { createAdminClient } from '@/lib/appwrite';
 import { AUTH_COOKIE } from '@/lib/constants';

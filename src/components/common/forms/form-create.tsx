@@ -1,11 +1,8 @@
 "use client";
 
-// Libraries
 import { ArrowLeftIcon } from "lucide-react";
 import {  UseFormReturn } from "react-hook-form";
 
-
-// Components
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Form, FormField } from "@/components/ui/form";
@@ -13,7 +10,6 @@ import { FormInput } from "@/components/common/forms/form-input";
 import { ImageUpload } from "@/components/common/widgets/image-upload";
 import { DottedSeparator } from "@/components/common/widgets/dotted-seperator";
 
-// Utils / Schemas/ Hooks
 import { cn } from "@/lib/utils";
  
 type FormModule =
@@ -39,7 +35,7 @@ const FORM_CONFIGS: Record<FormModule, FormConfig> = {
     showBackButton: false,
   },
   "update-workspace": {
-    title: "", // Will be set dynamically from entity name
+    title: "", 
     submitLabel: "Save Changes",
     nameLabel: "Workspace Name",
     namePlaceholder: "Enter workspace name",
@@ -53,7 +49,7 @@ const FORM_CONFIGS: Record<FormModule, FormConfig> = {
     showBackButton: false,
   },
   "update-project": {
-    title: "", // Will be set dynamically from entity name
+    title: "", 
     submitLabel: "Save Changes",
     nameLabel: "Project Name",
     namePlaceholder: "Enter project name",

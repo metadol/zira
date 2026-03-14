@@ -1,15 +1,11 @@
 "use client";
 
-// Libraries
 import z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { updateProjectSchema } from "../../schema";
 
-// Components
 import { FormWrapper } from "@/components/common/forms/form-create";
-
-// Utils / Schemas / Hooks
 import { useUpdateProject } from "../../api/client/use-project-update";
 import { Project } from "@/types";
 import { useParamId } from "@/hooks/use-param-id";

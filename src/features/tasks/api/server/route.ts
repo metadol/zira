@@ -1,7 +1,6 @@
 
 import { z } from 'zod';
 import { Hono } from 'hono';
-
 import { zValidator } from '@hono/zod-validator';
 import { ID, Models, Query } from 'node-appwrite';
 import { Project, TaskStatus, Task } from '@/types';

@@ -1,8 +1,6 @@
-// src/app/oauth/route.ts
-
+import { cookies } from "next/headers";
 import { AUTH_COOKIE } from "@/lib/constants";
 import { createAdminClient } from "@/lib/appwrite";
-import { cookies } from "next/headers";
 import { NextResponse, type NextRequest } from "next/server";
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
