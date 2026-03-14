@@ -77,7 +77,7 @@ export const SignUpCard = () => {
               placeholder="Enter password"
             />
             <Button disabled={isPending} size={"lg"} className="w-full">
-              Login
+              Sign Up
             </Button>
           </form>
         </Form>
@@ -99,7 +99,7 @@ export const SignUpCard = () => {
         <p className="text-sm text-center">
           Already have an account?{" "}
           <Link href="/sign-in" className="text-blue-600 ">
-            Sign In
+            Log In
           </Link>
         </p>
       </CardContent>
