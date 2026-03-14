@@ -38,7 +38,7 @@ export const FormInput = ({
     switch (type) {
       case "select":
         return (
-          <Select value={field.value} onValueChange={field.onChange}>
+          <Select value={field.value ?? ""} onValueChange={field.onChange}>
             <SelectTrigger>
               <SelectValue placeholder={placeholder} />
             </SelectTrigger>
