@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowLeftIcon } from "lucide-react";
-import {  UseFormReturn } from "react-hook-form";
+import { UseFormReturn } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -11,7 +11,7 @@ import { ImageUpload } from "@/components/common/widgets/image-upload";
 import { DottedSeparator } from "@/components/common/widgets/dotted-seperator";
 
 import { cn } from "@/lib/utils";
- 
+
 type FormModule =
   | "create-workspace"
   | "update-workspace"
@@ -35,7 +35,7 @@ const FORM_CONFIGS: Record<FormModule, FormConfig> = {
     showBackButton: false,
   },
   "update-workspace": {
-    title: "", 
+    title: "",
     submitLabel: "Save Changes",
     nameLabel: "Workspace Name",
     namePlaceholder: "Enter workspace name",
@@ -46,10 +46,10 @@ const FORM_CONFIGS: Record<FormModule, FormConfig> = {
     submitLabel: "Create Project",
     nameLabel: "Project Name",
     namePlaceholder: "Enter project name",
-    showBackButton: false,
+    showBackButton: true,
   },
   "update-project": {
-    title: "", 
+    title: "",
     submitLabel: "Save Changes",
     nameLabel: "Project Name",
     namePlaceholder: "Enter project name",
@@ -83,13 +83,15 @@ export function FormWrapper({
     <Card
       className={cn(
         "border-none shadow-none",
-        !config.showBackButton && "w-full h-full"
+        !config.showBackButton && "w-full h-full",
       )}
     >
       <CardHeader
         className={cn(
           "flex p-7",
-          config.showBackButton ? "flex-row items-center gap-x-4 space-y-0" : ""
+          config.showBackButton
+            ? "flex-row items-center gap-x-4 space-y-0"
+            : "",
         )}
       >
         {config.showBackButton && onBack && (
@@ -134,22 +136,20 @@ export function FormWrapper({
             <DottedSeparator className="py-7" />
 
             <div className="flex flex-col-reverse xs:flex-row gap-y-2 items-center justify-between">
-              <Button
-                variant="secondary"
-                onClick={onCancel}
-                size="lg"
-                type="button"
-                disabled={isPending}
-                className={cn(
-                  !onCancel &&
-                    config.showBackButton &&
-                    "hidden xs:invisible xs:block",
-                  !onCancel && !config.showBackButton && "invisible",
-                  "w-full xs:w-auto"
-                )}
-              >
-                Cancel
-              </Button>
+              {onCancel ? (
+                <Button
+                  variant="secondary"
+                  onClick={onCancel}
+                  size="lg"
+                  type="button"
+                  disabled={isPending}
+                  className="w-full xs:w-auto"
+                >
+                  Cancel
+                </Button>
+              ) : (
+                <div className="hidden xs:block"/>
+              )}
               <Button
                 type="submit"
                 size="lg"
