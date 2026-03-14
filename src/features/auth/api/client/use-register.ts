@@ -14,11 +14,14 @@ export const useRegister = () => {
 
   const mutation = useMutation<ResponseType, Error, RequestType>({
     mutationFn: async ({ json }) => {
-      const response = await client.api.auth.register['$post']({ json }); //rpc in action
+      const response = await client.api.auth.register['$post']({ json });
 
-      if (!response.ok) throw new Error('Email or Password is incorrect!');
+      if (!response.ok) {
+        const error = await response.json() as { message?: string };
+        throw new Error(error.message || `Request failed with status ${response.status}`);
+      }
 
-      return await response.json();
+      return response.json();
     },
     onSuccess: () => {
       router.refresh();
@@ -27,8 +30,8 @@ export const useRegister = () => {
         queryKey: ['current'],
       });
     },
-    onError: () => {
-      toast.error('Email or Password is incorrect!');
+    onError: (error) => {
+      toast.error(error.message);
     },
   });
 

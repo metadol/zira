@@ -26,13 +26,17 @@ const app = new Hono()
   })
   .post('/register', zValidator('json', registerSchema), async (c) => {
     const { name, email, password } = c.req.valid('json')
-
     const { account } = await createAdminClient();
-    await account.create(ID.unique(), email, password, name);
-    const session = await account.createEmailPasswordSession(email, password);
-    setAuthCookie(c, session.secret)
 
-    return c.json({ success: true })
+    try {
+      await account.create(ID.unique(), email, password, name);
+      const session = await account.createEmailPasswordSession(email, password);
+      setAuthCookie(c, session.secret);
+      return c.json({ success: true });
+    } catch (error) {
+      const appwriteError = error as { type: string; message: string; code: number };
+      return c.json({ message: appwriteError.message }, appwriteError.code as 409);
+    }
   })
   .post('/logout', sessionMiddleware, async (c) => {
 
