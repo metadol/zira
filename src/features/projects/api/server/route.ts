@@ -231,12 +231,12 @@ const app = new Hono()
             return c.json({ error: 'Unauthorized.' }, 401);
         }
 
-        // const tasks = await databases.listDocuments<Task>(DATABASE_ID, TASKS_ID, [Query.equal('projectId', projectId)]);
+        const tasks = await databases.listDocuments<Task>(DATABASE_ID, TASKS_ID, [Query.equal('projectid', projectId)]);
 
-        // // delete tasks
-        // for (const task of tasks.documents) {
-        //     await databases.deleteDocument(DATABASE_ID, TASKS_ID, task.$id);
-        // }
+        // delete tasks
+        for (const task of tasks.documents) {
+            await databases.deleteDocument(DATABASE_ID, TASKS_ID, task.$id);
+        }
 
         if (existingProject.image) await storage.deleteFile(IMAGES_BUCKET_ID, existingProject.image);
 

@@ -7,7 +7,6 @@ import { ArrowLeftIcon, Shield } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { DottedSeparator } from "@/components/common/widgets/dotted-seperator";
 
-
 import { hasAdminRole } from "../utils";
 import { Member, MemberRole } from "@/types";
 import { useConfirm } from "@/hooks/use-confirm";
@@ -18,7 +17,6 @@ import { useDeleteMember } from "../api/client/use-member-delete";
 import { UserAvatar } from "@/components/common/widgets/user-avatar";
 import { useCurrent } from "@/features/auth/api/client/use-current";
 import { MemberActionsDropdown } from "@/features/members/components/member-actions-dropdown";
-
 
 export const MembersListForm = () => {
   const workspaceId = useParamId("workspaceId");
@@ -83,7 +81,9 @@ export const MembersListForm = () => {
             <span className="hidden xs:block">Back</span>
           </Link>
         </Button>
-        <CardTitle className="text-xl font-bold">Members List</CardTitle>
+        <CardTitle className="text-xl font-bold truncate min-w-0">
+          Members List
+        </CardTitle>
       </CardHeader>
 
       <div className="px-7">
@@ -93,17 +93,19 @@ export const MembersListForm = () => {
       <CardContent className="p-7">
         {members?.documents.map((member, index) => (
           <Fragment key={member.$id}>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 min-w-0">
               <UserAvatar name={member.name} />
 
-              <div className="flex flex-col">
+              <div className="flex flex-col min-w-0 flex-1">
                 <div className="flex items-center gap-1.5">
                   <p className="text-sm font-medium">{member.name}</p>
                   {(member as Member).role === MemberRole.ADMIN && (
                     <Shield className="size-3.5" />
                   )}
                 </div>
-                <p className="text-xs text-muted-foreground">{member.email}</p>
+                <p className="text-xs text-muted-foreground truncate">
+                  {member.email}
+                </p>
               </div>
 
               <MemberActionsDropdown

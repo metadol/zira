@@ -97,10 +97,12 @@ export function FormWrapper({
         {config.showBackButton && onBack && (
           <Button size="sm" variant="secondary" onClick={onBack}>
             <ArrowLeftIcon className="size-4 mr-1" />
-            Back
+            <span className="hidden xs:block">Back</span>
           </Button>
         )}
-        <CardTitle className="text-xl font-bold">{displayTitle}</CardTitle>
+        <CardTitle className="text-xl font-bold truncate min-w-0">
+          {displayTitle}
+        </CardTitle>
       </CardHeader>
 
       <div className="px-7">
@@ -148,7 +150,7 @@ export function FormWrapper({
                   Cancel
                 </Button>
               ) : (
-                <div className="hidden xs:block"/>
+                <div className="hidden xs:block" />
               )}
               <Button
                 type="submit"

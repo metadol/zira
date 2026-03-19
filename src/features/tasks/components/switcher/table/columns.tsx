@@ -85,6 +85,12 @@ export const columns: ColumnDef<Task>[] = [
   },
   {
     accessorKey: "dueDate",
+    sortingFn: (rowA, rowB) => {
+      return (
+        new Date(rowA.original.duedate).getTime() -
+        new Date(rowB.original.duedate).getTime()
+      );
+    },
     header: ({ column }) => {
       return (
         <Button

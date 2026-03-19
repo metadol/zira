@@ -14,12 +14,15 @@ export const useJoinWorkspace = () => {
     mutationFn: async ({ param, json }) => {
       const response = await client.api.workspaces[':workspaceId']['join']['$post']({ param, json });
 
-      if (!response.ok) throw new Error('Failed to join workspace.');
+      if (!response.ok) {
+        const error = await response.json() as { error?: string };
+        throw new Error(error.error || `Request failed with status ${response.status}`);
+      }
 
       return await response.json();
     },
+
     onSuccess: ({ data }) => {
-      // toast.success('Invite code reset.');
       queryClient.invalidateQueries({
         queryKey: ['workspaces'],
       });
@@ -28,11 +31,10 @@ export const useJoinWorkspace = () => {
         exact: true,
       });
     },
-    onError: (error) => {
-      console.error('[JOIN_WORKSPACE]: ', error);
 
-      toast.error('Failed to join workspace.');
-    },
+    onError: (error) => {
+      toast.error(error.message);
+    }
   });
 
   return mutation;

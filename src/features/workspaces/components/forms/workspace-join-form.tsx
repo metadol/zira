@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { DottedSeparator } from "@/components/common/widgets/dotted-seperator";
 import { Button } from "@/components/ui/button";
@@ -66,16 +65,7 @@ export const WorkspaceJoinForm = ({
       </div>
 
       <CardContent className="p-7">
-        <div className="flex flex-col-reverse xs:flex-row gap-y-2 items-center justify-between">
-          <Button
-            variant="secondary"
-            size="lg"
-            type="button"
-            disabled={isLoading}
-            className={"w-full xs:w-auto"}
-          >
-            <Link href="/">Cancel</Link>
-          </Button>
+        <div className="text-end">
           <Button
             size="lg"
             type="button"

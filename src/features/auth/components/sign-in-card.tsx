@@ -38,7 +38,7 @@ export const SignInCard = () => {
   return (
     <Card className="w-full h-full md:w-[486px] border-none shadow-none">
       <CardHeader className="flex items-center justify-center p-7 text-center">
-        <Logo />
+        <Logo redirect={false} />
       </CardHeader>
 
       <div className="px-7">
