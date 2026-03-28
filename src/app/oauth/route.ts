@@ -24,7 +24,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     httpOnly: true,
     sameSite: "lax", // Relaxed same-site policy for better compatibility with OAuth redirects
     secure: process.env.NODE_ENV === "production",
-    maxAge: 60 * 60 * 24 * 30,// Keep the user logged in after browser close (otherwise it's a session cookie).
+    maxAge: 60 * 60 * 24 * 30,
   });
 
   return NextResponse.redirect(`${request.nextUrl.origin}/`);
