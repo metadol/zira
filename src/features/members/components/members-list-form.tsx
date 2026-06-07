@@ -113,8 +113,8 @@ export const MembersListForm = () => {
                 member={member}
                 isDisabled={isDisabled}
                 isLoggedInAdmin={isLoggedInAdmin}
-                onUpdate={(role) => handleUpateMemeber(member.$id, role)}
                 onDelete={() => handleDeleteMember(member)}
+                onUpdate={(role) => handleUpateMemeber(member.$id, role)}
               />
             </div>
 

@@ -8,6 +8,7 @@ import { createWorkspaceSchema } from "../../schemas";
 
 import { FormWrapper } from "@/components/common/forms/form-create";
 import { useCreateWorkspace } from "../../api/client/use-workspace-create";
+import { useTransition } from "react";
 
 interface CreateWorkspaceFormProps {
   onCancel?: () => void;
@@ -18,6 +19,7 @@ type CreateWorkspaceFormValues = z.infer<typeof createWorkspaceSchema>;
 export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
   const router = useRouter();
   const { mutate, isPending } = useCreateWorkspace();
+  const [isRouting, startTransition] = useTransition();
 
   const form = useForm<CreateWorkspaceFormValues>({
     resolver: zodResolver(createWorkspaceSchema),
@@ -34,9 +36,11 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
       {
         onSuccess: ({ data }) => {
           form.reset();
-          router.push(`/workspaces/${data.$id}`);
+          startTransition(() => {
+            router.push(`/workspaces/${data.$id}`);
+          });
         },
-      }
+      },
     );
   };
 
@@ -44,7 +48,7 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
     <FormWrapper
       form={form}
       onCancel={onCancel}
-      isPending={isPending}
+      isPending={isPending || isRouting}
       module={"create-workspace"}
       onSubmit={form.handleSubmit(onSubmit)}
     />
