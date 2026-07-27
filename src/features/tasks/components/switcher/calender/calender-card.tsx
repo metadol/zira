@@ -28,16 +28,9 @@ export const CalenderCard = ({
   const router = useRouter();
   const workspaceId = useParamId("workspaceId");
 
-  const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
-
-    router.push(`/workspaces/${workspaceId}/tasks/${id}`);
-  };
-
   return (
     <div className="p-0 xs:px-2 pb-2">
       <button
-        onClick={onClick}
         className={cn(
           "flex w-full text-left cursor-pointer flex-col gap-y-1.5 rounded-md border border-l-4 bg-white p-1.5  text-[6px] xs:text-xs text-primary transition hover:opacity-75",
           statusColorMap[status]
