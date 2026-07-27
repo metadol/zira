@@ -1,7 +1,5 @@
 import { cn } from "@/lib/utils";
-import { useRouter } from "next/navigation";
 import { TaskStatus, type Member, type Project } from "@/types";
-import { useParamId } from "@/hooks/use-param-id";
 
 
 interface CalenderCardProps {
@@ -25,9 +23,7 @@ export const CalenderCard = ({
   status,
   id,
 }: CalenderCardProps) => {
-  const router = useRouter();
-  const workspaceId = useParamId("workspaceId");
-
+  
   return (
     <div className="p-0 xs:px-2 pb-2">
       <button
