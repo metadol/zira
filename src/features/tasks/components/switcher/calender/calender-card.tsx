@@ -21,7 +21,6 @@ const statusColorMap: Record<TaskStatus, string> = {
 export const CalenderCard = ({
   title,
   status,
-  id,
 }: CalenderCardProps) => {
   
   return (
