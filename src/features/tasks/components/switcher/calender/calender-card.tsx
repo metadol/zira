@@ -32,7 +32,7 @@ export const CalenderCard = ({
     <div className="p-0 xs:px-2 pb-2">
       <button
         className={cn(
-          "flex w-full text-left cursor-pointer flex-col gap-y-1.5 rounded-md border border-l-4 bg-white p-1.5  text-[6px] xs:text-xs text-primary transition hover:opacity-75",
+          "flex w-full text-left flex-col gap-y-1.5 rounded-md border border-l-4 bg-white p-1.5  text-[6px] xs:text-xs text-primary transition hover:opacity-75",
           statusColorMap[status]
         )}
       >
