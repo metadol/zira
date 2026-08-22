@@ -23,11 +23,14 @@ export const SignInCard = () => {
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
+    mode: "onChange",
     defaultValues: {
       email: "",
       password: "",
     },
   });
+
+  const { isValid } = form.formState;
 
   const onSubmit = (data: LoginFormValues) => {
     mutate({ json: data });
@@ -65,7 +68,12 @@ export const SignInCard = () => {
               type="password"
               placeholder="Enter password"
             />
-            <Button disabled={isPending} size={"lg"} className="w-full">
+            <Button
+              type="submit"
+              disabled={isPending || !isValid}
+              size={"lg"}
+              className="w-full"
+            >
               Login
             </Button>
           </form>

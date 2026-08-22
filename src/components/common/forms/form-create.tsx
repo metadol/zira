@@ -78,6 +78,10 @@ export function FormWrapper({
 }: FormWrapperProps) {
   const config = FORM_CONFIGS[module];
   const displayTitle = entityName || config.title;
+  const { isValid, isDirty } = form.formState;
+  const isUpdateModule = module.startsWith("update-");
+  const isSubmitDisabled =
+    isPending || !isValid || (isUpdateModule && !isDirty);
 
   return (
     <Card
@@ -155,7 +159,7 @@ export function FormWrapper({
               <Button
                 type="submit"
                 size="lg"
-                disabled={isPending}
+                disabled={isSubmitDisabled}
                 className="w-full xs:w-auto"
               >
                 {config.submitLabel}

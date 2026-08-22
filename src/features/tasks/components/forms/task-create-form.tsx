@@ -39,6 +39,7 @@ export const CreateTaskForm = ({
 
   const form = useForm<CreateTaskFormValues>({
     resolver: zodResolver(createTaskSchema) as Resolver<CreateTaskFormValues>,
+    mode: "onChange",
     defaultValues: {
       name: "",
       dueDate: undefined,
@@ -49,6 +50,8 @@ export const CreateTaskForm = ({
       workspaceId,
     },
   });
+
+  const { isValid } = form.formState;
 
   const onSubmit = async (values: CreateTaskFormValues) => {
     mutate(
@@ -151,7 +154,7 @@ export const CreateTaskForm = ({
               <Button
                 type="submit"
                 size="lg"
-                disabled={isPending}
+                disabled={isPending || !isValid}
                 className="w-full xs:w-auto"
               >
                 Create Task

@@ -27,24 +27,25 @@ export const ProjectUpdateForm = ({
 
   const form = useForm<UpdateProjectFormValues>({
     resolver: zodResolver(updateProjectSchema),
-    defaultValues: { ...initialValues, image: initialValues?.image ?? "" },
+    mode: "onChange",
+    defaultValues: { ...initialValues, image: initialValues?.image ?? null },
   });
 
   const onSubmit = (data: UpdateProjectFormValues) => {
-    
     let imageValue: File | string = "";
     if (data.image instanceof File) imageValue = data.image;
-    else if (data.image === null) imageValue = "null";
+    else if (data.image === "" || data.image === null) imageValue = "null";
 
     const finalValues = {
       ...data,
       workspaceId,
       image: imageValue,
     };
-    mutate({
-      form: finalValues,
-      param: { projectId: initialValues.$id },
-    });
+
+    mutate(
+      { form: finalValues, param: { projectId: initialValues.$id } },
+      { onSuccess: () => form.reset(data) },
+    );
   };
 
   const handleBack = () => {

@@ -23,6 +23,7 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
 
   const form = useForm<CreateWorkspaceFormValues>({
     resolver: zodResolver(createWorkspaceSchema),
+    mode: "onChange",
     defaultValues: { name: "" },
   });
 

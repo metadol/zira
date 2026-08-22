@@ -25,9 +25,10 @@ export function WorkspaceUpdateForm({
 
   const form = useForm<UpdateWorkspaceFormValues>({
     resolver: zodResolver(updateWorkspaceSchema),
+    mode: "onChange",
     defaultValues: {
       ...initialValues,
-      image: initialValues?.image ?? "",
+      image: initialValues?.image ?? null,
       name: initialValues?.name ?? "",
     },
   });
@@ -35,17 +36,17 @@ export function WorkspaceUpdateForm({
   const onSubmit = (data: UpdateWorkspaceFormValues) => {
     let imageValue: File | string = "";
     if (data.image instanceof File) imageValue = data.image;
-    else if (data.image === null) imageValue = "null";
+    else if (data.image === "" || data.image === null) imageValue = "null";
 
     const finalValues = {
       ...data,
-      image: imageValue,  
+      image: imageValue,
     };
 
-    mutate({
-      form: finalValues,
-      param: { workspaceId: initialValues.$id },
-    });
+    mutate(
+      { form: finalValues, param: { workspaceId: initialValues.$id } },
+      { onSuccess: () => form.reset(data) },
+    );
   };
 
   const handleBack = () => {

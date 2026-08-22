@@ -23,12 +23,15 @@ export const SignUpCard = () => {
 
   const form = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
+    mode: "onChange",
     defaultValues: {
       name: "",
       email: "",
       password: "",
     },
   });
+
+  const { isValid } = form.formState;
 
   const onSubmit = (data: RegisterFormValues) => {
     console.log(data);
@@ -72,7 +75,12 @@ export const SignUpCard = () => {
               type="password"
               placeholder="Enter password"
             />
-            <Button disabled={isPending} size={"lg"} className="w-full">
+            <Button
+              type="submit"
+              disabled={isPending || !isValid}
+              size={"lg"}
+              className="w-full"
+            >
               Sign Up
             </Button>
           </form>
