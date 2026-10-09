@@ -49,7 +49,7 @@ export const Projects = () => {
             <div
               ref={provided.innerRef}
               {...provided.droppableProps}
-              className="flex flex-col gap-y-2"
+              className="flex flex-col"
             >
               {projects.map((project, index) => {
                 const fullHref = `/workspaces/${workspaceId}/projects/${project.$id}`;
@@ -65,6 +65,7 @@ export const Projects = () => {
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
+                        className="pb-2"
                       >
                         <Link href={fullHref}>
                           <div
