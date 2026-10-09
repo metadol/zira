@@ -3,10 +3,17 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { RiAddFill } from "react-icons/ri";
+import {
+  DragDropContext,
+  Droppable,
+  Draggable,
+  DropResult,
+} from "@hello-pangea/dnd";
 
 import { usePathname } from "next/navigation";
 import { useParamId } from "@/hooks/use-param-id";
 import { useParamModal } from "@/hooks/use-param-modal";
+import { useProjectOrder } from "@/features/projects/hooks/use-project-order";
 import { useGetProjects } from "@/features/projects/api/client/use-projects-get";
 import { ProjectAvatar } from "@/features/projects/components/common/project-avatar";
 
@@ -15,6 +22,16 @@ export const Projects = () => {
   const workspaceId = useParamId("workspaceId");
   const { open } = useParamModal("create-project");
   const { data } = useGetProjects({ workspaceId });
+
+  const { items: projects, reorder } = useProjectOrder(
+    data?.documents,
+    `project-order-${workspaceId}`,
+  );
+
+  const onDragEnd = (result: DropResult) => {
+    if (!result.destination) return;
+    reorder(result.source.index, result.destination.index);
+  };
 
   return (
     <div className="flex flex-col gap-y-2">
@@ -26,23 +43,54 @@ export const Projects = () => {
         />
       </div>
 
-      {data?.documents?.map((project: typeof data.documents[number]) => {
-        const fullHref = `/workspaces/${workspaceId}/projects/${project.$id}`;
-        const isActive = pathname === fullHref;
-        return (
-          <Link href={fullHref} key={project.$id}>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Droppable droppableId="projects">
+          {(provided) => (
             <div
-              className={cn(
-                "flex items-center gap-2.5 rounded-md p-2.5 font-medium text-neutral-500 transition hover:opacity-75",
-                isActive && "bg-white text-primary shadow-sm hover:opacity-100"
-              )}
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+              className="flex flex-col gap-y-2"
             >
-              <ProjectAvatar image={project.image} name={project.name} />
-              <span className="truncate">{project.name}</span>
+              {projects.map((project, index) => {
+                const fullHref = `/workspaces/${workspaceId}/projects/${project.$id}`;
+                const isActive = pathname === fullHref;
+                return (
+                  <Draggable
+                    key={project.$id}
+                    draggableId={project.$id}
+                    index={index}
+                  >
+                    {(provided) => (
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                      >
+                        <Link href={fullHref}>
+                          <div
+                            className={cn(
+                              "flex items-center gap-2.5 rounded-md p-2.5 font-medium text-neutral-500 transition hover:opacity-75",
+                              isActive &&
+                                "bg-white text-primary shadow-sm hover:opacity-100",
+                            )}
+                          >
+                            <ProjectAvatar
+                              image={project.image}
+                              name={project.name}
+                            />
+                            <span className="truncate">{project.name}</span>
+                          </div>
+                        </Link>
+                      </div>
+                    )}
+                  </Draggable>
+                );
+              })}
+              {provided.placeholder}
             </div>
-          </Link>
-        );
-      })}
+          )}
+        </Droppable>
+      </DragDropContext>
     </div>
   );
 };
